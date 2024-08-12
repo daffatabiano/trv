@@ -22,9 +22,7 @@ export default function Headers() {
 
     return (
         <nav
-            className={`flex gap-4 items-center ${
-                isScrolled ? 'bg-zinc-900 text-white' : 'bg - transparent'
-            } sticky top-0 text-slate-950 `}
+            className={`flex gap-4 w-full h-15 items-center bg-transparent backdrop-blur-md sticky top-0 text-slate-950 `}
         >
             <div>
                 <Icons.Home />
