@@ -12,14 +12,14 @@ export const lists = [
         id: 2,
         name: 'Promo',
         path: '/',
-        icon: <Icons.Home />,
+        icon: <Icons.Promo />,
         className,
     },
     {
         id: 3,
         name: 'Popular',
         path: '/',
-        icon: <Icons.Home />,
+        icon: <Icons.Top />,
         className,
     },
 ];
