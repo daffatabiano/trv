@@ -1,20 +1,19 @@
 .contain {
-    &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('../../assets/images/bg.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    background-image: url('/img/general/jumbotron.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
     &__title {
         display: flex;
         flex-direction: column;
         z-index: 3;
-        width: 100%;
         align-items: center;
         justify-content: center;
         color: rgb(255, 255, 255);

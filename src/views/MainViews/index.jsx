@@ -4,13 +4,8 @@ import styles from '@/views/MainViews/style.module.scss';
 
 export default function MainViews() {
     return (
-        <BaseLayout>
-            <div
-                className={cn(
-                    'flex flex-col text-center justify-center items-center',
-                    styles.contain
-                )}
-            >
+        <>
+            <div className={styles.contain}>
                 <div
                     className={cn(
                         `text-3xl md:text-7xl font-bold  `,
@@ -28,6 +23,7 @@ export default function MainViews() {
                     Explore Now
                 </button>
             </div>
-        </BaseLayout>
+            <BaseLayout>helloworld</BaseLayout>
+        </>
     );
 }
