@@ -35,7 +35,7 @@ export default function MainViews() {
                     </button>
                 </motion.div>
             </div>
-            <BaseLayout>helloworld</BaseLayout>
+            <BaseLayout>hello world</BaseLayout>
         </>
     );
 }
