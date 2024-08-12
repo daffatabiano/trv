@@ -10,3 +10,9 @@ export const BASE_HEADERS = {
     apiKey: process.env.NEXT_PUBLIC_API_KEY,
     Authorization: `Bearer ${localStorage.getItem('token')}`,
 };
+
+export const UPLOAD_HEADERS = {
+    apiKey: process.env.NEXT_PUBLIC_API_KEY,
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+    'Content-Type': 'multipart/form-data',
+};
