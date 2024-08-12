@@ -6,20 +6,20 @@ export const lists = [
         name: 'Home',
         path: '/',
         icon: <Icons.Home />,
-        className,
+        className: '',
     },
     {
         id: 2,
         name: 'Promo',
         path: '/',
         icon: <Icons.Promo />,
-        className,
+        className: '',
     },
     {
         id: 3,
         name: 'Popular',
         path: '/',
         icon: <Icons.Top />,
-        className,
+        className: '',
     },
 ];

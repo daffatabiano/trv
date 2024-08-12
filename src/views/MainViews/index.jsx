@@ -1,3 +1,4 @@
+import Button from '@/components/ui/Button';
 import BaseLayout from '@/layout/BaseLayout';
 import { cn } from '@/lib/utils';
 import styles from '@/views/MainViews/style.module.scss';
@@ -30,9 +31,11 @@ export default function MainViews() {
                     <div className="font-extralight text-base md:text-4xl dark:text-neutral-200 py-4">
                         <p>Make Your Life Be More Fun</p>
                     </div>
-                    <button className="bg-amber-300 rounded-full w-fit text-emerald-950 font-bold px-4 py-2 hover:bg-amber-400 hover:translate-y-1 hover:shadow-inner hover:shadow-amber-600 ">
-                        Explore Now
-                    </button>
+                    <Button
+                        text={'Explore Now'}
+                        type="button"
+                        onClick={() => {}}
+                    />
                 </motion.div>
             </div>
             <BaseLayout>hello world</BaseLayout>
