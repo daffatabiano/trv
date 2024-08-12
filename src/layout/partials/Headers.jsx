@@ -9,7 +9,6 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 export default function Headers() {
     const [isScrolled, setIsScrolled] = useState(false);
     const md = useMediaQuery('(max-width: 768px)');
-    console.log(md);
 
     useEffect(() => {
         const stickyTop = document.querySelector('.sticky');

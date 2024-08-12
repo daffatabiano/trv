@@ -13,7 +13,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { lists } from '@/services/Headers/data';
 
-export function SidebarDemo() {
+export function SidebarAdmin() {
     const [open, setOpen] = useState(false);
     return (
         <div
