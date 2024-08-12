@@ -5,12 +5,13 @@
     justify-content: center;
     min-height: 100vh;
     width: 100%;
-    opacity: 0.8;
+    opacity: 1;
     background-image: url('/img/general/jumbotron.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     position: relative;
+    z-index: 999999;
     &::before {
         content: '';
         position: absolute;
