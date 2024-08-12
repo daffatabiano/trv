@@ -18,8 +18,8 @@ export default function MainViews() {
             <div className="font-extralight text-base md:text-4xl dark:text-neutral-200 py-4">
                 <p>Make Your Life Be More Fun</p>
             </div>
-            <button className="bg-black dark:bg-white rounded-full w-fit text-white dark:text-black px-4 py-2">
-                Debug now
+            <button className="bg-amber-300 rounded-full w-fit text-emerald-950 font-bold px-4 py-2 hover:bg-amber-400 hover:translate-y-1 hover:shadow-inner hover:shadow-amber-600 ">
+                Explore Now
             </button>
         </BaseLayout>
     );
