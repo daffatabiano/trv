@@ -4,9 +4,12 @@ import { lists } from '@/services/Headers/data';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 export default function Headers() {
     const [isScrolled, setIsScrolled] = useState(false);
+    const md = useMediaQuery('(max-width: 768px)');
+    console.log(md);
 
     useEffect(() => {
         const stickyTop = document.querySelector('.sticky');
