@@ -30,7 +30,7 @@ export default function Headers() {
         <nav
             className={`flex gap-4 w-full h-20 items-center bg-transparent backdrop-blur-md sticky top-0 text-slate-950 px-4 pt-2`}
         >
-            <div className="w-1/12">
+            <div className="w-1/6">
                 <img src="/img/logo/main-logo.png" alt="logo-company" />
             </div>
             <div className="w-10/12 flex gap-4 ">
@@ -47,7 +47,7 @@ export default function Headers() {
                     </div>
                 ))}
             </div>
-            <div className="w-1/12">
+            <div className="w-1/12 me-4">
                 <Button text="Login" type="button" onClick={() => {}} />
             </div>
         </nav>

@@ -15,6 +15,9 @@ module.exports = {
     darkMode: 'class',
     theme: {
         extend: {
+            screens: {
+                xs: '400px',
+            },
             animation: {
                 aurora: 'aurora 60s linear infinite',
             },
