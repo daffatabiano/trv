@@ -47,7 +47,6 @@ export default function Drawer() {
     const [active, setActive] = useState(false);
     const { pathname } = useRouter();
 
-    console.log(pathname, 'routerr');
     const handleClick = () => {
         setShow((curr) => !curr);
     };
@@ -72,10 +71,12 @@ export default function Drawer() {
             </nav> */}
 
             <aside
-                className={`w-full xs:w-3/4 sm:w-[40%] gap-4 bg-amber-400 justify-between h-screen z-[100] fixed top-0 rounded-tr-3xl rounded-br-3xl transition-all duration-300`}
+                className={` xs:w-3/4 sm:w-[40%] gap-4 ${
+                    show ? 'w-32' : 'w-full'
+                } bg-amber-400 justify-between h-screen z-[100] fixed top-0 rounded-tr-3xl rounded-br-3xl transition-all duration-300`}
             >
                 <div
-                    className={`w-full flex pt-2 h-[15%] space-x-20 ${
+                    className={`w-full flex pt-2 h-[15%]  ${
                         show
                             ? 'justify-center'
                             : 'justify-between items-center pe-4'
@@ -83,14 +84,14 @@ export default function Drawer() {
                 >
                     {show ? (
                         <img
-                            src="/img/logo/sec-logo.png"
-                            className={`overflow-hidden transition-all w-36 duration-300`}
+                            src="/img/logo/single-logo.png"
+                            className={`overflow-hidden transition-all w-20 duration-300`}
                             alt="logo-company"
                         />
                     ) : (
                         <img
-                            src="/img/logo/single-logo.png"
-                            className={`overflow-hidden transition-all w-20 duration-300`}
+                            src="/img/logo/sec-logo.png"
+                            className={`overflow-hidden transition-all w-36 duration-300`}
                             alt="logo-company"
                         />
                     )}
@@ -99,13 +100,13 @@ export default function Drawer() {
                         className={`text-white font-bold w-fit text-center text-sm p-2 top-2 right-2 rounded-full bg-amber-300 `}
                         onClick={handleClick}
                     >
-                        {show ? <Icons.ChevronLeft /> : <Icons.ChevronRight />}
+                        {show ? <Icons.ChevronRight /> : <Icons.ChevronLeft />}
                     </span>
                 </div>
                 <hr className="w-full h-[1px] border-amber-300" />
-                <div className="w-full h-[70%]  px-2 py-8 flex flex-col items-start">
+                <div className={`w-full h-[70%] px-2 py-8 flex flex-col gap-2`}>
                     {lists.map((item) => (
-                        <ul key={item.id} className="w-full">
+                        <ul key={item.id} className="w-full ">
                             <li className=" w-full">
                                 <Link
                                     href={item.path}
@@ -113,33 +114,45 @@ export default function Drawer() {
                                         item.path === pathname
                                             ? 'bg-gradient-to-l from-amber-400 to-amber-600 text-amber-950'
                                             : 'hover:bg-amber-600/30 '
+                                    } ${
+                                        show
+                                            ? 'justify-center'
+                                            : 'justify-start'
                                     }`}
                                 >
                                     {item.icon}
-                                    {item.name}
+                                    {show ? '' : item.name}
                                 </Link>
                             </li>
                         </ul>
                     ))}
                 </div>
                 <hr className="w-full h-[1px] border-amber-300" />
-                <div className="w-full px-2 mt-4 h-[10%] flex justify-between items-center">
+                <div
+                    className={`w-full px-2 mt-4 h-[10%] flex justify-${
+                        show ? 'center' : 'between'
+                    } items-center`}
+                >
                     <div className="flex gap-2">
                         <img
                             src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
                             alt="profile"
                             className="w-14 h-14 rounded-lg"
                         />
-                        <span className="flex flex-col text-white font-normal w-fit h-fit p-2 items-start text-center text-sm rounded-lg bg-gradient-to-l from-amber-400 to-amber-500 text-amber-950">
-                            John Doe
-                            <em>Johndoe@gmail.com</em>
-                        </span>
+                        {!show ? (
+                            <span className="flex flex-col text-white font-normal w-fit h-fit p-2 items-start text-center text-sm rounded-lg bg-gradient-to-l from-amber-400 to-amber-500 text-amber-950">
+                                John Doe
+                                <em>Johndoe@gmail.com</em>
+                            </span>
+                        ) : null}
                     </div>
-                    <div className="w-1/6 ">
-                        <button className="text-white font-bold w-fit text-center text-sm p-2 top-2 right-2 rounded-full bg-amber-300 ">
-                            <Icons.ThreeDots />
-                        </button>
-                    </div>
+                    {!show ? (
+                        <div className="w-1/6 ">
+                            <button className="text-white font-bold w-fit text-center text-sm p-2 top-2 right-2 rounded-full bg-amber-300 ">
+                                <Icons.ThreeDots />
+                            </button>
+                        </div>
+                    ) : null}
                 </div>
             </aside>
         </>
