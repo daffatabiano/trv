@@ -119,6 +119,49 @@ const ThreeDots = () => {
     );
 };
 
+const Logout = () => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-log-out"
+        >
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" x2="9" y1="12" y2="12" />
+        </svg>
+    );
+};
+
+const Dashboard = () => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-layout-dashboard"
+        >
+            <rect width="7" height="9" x="3" y="3" rx="1" />
+            <rect width="7" height="5" x="14" y="3" rx="1" />
+            <rect width="7" height="9" x="14" y="12" rx="1" />
+            <rect width="7" height="5" x="3" y="16" rx="1" />
+        </svg>
+    );
+};
+
 Icons.Home = Home;
 Icons.Promo = Promo;
 Icons.Top = Top;
@@ -126,3 +169,5 @@ Icons.Hamburger = Hamburger;
 Icons.ChevronRight = ChevronRight;
 Icons.ChevronLeft = ChevronLeft;
 Icons.ThreeDots = ThreeDots;
+Icons.Logout = Logout;
+Icons.Dashboard = Dashboard;
