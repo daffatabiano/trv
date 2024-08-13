@@ -1,6 +1,7 @@
 import { Icons } from '@/components/Icons';
 import { lists } from '@/services/Headers/data';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const Sidebar = ({ lists, show }) => {
@@ -47,6 +48,9 @@ const Sidebar = ({ lists, show }) => {
 
 export default function Drawer() {
     const [show, setShow] = useState(true);
+    const [active, setActive] = useState(false);
+    const router = useRouter();
+    console.log(router);
     const handleClick = () => {
         setShow((curr) => !curr);
     };
@@ -70,10 +74,10 @@ export default function Drawer() {
                 </div>
             </nav>
             <aside
-                className={`w-full xs:w-1/2 gap-4  bg-amber-400 justify-between h-screen z-[100] fixed top-0 rounded-tr-3xl rounded-br-3xl transition-all duration-300`}
+                className={`w-full xs:w-1/2 bg-amber-400 justify-between h-screen z-[100] relative top-0 rounded-tr-3xl rounded-br-3xl transition-all duration-300`}
             >
                 <div
-                    className={`w-full flex h-[15%] ${
+                    className={`w-full flex pt-2  space-x-20 ${
                         show
                             ? 'justify-center'
                             : 'justify-between items-center pe-4'
@@ -100,23 +104,36 @@ export default function Drawer() {
                         {show ? <Icons.ChevronLeft /> : <Icons.ChevronRight />}
                     </span>
                 </div>
-                <hr className="w-full h-[1px] border-amber-300 " />
-                <div className="w-full h-[50%]  px-2 py-8 flex flex-col gap-4 justify-between items-center">
+                <hr className="w-full h-[1px] border-amber-300 me-12" />
+                <div className="w-full  px-2 py-8 flex flex-col gap-4 justify-between items-start">
                     {lists.map((item) => (
-                        <ul key={item.id}>
-                            <li className="">
+                        <ul key={item.id} className="w-full h-full px-6">
+                            <li className=" w-full">
                                 <Link
                                     href={item.path}
-                                    className="text-white flex items-center gap-2 link"
+                                    className={`text-white w-full h-full rounded flex items-center gap-4 link py-4 px-2 ${
+                                        active
+                                            ? 'bg-amber-300'
+                                            : 'hover:bg-amber-600/30 '
+                                    }`}
                                 >
-                                    {item.icon} {item.name}
+                                    {item.icon}
+                                    {item.name}
                                 </Link>
                             </li>
                         </ul>
                     ))}
                 </div>
-                <div className="w-full h-[10%] mt-24  justify-end items-end flex">
-                    <img src="/img/logo/main-logo.png" alt="logo-company" />
+                <div className="w-full mt-24  flex bg-yellow-950">
+                    <img
+                        src="/img/logo/main-logo.png"
+                        alt="logo-company"
+                        className="w-20 h-20"
+                    />
+                    <span className="text-white font-bold w-fit text-center text-sm p-2 top-2 right-2 rounded-full bg-yellow-800 ">
+                        ACET LABS
+                    </span>
+                    <div className="w-1/6"></div>
                 </div>
             </aside>
         </>
