@@ -73,8 +73,10 @@ export default function Drawer() {
                 className={`w-full xs:w-1/2 gap-4  bg-amber-400 justify-between h-screen z-[100] fixed top-0 rounded-tr-3xl rounded-br-3xl transition-all duration-300`}
             >
                 <div
-                    className={`w-full bg-red-200 flex h-[20%] ${
-                        show ? 'justify-center' : 'justify-between'
+                    className={`w-full flex h-[15%] ${
+                        show
+                            ? 'justify-center'
+                            : 'justify-between items-center pe-4'
                     } items-center transition-all duration-300`}
                 >
                     {show ? (
@@ -86,7 +88,7 @@ export default function Drawer() {
                     ) : (
                         <img
                             src="/img/logo/single-logo.png"
-                            className={`overflow-hidden transition-all w-24 duration-300`}
+                            className={`overflow-hidden transition-all w-20 duration-300`}
                             alt="logo-company"
                         />
                     )}
@@ -98,6 +100,7 @@ export default function Drawer() {
                         {show ? <Icons.ChevronLeft /> : <Icons.ChevronRight />}
                     </span>
                 </div>
+                <hr className="w-full h-[1px] border-amber-300 " />
                 <div className="w-full h-[50%]  px-2 py-8 flex flex-col gap-4 justify-between items-center">
                     {lists.map((item) => (
                         <ul key={item.id}>

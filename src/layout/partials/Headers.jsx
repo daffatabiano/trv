@@ -28,10 +28,14 @@ export default function Headers() {
 
     return (
         <nav
-            className={`flex gap-4 w-full h-20 items-center bg-transparent backdrop-blur-md sticky top-0 text-slate-950 px-4 pt-2`}
+            className={`flex gap-4 w-full h-24 items-center bg-transparent backdrop-blur-md sticky top-0 text-slate-950 px-4 pt-2`}
         >
-            <div className="w-1/6">
-                <img src="/img/logo/main-logo.png" alt="logo-company" />
+            <div className="w-1/6 xl:pt-16 lg:pt-10 md:6">
+                <img
+                    className="w-full object-cover h-full"
+                    src="/img/logo/main-logo.png"
+                    alt="logo-company"
+                />
             </div>
             <div className="w-10/12 flex gap-4 ">
                 {lists.map((item) => (

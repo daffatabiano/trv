@@ -1,5 +1,5 @@
-export function Icons({ children }) {
-    return <>{children}</>;
+export function Icons({ children, className }) {
+    return <div className={className}>{children}</div>;
 }
 
 const Home = () => {
@@ -67,9 +67,9 @@ const ChevronRight = () => {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLineJoin="round"
             className="lucide lucide-circle-chevron-right"
         >
             <circle cx="12" cy="12" r="10" />
@@ -87,9 +87,9 @@ const ChevronLeft = () => {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLineJoin="round"
             className="lucide lucide-circle-chevron-left"
         >
             <circle cx="12" cy="12" r="10" />

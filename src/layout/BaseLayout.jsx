@@ -6,7 +6,6 @@ import Drawer from './partials/Drawer';
 
 export default function BaseLayout({ children }) {
     const md = useMediaQuery('(min-width: 768px)');
-    console.log(md);
 
     return (
         <>
