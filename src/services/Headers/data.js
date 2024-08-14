@@ -4,7 +4,7 @@ export const lists = [
     {
         id: 1,
         name: 'Home',
-        path: '/',
+        path: '/home',
         icon: <Icons.Home />,
         className: '',
     },

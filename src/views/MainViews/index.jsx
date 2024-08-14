@@ -3,8 +3,11 @@ import BaseLayout from '@/layout/BaseLayout';
 import { cn } from '@/lib/utils';
 import styles from '@/views/MainViews/style.module.scss';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 export default function MainViews() {
+    const { push } = useRouter();
+
     return (
         <>
             <div className={styles.contain}>
@@ -18,6 +21,11 @@ export default function MainViews() {
                     }}
                     className="relative flex flex-col gap-0 items-center justify-center w-full"
                 >
+                    <img
+                        src="/img/logo/single-logo.png"
+                        alt="single-logo-company"
+                        className="w-20 h-20"
+                    />
                     <div
                         className={cn(
                             `text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold  `,
@@ -34,11 +42,12 @@ export default function MainViews() {
                     <Button
                         text={'Explore Now'}
                         type="button"
-                        onClick={() => {}}
+                        onClick={() => {
+                            push('/home');
+                        }}
                     />
                 </motion.div>
             </div>
-            <BaseLayout>hello world</BaseLayout>
         </>
     );
 }
