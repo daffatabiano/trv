@@ -21,9 +21,11 @@ export default function Drawer() {
     return (
         <>
             <aside
-                className={` xs:w-3/4 sm:w-[40%] gap-4 ${
-                    show ? 'w-32' : 'w-full'
-                } bg-amber-400 justify-between h-screen z-[100] fixed top-0 rounded-tr-3xl rounded-br-3xl transition-all duration-300`}
+                className={` gap-4 ${
+                    show
+                        ? 'w-32 xs:w-1/4 sm:w-[20%] bg-amber-400/80'
+                        : 'w-full  xs:w-3/4 sm:w-[40%] bg-amber-400'
+                }  justify-between h-screen z-[100] fixed top-0 rounded-tr-3xl rounded-br-3xl transition-all duration-300`}
             >
                 <div
                     className={`w-full flex pt-2 h-[15%]  ${
