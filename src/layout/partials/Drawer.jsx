@@ -102,8 +102,8 @@ export default function Drawer() {
                         />
                         {!show ? (
                             <span className="flex flex-col text-white font-normal w-fit h-fit p-2 items-start text-center text-sm rounded-lg bg-gradient-to-l from-amber-400 to-amber-500 text-amber-950">
-                                John Doe
-                                <em>Johndoe@gmail.com</em>
+                                {'Guest'}
+                                <em>{'Empty Email'}</em>
                             </span>
                         ) : null}
                     </div>
