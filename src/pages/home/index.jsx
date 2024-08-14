@@ -1,9 +1,7 @@
-import BaseLayout from '@/layout/BaseLayout';
+import Home from '..';
 
 export default function Page() {
     return (
-        <BaseLayout>
-            <h1>hello world!</h1>
-        </BaseLayout>
+            <Home />
     );
 }
