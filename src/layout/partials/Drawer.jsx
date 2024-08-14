@@ -2,13 +2,13 @@ import { Icons } from '@/components/Icons';
 import { lists } from '@/services/Headers/data';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Drawer() {
     const [show, setShow] = useState(true);
     const [dropdown, setDropdown] = useState(false);
     const { pathname } = useRouter();
-
+    const [token, setToken] = useState('');
     const handleClick = () => {
         setShow((curr) => !curr);
         setDropdown(false);
@@ -17,6 +17,15 @@ export default function Drawer() {
     const handleDropdown = () => {
         setDropdown((curr) => !curr);
     };
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const storedData = localStorage.getItem('token');
+            if (storedData) {
+                setToken(JSON.parse(storedData));
+            }
+        }
+    }, []);
 
     return (
         <>
@@ -123,10 +132,23 @@ export default function Drawer() {
                                     <li className="w-full">
                                         <Link
                                             href="#"
-                                            className="text-red-600 w-full h-full rounded flex items-center gap-4 link p-2 hover:bg-red-600/30"
+                                            className={`${
+                                                token
+                                                    ? 'text-red-600 hover:bg-red-600/30'
+                                                    : 'text-green-600 hover:bg-green-600/30'
+                                            } w-full h-full rounded flex items-center gap-4 link p-2 `}
                                         >
-                                            <Icons.Logout />
-                                            Logout
+                                            {token ? (
+                                                <>
+                                                    <Icons.Logout />
+                                                    Logout
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Icons.Login />
+                                                    Login
+                                                </>
+                                            )}
                                         </Link>
                                     </li>
                                 </ul>
