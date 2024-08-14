@@ -23,7 +23,7 @@ export default function Drawer() {
             <aside
                 className={` gap-4 ${
                     show
-                        ? 'w-32 xs:w-1/4 sm:w-[20%] bg-amber-400/80'
+                        ? 'w-20 xs:w-[20%] sm:w-[15%] bg-amber-400/80'
                         : 'w-full  xs:w-3/4 sm:w-[40%] bg-amber-400'
                 }  justify-between h-screen z-[100] fixed top-0 rounded-tr-3xl rounded-br-3xl transition-all duration-300`}
             >
@@ -49,7 +49,7 @@ export default function Drawer() {
                     )}
 
                     <span
-                        className={`text-white font-bold w-fit text-center text-sm p-2 top-2 right-2 rounded-full bg-amber-300 `}
+                        className={` text-white font-bold w-fit text-center p-1 xs:p-2 top-2 right-2 rounded-full bg-amber-300 `}
                         onClick={handleClick}
                     >
                         {show ? <Icons.ChevronRight /> : <Icons.ChevronLeft />}
