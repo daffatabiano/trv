@@ -5,10 +5,12 @@ import Button from '@/components/ui/Button';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useRouter } from 'next/navigation';
 
 export default function Headers() {
     const [isScrolled, setIsScrolled] = useState(false);
     const md = useMediaQuery('(max-width: 768px)');
+    const { push } = useRouter();
 
     useEffect(() => {
         const stickyTop = document.querySelector('.sticky');
@@ -52,7 +54,13 @@ export default function Headers() {
                 ))}
             </div>
             <div className="w-1/12 me-4">
-                <Button text="Login" type="button" onClick={() => {}} />
+                <Button
+                    text="Login"
+                    type="button"
+                    onClick={() => {
+                        push('/auth/login');
+                    }}
+                />
             </div>
         </nav>
     );

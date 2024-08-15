@@ -3,21 +3,28 @@ import { motion } from 'framer-motion';
 import Headers from './partials/Headers';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import Drawer from './partials/Drawer';
+import { useRouter } from 'next/router';
 
 export default function BaseLayout({ children }) {
     const md = useMediaQuery('(min-width: 768px)');
+    const { pathname } = useRouter();
+    const paths = ['/auth/login', '/'];
 
     return (
         <>
             <AuroraBackground>
-                {md ? (
-                    <Headers />
-                ) : (
-                    <>
-                        <Drawer />
-                        <div className="w-20 xs:w-[20%] sm:w-[15%] bg-transparent h-screen" />
-                    </>
-                )}
+                <>
+                    {!paths.includes(pathname) &&
+                        (md ? (
+                            <Headers />
+                        ) : (
+                            <>
+                                <Drawer />
+                                <div className="w-20 xs:w-[20%] sm:w-[15%] bg-transparent h-screen" />
+                            </>
+                        ))}
+                </>
+
                 <motion.div
                     initial={{ opacity: 0.0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
