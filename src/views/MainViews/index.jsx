@@ -36,7 +36,7 @@ export default function MainViews() {
                             E N J O <span> Y O U R </span>T - R A V E L
                         </h1>
                     </div>
-                    <div className="font-extralight text-base text-lg md:text-4xl dark:text-neutral-200 py-4">
+                    <div className="font-extralight text-base text-lg md:text-4xl text-neutral-200 py-4">
                         <p>Make Your Life Be More Fun</p>
                     </div>
                     <Button
