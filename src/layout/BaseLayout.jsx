@@ -10,7 +10,14 @@ export default function BaseLayout({ children }) {
     return (
         <>
             <AuroraBackground>
-                {md ? <Headers /> : <Drawer />}
+                {md ? (
+                    <Headers />
+                ) : (
+                    <>
+                        <Drawer />
+                        <div className="w-20 xs:w-[20%] sm:w-[15%] bg-transparent h-screen" />
+                    </>
+                )}
                 <motion.div
                     initial={{ opacity: 0.0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
