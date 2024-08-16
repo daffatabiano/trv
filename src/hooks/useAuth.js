@@ -1,4 +1,5 @@
 import { AUTH_HEADERS, BASE_HEADERS, BASE_URL } from '@/services/BASE/data';
+import axios from 'axios';
 
 export default function useAuth() {
     const login = async (url, option) => {
