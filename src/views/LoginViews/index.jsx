@@ -14,7 +14,9 @@ export default function Login() {
         };
 
         const res = await login('login', body);
-        console.log(res);
+        if(res.status === 200) {
+            
+        }
     };
 
     return (
