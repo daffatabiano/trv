@@ -1,6 +1,6 @@
 import Form from '@/components/forms';
 import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
+import Input, { InputPassword } from '@/components/ui/Input';
 
 export default function Login() {
     return (
@@ -17,11 +17,7 @@ export default function Login() {
                         placeholder="example@mail.com"
                         type="email"
                     />
-                    <Input
-                        name="email"
-                        placeholder="example@mail.com"
-                        type="email"
-                    />
+                    <InputPassword />
                     <button className="w-full bg-amber-300 rounded-full px-4 py-2 text-white font-bold">
                         Login
                     </button>

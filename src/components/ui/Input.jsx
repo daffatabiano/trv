@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { Icons } from '../Icons';
 
 export default function Input(props) {
     const { className, ...rest } = props;
@@ -13,3 +14,14 @@ export default function Input(props) {
         />
     );
 }
+
+export const InputPassword = () => {
+    return (
+        <div className="relative">
+            <Input type="text" name="password" placeholder="Password" />
+            <Icons className="absolute right-4 top-1/2 -translate-y-1/2">
+                <Icons.Eye />
+            </Icons>
+        </div>
+    );
+};
