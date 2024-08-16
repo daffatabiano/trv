@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 import { Icons } from '../Icons';
 import { useState } from 'react';
+import styles from '@/components/ui/Input.module.scss';
 
 export default function Input(props) {
     const { className, ...rest } = props;
@@ -19,21 +20,19 @@ export default function Input(props) {
 export const InputPassword = () => {
     const [show, setShow] = useState(false);
 
-    const toggleShow = () => setShow((s) => !s);
-
     return (
         <div className="relative">
             <Input
+                className={styles.none}
                 type={show ? 'text' : 'password'}
                 name="password"
                 placeholder="Password"
             />
-            <Icons className="absolute right-4 top-1/2 -translate-y-1/2">
-                {show ? (
-                    <Icons.EyeOff onClick={toggleShow} />
-                ) : (
-                    <Icons.Eye onClick={toggleShow} />
-                )}
+            <Icons
+                onClick={() => setShow((curr) => !curr)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-10 cursor-pointer"
+            >
+                {show ? <Icons.EyeOff /> : <Icons.Eye />}
             </Icons>
         </div>
     );
