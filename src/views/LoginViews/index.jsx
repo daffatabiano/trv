@@ -2,6 +2,7 @@ import Form from '@/components/forms';
 import Input, { InputPassword } from '@/components/ui/Input';
 import useAuth from '@/hooks/useAuth';
 import Link from 'next/link';
+import { toast, ToastContainer } from 'react-toastify';
 
 export default function Login() {
     const { login } = useAuth();
@@ -14,12 +15,17 @@ export default function Login() {
         };
 
         const res = await login('login', body);
+        console.log(res);
         if (res.status === 200) {
+            toast.success(res.data.message);
+        } else {
+            toast.error('Login Failed');
         }
     };
 
     return (
         <div className="bg-slate-900/60 w-screen h-screen flex flex-col items-center justify-center">
+            <ToastContainer />
             <div className="w-80 h-full flex flex-col gap-4 items-center justify-center p-5">
                 <img
                     src="/img/logo/single-logo.png"
