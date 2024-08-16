@@ -5,14 +5,18 @@ export const AUTH_HEADERS = {
     'Content-Type': 'application/json',
 };
 
-// export const BASE_HEADERS = {
-//     'Content-Type': 'application/json',
-//     apiKey: process.env.NEXT_PUBLIC_API_KEY,
-//     Authorization: `Bearer ${localStorage.getItem('token')}`,
-// };
+export const BASE_HEADERS = (token) => {
+    return {
+        'Content-Type': 'application/json',
+        apiKey: process.env.NEXT_PUBLIC_API_KEY,
+        Authorization: `Bearer ${token}`,
+    };
+};
 
-// export const UPLOAD_HEADERS = {
-//     apiKey: process.env.NEXT_PUBLIC_API_KEY,
-//     Authorization: `Bearer ${localStorage.getItem('token')}`,
-//     'Content-Type': 'multipart/form-data',
-// };
+export const UPLOAD_HEADERS = (token) => {
+    return {
+        apiKey: process.env.NEXT_PUBLIC_API_KEY,
+        Authorization: `Bearer ${localStorage.getItem(token)}`,
+        'Content-Type': 'multipart/form-data',
+    };
+};

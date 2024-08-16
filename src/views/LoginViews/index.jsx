@@ -7,6 +7,7 @@ export default function Login() {
     const { login } = useAuth();
 
     const handleLogin = async (e) => {
+        e.preventDefault();
         const body = {
             email: e.target.email.value,
             password: e.target.password.value,

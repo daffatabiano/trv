@@ -14,11 +14,11 @@ export default function useAuth() {
         }
     };
 
-    const logout = async (url, callback) => {
+    const logout = async (url, callback, token) => {
         try {
             setLoading(true);
             const response = await axios.get(`${BASE_URL}/${url}`, {
-                headers: BASE_HEADERS,
+                headers: BASE_HEADERS(token),
             });
             if (url === 'logout') {
                 localStorage.removeItem('token');
