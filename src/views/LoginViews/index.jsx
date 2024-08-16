@@ -30,7 +30,7 @@ export default function Login() {
                     <li>Terms and Conditions</li>
                 </ul>
                 <p className="text-white text-sm">
-                    © 2022. Acet Labs. All rights reserved.
+                    © 2024. Daffa Tabiano. All rights reserved.
                 </p>
             </div>
         </div>
