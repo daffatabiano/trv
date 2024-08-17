@@ -46,7 +46,7 @@ export default function Login() {
 
     return (
         <div className="bg-slate-900/60 w-screen h-screen flex flex-col items-center justify-center">
-            <Toast {...toast} />
+            <Toast {...toast} setToast={setToast} />
             <div className="w-80 h-full flex flex-col gap-4 items-center justify-center p-5">
                 <img
                     src="/img/logo/single-logo.png"

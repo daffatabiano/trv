@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Icons } from '../Icons';
 
 const toasterVariant = {
     success: {
         icon: <Icons.Success w={12} />,
-        color: 'bg-emerald-700',
+        color: 'bg-emerald-600',
         barColor: 'bg-emerald-800',
         textColor: 'text-emerald-700',
     },
@@ -17,16 +17,34 @@ const toasterVariant = {
 };
 
 export default function Toast(prop) {
-    const { title, message, variant, show } = prop;
+    const { title, message, variant, show, setToast } = prop;
+    const [lengthBar, setLengthBar] = useState(100);
+    const timerRef = useRef(null);
+
+    const timer = () => {
+        timerRef.current = setInterval(() => {
+            setLengthBar((prevCurrent) => prevCurrent - 0.5);
+        }, 1);
+    };
+
+    useEffect(() => {
+        if (show) {
+            timer();
+        } else {
+            clearInterval(timerRef.current);
+        }
+    }, [show]);
+
+    console.log(lengthBar, 'lengthBar');
 
     return (
         <div
-            className={`absolute mx-auto left-0 right-0 top-4  z-50 sm:w-1/3 sm:mx-0 sm:left-auto sm:right-4 origin-top transition-all duration-300 ${
-                show ? 'w-[90%]' : 'w-0'
+            className={`absolute mx-auto left-0 right-0 top-4  z-50  sm:mx-0 sm:left-auto sm:right-4 origin-top transition-all duration-300 ${
+                show ? 'w-[90%] sm:w-1/3 md:w-1/5' : 'w-0'
             }`}
         >
             <div
-                // onClick={() => !show}
+                onClick={() => setToast({})}
                 className={`${
                     show ? 'absolute' : 'hidden'
                 } cursor-pointer z-50 w-4 right-2 top-2 bg-neutral-200 rounded-full p-1 hover:bg-neutral-300`}
@@ -53,7 +71,7 @@ export default function Toast(prop) {
                     className={`w-full h-2 absolute bottom-0 rounded-lg ${toasterVariant[variant]?.color}`}
                 />
                 <div
-                    className={`w-[40%] h-2 absolute bottom-0 rounded-lg    ${toasterVariant[variant]?.barColor}`}
+                    className={`w-[${lengthBar}%] h-2 absolute bottom-0 rounded-lg ${toasterVariant[variant]?.barColor}`}
                 />
             </div>
         </div>
