@@ -12,7 +12,7 @@ export default function Input(props) {
             <Label text={text} className="ps-2" />
             <input
                 className={cn(
-                    'w-full p-2 sm:p-4 md:p-6 bg-neutral-100/30 outline-none shadow-sm shadow-neutral-200 rounded-full',
+                    'w-full p-2 sm:p-4  bg-neutral-100/30 outline-none shadow-sm shadow-neutral-200 rounded-full',
                     className
                 )}
                 {...rest}

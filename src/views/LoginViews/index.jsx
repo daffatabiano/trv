@@ -52,7 +52,7 @@ export default function Login() {
                 <img
                     src="/img/logo/single-logo.png"
                     alt="single-logo"
-                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-30 md:h-30 object-cover"
+                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-cover"
                 />
                 <Form onSubmit={handleLogin}>
                     <Input
@@ -64,7 +64,7 @@ export default function Login() {
                     <InputPassword />
                     <button
                         type="submit"
-                        className="w-full bg-amber-300 rounded-full px-4 py-2 text-white font-bold"
+                        className="w-full bg-amber-300 rounded-full px-4 py-2 sm:p-4 text-white font-bold"
                     >
                         Login
                     </button>
