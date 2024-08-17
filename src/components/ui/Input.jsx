@@ -53,15 +53,19 @@ export const InputImage = (prop) => {
     const { image, onChange } = prop;
 
     return (
-        <div className="flex flex-col">
-            <Label text="Choose Profile Picture" />
+        <div className="flex flex-col gap-4">
+            <Label text="Choose Profile Picture" className="ps-2" />
             <img
                 src={SUB_EMPTY_PROFILE || image}
                 alt={'profile-picture-user'}
                 onChange={onChange}
-                className="w-12 h-12 "
+                className="w-24 h-24 m-auto rounded-lg"
             />
-            <Input type="file" name="profilePictureUrl" />
+            <Input
+                type="file"
+                name="profilePictureUrl"
+                className="focus:outline-none file:hidden text-white"
+            />
         </div>
     );
 };

@@ -85,7 +85,7 @@ export default function RegisterViews() {
                             <InputPassword name="password" />
                             <InputPassword name="passwordRepeat" />
                         </div>
-                        <div>
+                        <div className="flex flex-col gap-3">
                             <Input
                                 name="phoneNumber"
                                 placeholder="+62 123 xxx xxxx"
