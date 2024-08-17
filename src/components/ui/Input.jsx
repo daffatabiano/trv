@@ -13,7 +13,7 @@ export default function Input(props) {
             <Label text={text} className="ps-2" />
             <input
                 className={cn(
-                    'w-full p-2  bg-neutral-100/30 outline-none shadow-sm shadow-neutral-200 rounded-full',
+                    'w-full p-2 text-white bg-neutral-100/30 outline-none shadow-sm shadow-neutral-200 rounded-full',
                     className
                 )}
                 {...rest}
@@ -50,16 +50,24 @@ export const InputPassword = ({ name }) => {
 };
 
 export const InputImage = (prop) => {
-    const { image, onChange } = prop;
+    const { image, onChange, clear } = prop;
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 relative">
             <Label text="Choose Profile Picture" className="ps-2" />
             <img
-                src={SUB_EMPTY_PROFILE || image}
+                src={image.length > 0 ? image : SUB_EMPTY_PROFILE}
                 alt={'profile-picture-user'}
                 className="w-24 h-24 m-auto rounded-lg"
             />
+            {image.length > 0 ? (
+                <span
+                    onClick={clear}
+                    className="absolute bottom-0 right-0 w-10 h-10 p-3 text-rose-800 bg-rose-500/80 rounded-full"
+                >
+                    <Icons.Close w={20} />
+                </span>
+            ) : null}
             <Input
                 type="file"
                 name="profilePictureUrl"

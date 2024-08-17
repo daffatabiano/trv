@@ -3,17 +3,19 @@ import Form from '@/components/forms';
 import Input, { InputImage, InputPassword } from '@/components/ui/Input';
 import Toast from '@/components/ui/Toast';
 import useAuth from '@/hooks/useAuth';
+import useUpload from '@/hooks/useUpload';
 import Link from 'next/link';
 import { useState } from 'react';
 
 export default function RegisterViews() {
     const { login } = useAuth();
+    const { upload } = useUpload();
     const [toast, setToast] = useState({});
     const [file, setFile] = useState({});
+    const [imageUrl, setImageUrl] = useState('');
 
     const changeFile = (e) => {
         const file = e.target.files[0];
-        console.log(file);
 
         if (!file.type.startsWith('image')) {
             setToast({
@@ -22,6 +24,7 @@ export default function RegisterViews() {
                 message: 'Format file should be .jpg/.png/.jpeg/.gif/.svg',
                 show: true,
             });
+            return;
         }
 
         if (file.size > 10000) {
@@ -31,13 +34,33 @@ export default function RegisterViews() {
                 message: ' Maximum upload 1 MB',
                 show: true,
             });
+            return;
         } else {
-            setToast({
-                variant: 'success',
-                title: 'Upload Success',
-                message: 'Your profile picture success to be applied',
-                show: true,
-            });
+            setTimeout(async () => {
+                const newFile = new FormData();
+                newFile.append('image', file);
+
+                await upload('upload-image', newFile)
+                    .then((res) => {
+                        console.log(res);
+                        setToast({
+                            variant: 'success',
+                            title: 'Upload Success',
+                            message:
+                                'Your profile picture success to be applied',
+                            show: true,
+                        });
+                        setImageUrl(res.data.url);
+                    })
+                    .catch((err) => {
+                        setToast({
+                            variant: 'error',
+                            title: 'Upload Failed',
+                            message: err?.response?.message?.data,
+                            show: true,
+                        });
+                    });
+            }, 1000);
         }
     };
 
@@ -79,6 +102,19 @@ export default function RegisterViews() {
                 show: true,
             });
         }
+    };
+
+    const removePicture = () => {
+        setImageUrl({});
+        setToast({
+            variant: 'success',
+            title: 'Success',
+            message: 'Picture success to remove',
+            show: true,
+        });
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
     };
 
     return (
@@ -124,7 +160,11 @@ export default function RegisterViews() {
                                 type="number"
                                 text="Phone"
                             />
-                            <InputImage onChange={changeFile} />
+                            <InputImage
+                                onChange={changeFile}
+                                image={imageUrl}
+                                clear={removePicture}
+                            />
                         </div>
                     </div>
                     <p className="text-amber-300 italic text-sm sm:mx-auto  -mb-2 opacity-75">
