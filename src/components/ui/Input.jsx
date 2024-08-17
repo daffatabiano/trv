@@ -13,7 +13,7 @@ export default function Input(props) {
             <Label text={text} className="ps-2" />
             <input
                 className={cn(
-                    'w-full p-2 sm:p-4  bg-neutral-100/30 outline-none shadow-sm shadow-neutral-200 rounded-full',
+                    'w-full p-2  bg-neutral-100/30 outline-none shadow-sm shadow-neutral-200 rounded-full',
                     className
                 )}
                 {...rest}
@@ -27,7 +27,10 @@ export const InputPassword = ({ name }) => {
 
     return (
         <div className="-ms-2 me-2">
-            <Label text="Password" className="ps-4" />
+            <Label
+                text={name === 'password' ? 'Password' : 'Confirm Password'}
+                className="ps-4"
+            />
             <div className="relative">
                 <Input
                     className={styles.none}
@@ -56,6 +59,7 @@ export const InputImage = (prop) => {
                 src={SUB_EMPTY_PROFILE || image}
                 alt={'profile-picture-user'}
                 onChange={onChange}
+                className="w-12 h-12 "
             />
             <Input type="file" name="profilePictureUrl" />
         </div>

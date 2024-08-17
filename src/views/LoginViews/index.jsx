@@ -48,7 +48,7 @@ export default function Login() {
     return (
         <div className="bg-slate-900/60 max-w-screen w-full h-screen max-h-screen flex flex-col items-center justify-center">
             <Toast {...toast} setToast={setToast} duration={10000} />
-            <div className="w-full h-full flex flex-col gap-4 items-center justify-center p-5">
+            <div className="w-80 sm:w-96 h-full flex flex-col gap-4 items-center justify-center p-5">
                 <img
                     src="/img/logo/single-logo.png"
                     alt="single-logo"
@@ -60,11 +60,12 @@ export default function Login() {
                         placeholder="example@mail.com"
                         type="email"
                         text="Email"
+                        className="text-white"
                     />
-                    <InputPassword name="password" />
+                    <InputPassword name="password" className="text-white" />
                     <button
                         type="submit"
-                        className="w-full bg-amber-300 rounded-full px-4 py-2 sm:p-4 text-white font-bold"
+                        className="w-full bg-amber-300 rounded-full px-4 py-2 text-white font-bold"
                     >
                         Login
                     </button>

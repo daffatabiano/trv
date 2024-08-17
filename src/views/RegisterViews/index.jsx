@@ -52,7 +52,7 @@ export default function RegisterViews() {
     return (
         <div className="bg-slate-900/60 max-w-screen w-full h-screen max-h-screen flex flex-col items-center justify-center">
             <Toast {...toast} setToast={setToast} duration={10000} />
-            <div className="w-80 h-full flex flex-col gap-4 items-center justify-center p-5">
+            <div className="w-full h-full bg-slate-500 flex flex-col gap-4 items-center justify-center p-5">
                 <div className="flex flex-col w-full">
                     <img
                         src="/img/logo/sec-logo.png"
@@ -93,12 +93,11 @@ export default function RegisterViews() {
                                 text="Phone"
                             />
                             <InputImage />
-                            <p className="text-amber-300 italic">
-                                * Default Role is USER, contact ADMIN for change
-                                role
-                            </p>
                         </div>
                     </div>
+                    <p className="text-amber-300 italic">
+                        * Default Role is USER, contact ADMIN for change role
+                    </p>
                     <button
                         type="submit"
                         className="w-full bg-amber-300 rounded-full px-4 py-2 sm:p-4 text-white font-bold"
@@ -110,7 +109,7 @@ export default function RegisterViews() {
                     <p className="text-white text-sm font-thin">
                         Already have an account?{' '}
                         <Link
-                            href="/auth/signup"
+                            href="/auth/login"
                             className="text-amber-300 font-normal"
                         >
                             Sign In
