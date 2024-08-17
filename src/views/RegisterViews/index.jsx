@@ -51,16 +51,16 @@ export default function RegisterViews() {
     };
 
     return (
-        <div className="bg-slate-900/60 max-w-screen w-full h-full md:min-h-screen md:max-h-screen flex flex-col items-center justify-center">
+        <div className="bg-slate-900/60 max-w-screen w-full h-full md:min-h-screen flex flex-col items-center justify-center">
             <Toast {...toast} setToast={setToast} duration={10000} />
-            <div className="w-full h-full flex flex-col gap-2 items-center justify-center p-5">
+            <div className="w-full h-full sm:w-4/5 lg:w-2/3 flex flex-col gap-2 items-center justify-center p-5">
                 <div className="flex flex-col w-full  justify-center items-center">
                     <img
                         src="/img/logo/sec-logo-2.png"
                         alt="single-logo"
                         className="w-3/4 sm:w-24 md:w-40 h-min object-cover"
                     />
-                    <h3 className="flex flex-col mt-2 text-center justify-center font-bold text-xl text-amber-300">
+                    <h3 className="flex flex-col mt-2 text-center justify-center font-bold text-xl md:text-2xl text-amber-300">
                         SIGN UP{' '}
                         <span className="text-sm font-light text-white italic">
                             Create your account and to be part of us
@@ -68,8 +68,8 @@ export default function RegisterViews() {
                     </h3>
                 </div>
                 <Form onSubmit={handleRegister}>
-                    <div className="flex flex-col sm:flex-row gap-4">
-                        <div className=" flex flex-col gap-3">
+                    <div className="flex flex-col sm:flex-row gap-4 my-6">
+                        <div className=" flex flex-col gap-3 sm:w-1/2">
                             <Input
                                 name="email"
                                 placeholder="example@mail.com"
@@ -86,7 +86,7 @@ export default function RegisterViews() {
                             <InputPassword name="password" />
                             <InputPassword name="passwordRepeat" />
                         </div>
-                        <div className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-3 sm:w-1/2">
                             <Input
                                 name="phoneNumber"
                                 placeholder="+62 123 xxx xxxx"
@@ -96,12 +96,12 @@ export default function RegisterViews() {
                             <InputImage />
                         </div>
                     </div>
-                    <p className="text-amber-300 italic">
+                    <p className="text-amber-300 italic text-sm sm:mx-auto  -mb-2 opacity-75">
                         * Default Role is USER, contact ADMIN for change role
                     </p>
                     <button
                         type="submit"
-                        className="w-full bg-amber-300 rounded-full px-4 py-2 text-white font-bold"
+                        className="w-full bg-amber-300 rounded-full px-4 py-2 sm:w-1/2 sm:mx-auto text-white font-bold"
                     >
                         Register
                     </button>
