@@ -23,16 +23,13 @@ export default function Toast(prop) {
 
     const timer = () => {
         timerRef.current = setInterval(() => {
-            setLengthBar((prevCurrent) => prevCurrent - 0.5);
+            setLengthBar((prevCurrent) => prevCurrent - 0.14);
         }, 1);
     };
 
     useEffect(() => {
-        if (show) {
-            timer();
-        } else {
-            clearInterval(timerRef.current);
-        }
+        timer();
+        return () => clearInterval(timerRef.current);
     }, [show]);
 
     console.log(lengthBar, 'lengthBar');
@@ -68,10 +65,10 @@ export default function Toast(prop) {
                     </div>
                 </div>
                 <div
-                    className={`w-full h-2 absolute bottom-0 rounded-lg ${toasterVariant[variant]?.color}`}
+                    className={`w-[${lengthBar}%] h-2 absolute bottom-0 rounded-lg ${toasterVariant[variant]?.barColor}`}
                 />
                 <div
-                    className={`w-[${lengthBar}%] h-2 absolute bottom-0 rounded-lg ${toasterVariant[variant]?.barColor}`}
+                    className={`w-full h-2 absolute bottom-0 rounded-lg ${toasterVariant[variant]?.color}`}
                 />
             </div>
         </div>
