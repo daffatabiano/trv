@@ -21,7 +21,7 @@ export default function Toast(prop) {
 
     return (
         <div
-            className={`absolute mx-auto left-0 right-0 top-4  z-50 sm:w-1/3 origin-top transition-all duration-300 ${
+            className={`absolute mx-auto left-0 right-0 top-4  z-50 sm:w-1/3 sm:mx-0 sm:left-auto sm:right-4 origin-top transition-all duration-300 ${
                 show ? 'w-[90%]' : 'w-0'
             }`}
         >
