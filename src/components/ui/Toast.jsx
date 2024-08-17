@@ -21,11 +21,16 @@ export default function Toast(prop) {
 
     return (
         <div
-            className={`absolute mx-auto left-0 right-0 top-4 w-[90%] z-50 sm:w-1/3 ${
-                show ? '' : 'hidden'
+            className={`absolute mx-auto left-0 right-0 top-4  z-50 sm:w-1/3 origin-top transition-all duration-300 ${
+                show ? 'w-[90%]' : 'w-0'
             }`}
         >
-            <div className="absolute cursor-pointer z-50 w-4 right-2 top-2 bg-neutral-200 rounded-full p-1 hover:bg-neutral-300">
+            <div
+                // onClick={() => !show}
+                className={`${
+                    show ? 'absolute' : 'hidden'
+                } cursor-pointer z-50 w-4 right-2 top-2 bg-neutral-200 rounded-full p-1 hover:bg-neutral-300`}
+            >
                 <Icons.Close />
             </div>
             <div className="relative flex flex-col gap-2 bg-white rounded-lg ">
@@ -35,17 +40,13 @@ export default function Toast(prop) {
                     >
                         {toasterVariant[variant]?.icon}
                     </div>
-                    <div className="flex flex-col gap-1 pb-2">
+                    <div className="flex flex-col gap-1 pb-2 flex-1">
                         <p
-                            className={`text-sm ${toasterVariant[variant]?.textColor}`}
+                            className={`text-sm font-medium ${toasterVariant[variant]?.textColor}`}
                         >
                             {title}
                         </p>
-                        <p
-                            className={`text-xs ${toasterVariant[variant]?.textColor}`}
-                        >
-                            {message}
-                        </p>
+                        <p className={`text-xs `}>{message}</p>
                     </div>
                 </div>
                 <div
