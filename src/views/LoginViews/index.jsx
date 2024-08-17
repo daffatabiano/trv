@@ -3,9 +3,11 @@ import Input, { InputPassword } from '@/components/ui/Input';
 import Toast from '@/components/ui/Toast';
 import useAuth from '@/hooks/useAuth';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Login() {
     const { login } = useAuth();
+    const [toast, setToast] = useState({});
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -14,16 +16,37 @@ export default function Login() {
             password: e.target.password.value,
         };
 
-        await login('login', body).then((res) => {});
+        await login('login', body)
+            .then((res) => {
+                if (res.status === 200) {
+                    setToast({
+                        variant: 'success',
+                        title: 'Login successful',
+                        message: res.data.message,
+                        show: true,
+                    });
+                } else {
+                    setToast({
+                        variant: 'error',
+                        title: 'Login failed',
+                        message: res.reponse.data.message,
+                        show: true,
+                    });
+                }
+            })
+            .catch((err) => {
+                setToast({
+                    variant: 'error',
+                    title: 'Login failed',
+                    message: err?.response?.data?.message,
+                    show: true,
+                });
+            });
     };
 
     return (
         <div className="bg-slate-900/60 w-screen h-screen flex flex-col items-center justify-center">
-            <Toast
-                variant="success"
-                title="Login Successful"
-                message="Welcome!"
-            />
+            <Toast {...toast} />
             <div className="w-80 h-full flex flex-col gap-4 items-center justify-center p-5">
                 <img
                     src="/img/logo/single-logo.png"

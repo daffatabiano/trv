@@ -3,15 +3,10 @@ import axios from 'axios';
 
 export default function useAuth() {
     const login = async (url, option) => {
-        try {
-            const resp = await axios.post(`${BASE_URL}/${url}`, option, {
-                headers: AUTH_HEADERS,
-            });
-            return resp;
-        } catch (error) {
-            console.log(error);
-            return error;
-        }
+        const resp = await axios.post(`${BASE_URL}/${url}`, option, {
+            headers: AUTH_HEADERS,
+        });
+        return resp;
     };
 
     const logout = async (url, callback, token) => {
