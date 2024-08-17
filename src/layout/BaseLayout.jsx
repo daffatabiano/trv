@@ -8,13 +8,13 @@ import { useRouter } from 'next/router';
 export default function BaseLayout({ children }) {
     const md = useMediaQuery('(min-width: 768px)');
     const { pathname } = useRouter();
-    const paths = ['/auth/login', '/'];
+    const paths = ['/home', '/promo', '/popular'];
 
     return (
         <>
             <AuroraBackground>
                 <>
-                    {!paths.includes(pathname) &&
+                    {paths.includes(pathname) &&
                         (md ? (
                             <Headers />
                         ) : (
