@@ -50,14 +50,14 @@ export default function RegisterViews() {
     };
 
     return (
-        <div className="bg-slate-900/60 max-w-screen w-full h-screen max-h-screen flex flex-col items-center justify-center">
+        <div className="bg-slate-900/60 max-w-screen w-full h-full md:min-h-screen md:max-h-screen flex flex-col items-center justify-center">
             <Toast {...toast} setToast={setToast} duration={10000} />
-            <div className="w-full h-full bg-slate-500 flex flex-col gap-4 items-center justify-center p-5">
-                <div className="flex flex-col w-full">
+            <div className="w-full h-full flex flex-col gap-2 items-center justify-center p-5">
+                <div className="flex flex-col w-full  justify-center items-center">
                     <img
                         src="/img/logo/sec-logo.png"
                         alt="single-logo"
-                        className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-cover"
+                        className="w-20 sm:w-24  md:w-40 h-min bg-rose-800  object-cover"
                     />
                     <h3 className="flex flex-col text-start justify-start font-bold text-amber-300">
                         Register{' '}
@@ -100,7 +100,7 @@ export default function RegisterViews() {
                     </p>
                     <button
                         type="submit"
-                        className="w-full bg-amber-300 rounded-full px-4 py-2 sm:p-4 text-white font-bold"
+                        className="w-full bg-amber-300 rounded-full px-4 py-2 text-white font-bold"
                     >
                         Register
                     </button>
