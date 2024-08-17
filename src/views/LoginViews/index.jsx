@@ -52,7 +52,7 @@ export default function Login() {
                 <img
                     src="/img/logo/single-logo.png"
                     alt="single-logo"
-                    className="w-16 h-16 object-cover"
+                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-30 md:h-30 object-cover"
                 />
                 <Form onSubmit={handleLogin}>
                     <Input
