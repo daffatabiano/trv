@@ -10,33 +10,37 @@ const toasterVariant = {
     },
     error: {
         icon: <Icons.Error w={12} />,
-        color: 'bg-rose-700',
+        color: 'bg-rose-600',
         barColor: 'bg-rose-800',
         textColor: 'text-rose-700',
     },
 };
 
 export default function Toast(prop) {
-    const { title, message, variant, show, setToast } = prop;
+    const { title, message, variant, show, setToast, duration } = prop;
     const [lengthBar, setLengthBar] = useState(100);
     const timerRef = useRef(null);
 
-    const timer = () => {
+    const startTimer = () => {
         timerRef.current = setInterval(() => {
-            setLengthBar((prevCurrent) => prevCurrent - 0.14);
+            setLengthBar((prevCurrent) => prevCurrent - 0.1);
         }, 1);
     };
 
+    if (lengthBar < 100 && show) {
+        setTimeout(() => {
+            setToast({});
+        }, duration);
+    }
+
     useEffect(() => {
-        timer();
+        startTimer();
         return () => clearInterval(timerRef.current);
     }, [show]);
 
-    console.log(lengthBar, 'lengthBar');
-
     return (
         <div
-            className={`absolute mx-auto left-0 right-0 top-4  z-50  sm:mx-0 sm:left-auto sm:right-4 origin-top transition-all duration-300 ${
+            className={`absolute mx-auto left-0 right-0 top-4 z-50 overflow-hidden sm:mx-0 sm:left-auto sm:right-4 origin-top transition-all duration-300 ${
                 show ? 'w-[90%] sm:w-1/3 md:w-1/5' : 'w-0'
             }`}
         >
@@ -65,10 +69,11 @@ export default function Toast(prop) {
                     </div>
                 </div>
                 <div
-                    className={`w-[${lengthBar}%] h-2 absolute bottom-0 rounded-lg ${toasterVariant[variant]?.barColor}`}
+                    className={`w-full h-2 absolute bottom-0 rounded-lg ${toasterVariant[variant]?.color}`}
                 />
                 <div
-                    className={`w-full h-2 absolute bottom-0 rounded-lg ${toasterVariant[variant]?.color}`}
+                    style={{ width: `${lengthBar}%` }}
+                    className={` h-2 absolute bottom-0 rounded-lg ${toasterVariant[variant]?.barColor}`}
                 />
             </div>
         </div>

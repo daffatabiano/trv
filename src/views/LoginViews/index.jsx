@@ -18,6 +18,7 @@ export default function Login() {
 
         await login('login', body)
             .then((res) => {
+                console.log(res);
                 if (res.status === 200) {
                     setToast({
                         variant: 'success',
@@ -29,7 +30,7 @@ export default function Login() {
                     setToast({
                         variant: 'error',
                         title: 'Login failed',
-                        message: res.reponse.data.message,
+                        message: 'Something went wrong!',
                         show: true,
                     });
                 }
@@ -45,8 +46,8 @@ export default function Login() {
     };
 
     return (
-        <div className="bg-slate-900/60 w-screen h-screen flex flex-col items-center justify-center">
-            <Toast {...toast} setToast={setToast} />
+        <div className="bg-slate-900/60 max-w-screen w-full h-screen max-h-screen flex flex-col items-center justify-center">
+            <Toast {...toast} setToast={setToast} duration={10000} />
             <div className="w-80 h-full flex flex-col gap-4 items-center justify-center p-5">
                 <img
                     src="/img/logo/single-logo.png"
