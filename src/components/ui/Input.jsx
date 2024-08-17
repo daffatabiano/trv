@@ -25,8 +25,8 @@ export const InputPassword = () => {
     const [show, setShow] = useState(false);
 
     return (
-        <div>
-            <Label text="Password" className="" />
+        <div className="-ms-2 me-2">
+            <Label text="Password" className="ps-4" />
             <div className="relative">
                 <Input
                     className={styles.none}
@@ -36,7 +36,7 @@ export const InputPassword = () => {
                 />
                 <Icons
                     onClick={() => setShow((curr) => !curr)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 cursor-pointer"
+                    className="absolute right-1 top-1/2 -translate-y-1/2 z-10 cursor-pointer"
                 >
                     {show ? <Icons.EyeOff /> : <Icons.Eye />}
                 </Icons>
