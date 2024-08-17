@@ -266,13 +266,19 @@ const EyeOff = (w) => {
 const Success = (w) => {
     return (
         <svg
-            className={w}
-            aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 20 20"
+            width={w}
+            height={w}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-circle-check"
         >
-            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+            <circle cx="12" cy="12" r="10" />
+            <path d="m9 12 2 2 4-4" />
         </svg>
     );
 };

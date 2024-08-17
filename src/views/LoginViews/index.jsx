@@ -1,5 +1,6 @@
 import Form from '@/components/forms';
 import Input, { InputPassword } from '@/components/ui/Input';
+import Toast from '@/components/ui/Toast';
 import useAuth from '@/hooks/useAuth';
 import Link from 'next/link';
 
@@ -13,13 +14,16 @@ export default function Login() {
             password: e.target.password.value,
         };
 
-        await login('login', body).then((res) => {
-            
-        })
+        await login('login', body).then((res) => {});
     };
 
     return (
         <div className="bg-slate-900/60 w-screen h-screen flex flex-col items-center justify-center">
+            <Toast
+                variant="success"
+                title="Login Successful"
+                message="Welcome!"
+            />
             <div className="w-80 h-full flex flex-col gap-4 items-center justify-center p-5">
                 <img
                     src="/img/logo/single-logo.png"
