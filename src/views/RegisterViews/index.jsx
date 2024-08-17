@@ -55,12 +55,12 @@ export default function RegisterViews() {
             <div className="w-full h-full flex flex-col gap-2 items-center justify-center p-5">
                 <div className="flex flex-col w-full  justify-center items-center">
                     <img
-                        src="/img/logo/sec-logo.png"
+                        src="/img/logo/sec-logo-2.png"
                         alt="single-logo"
-                        className="w-20 sm:w-24  md:w-40 h-min bg-rose-800  object-cover"
+                        className="w-3/4 sm:w-24 md:w-40 h-min object-cover"
                     />
-                    <h3 className="flex flex-col text-start justify-start font-bold text-amber-300">
-                        Register{' '}
+                    <h3 className="flex flex-col mt-2 text-center justify-center font-bold text-xl text-amber-300">
+                        SIGN UP{' '}
                         <span className="text-sm font-light text-white italic">
                             Create your account and to be part of us
                         </span>
@@ -68,7 +68,7 @@ export default function RegisterViews() {
                 </div>
                 <Form onSubmit={handleRegister}>
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <div>
+                        <div className=" flex flex-col gap-3">
                             <Input
                                 name="email"
                                 placeholder="example@mail.com"
