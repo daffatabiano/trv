@@ -9,6 +9,37 @@ import { useState } from 'react';
 export default function RegisterViews() {
     const { login } = useAuth();
     const [toast, setToast] = useState({});
+    const [file, setFile] = useState({});
+
+    const changeFile = (e) => {
+        const file = e.target.files[0];
+        console.log(file);
+
+        if (!file.type.startsWith('image')) {
+            setToast({
+                variant: 'error',
+                title: 'Upload Failed',
+                message: 'Format file should be .jpg/.png/.jpeg/.gif/.svg',
+                show: true,
+            });
+        }
+
+        if (file.size > 10000) {
+            setToast({
+                variant: 'error',
+                title: 'Too big size',
+                message: ' Maximum upload 1 MB',
+                show: true,
+            });
+        } else {
+            setToast({
+                variant: 'success',
+                title: 'Upload Success',
+                message: 'Your profile picture success to be applied',
+                show: true,
+            });
+        }
+    };
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -52,7 +83,7 @@ export default function RegisterViews() {
 
     return (
         <div className="bg-slate-900/60 max-w-screen w-full h-full md:min-h-screen flex flex-col items-center justify-center">
-            <Toast {...toast} setToast={setToast} duration={10000} />
+            <Toast {...toast} setToast={setToast} duration={6000} />
             <div className="w-full h-full sm:w-4/5 lg:w-2/3 flex flex-col gap-2 items-center justify-center p-5">
                 <div className="flex flex-col w-full  justify-center items-center">
                     <img
@@ -93,7 +124,7 @@ export default function RegisterViews() {
                                 type="number"
                                 text="Phone"
                             />
-                            <InputImage />
+                            <InputImage onChange={changeFile} />
                         </div>
                     </div>
                     <p className="text-amber-300 italic text-sm sm:mx-auto  -mb-2 opacity-75">
@@ -118,7 +149,7 @@ export default function RegisterViews() {
                     </p>
                 </div>
             </div>
-            <div className="flex flex-col mt-2 gap-1 text-center justify-end h-1/6 pb-2">
+            <div className="flex flex-col mt-2 gap-1 text-center justify-end h-1/6 pb-2 sm:pb-0">
                 <AuthFooter />
             </div>
         </div>

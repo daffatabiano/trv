@@ -58,13 +58,13 @@ export const InputImage = (prop) => {
             <img
                 src={SUB_EMPTY_PROFILE || image}
                 alt={'profile-picture-user'}
-                onChange={onChange}
                 className="w-24 h-24 m-auto rounded-lg"
             />
             <Input
                 type="file"
                 name="profilePictureUrl"
                 className="focus:outline-none file:hidden text-white"
+                onChange={onChange}
             />
         </div>
     );
