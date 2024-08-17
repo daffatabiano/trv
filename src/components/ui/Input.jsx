@@ -3,6 +3,7 @@ import { Icons } from '../Icons';
 import { useState } from 'react';
 import styles from '@/components/ui/Input.module.scss';
 import Label from './Label';
+import { SUB_EMPTY_PROFILE } from '@/services/SUB_DATA/data';
 
 export default function Input(props) {
     const { className, text, ...rest } = props;
@@ -21,7 +22,7 @@ export default function Input(props) {
     );
 }
 
-export const InputPassword = () => {
+export const InputPassword = ({ name }) => {
     const [show, setShow] = useState(false);
 
     return (
@@ -31,7 +32,7 @@ export const InputPassword = () => {
                 <Input
                     className={styles.none}
                     type={show ? 'text' : 'password'}
-                    name="password"
+                    name={name}
                     placeholder="Password"
                 />
                 <Icons
@@ -41,6 +42,22 @@ export const InputPassword = () => {
                     {show ? <Icons.EyeOff /> : <Icons.Eye />}
                 </Icons>
             </div>
+        </div>
+    );
+};
+
+export const InputImage = (prop) => {
+    const { image, onChange } = prop;
+
+    return (
+        <div className="flex flex-col">
+            <Label text="Choose Profile Picture" />
+            <img
+                src={SUB_EMPTY_PROFILE || image}
+                alt={'profile-picture-user'}
+                onChange={onChange}
+            />
+            <Input type="file" name="profilePictureUrl" />
         </div>
     );
 };
