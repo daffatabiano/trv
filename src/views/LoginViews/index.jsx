@@ -1,3 +1,4 @@
+import AuthFooter from '@/components/Footers/AuthFooter';
 import Form from '@/components/forms';
 import Input, { InputPassword } from '@/components/ui/Input';
 import Toast from '@/components/ui/Toast';
@@ -82,15 +83,8 @@ export default function Login() {
                     </p>
                 </div>
             </div>
-            <div className="flex flex-col gap-2 text-center justify-end h-1/6 pb-5">
-                <ul className="text-white text-sm flex gap-2 ">
-                    <li>About Us</li>
-                    <li>Privacy Policy</li>
-                    <li>Terms and Conditions</li>
-                </ul>
-                <p className="text-white text-sm">
-                    © 2024. Daffa Tabiano. All rights reserved.
-                </p>
+            <div className="flex flex-col mt-2 gap-1 text-center justify-end h-1/6 pb-2">
+                <AuthFooter />
             </div>
         </div>
     );
