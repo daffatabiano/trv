@@ -15,8 +15,8 @@ export function SidebarAdmin(props) {
     return (
         <div
             className={cn(
-                'rounded-md flex flex-col md:flex-row bg-indigo-600 dark:bg-neutral-800 w-full flex-1 max-w-7xl mx-auto border border-indigo-200 dark:border-neutral-700 overflow-hidden',
-                'h-screen' // for your use case, use `h-screen` instead of `h-[60vh]`
+                'rounded-md h-screen flex flex-col md:flex-row bg-indigo-600 dark:bg-neutral-800 w-screen flex-1 border border-indigo-200 dark:border-neutral-700 overflow-hidden',
+                'min-h-screen min-w-screen'
             )}
         >
             <Sidebar open={open} setOpen={setOpen}>
@@ -32,7 +32,7 @@ export function SidebarAdmin(props) {
                             <img
                                 src="/img/logo/single-logo.png"
                                 alt="company-logo"
-                                className="w-20 h-20 object-fill"
+                                className="w-18 h-18 object-cover"
                             />
                         )}
                         <div className="mt-8 flex flex-col gap-2">
