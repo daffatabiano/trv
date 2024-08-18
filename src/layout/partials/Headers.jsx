@@ -36,7 +36,7 @@ export default function Headers(props) {
     }, []);
 
     const take = props[0].name;
-    const name = take.slice(0, 5).toUpperCase();
+    const name = take.slice(0, 5);
 
     return (
         <nav
@@ -68,8 +68,11 @@ export default function Headers(props) {
             <div className="w-2/12 me-4">
                 {props[0] ? (
                     <div className="flex gap-2 items-center w-full">
-                        <p className="text-amber-400 font-bold w-full">
-                            Hello, {name}
+                        <p className="text-amber-400 font-medium italic w-full">
+                            Hello,{' '}
+                            <span className="text-stone-100 font-bold capitalize not-italic">
+                                {name}
+                            </span>
                         </p>
                         <img
                             src={
