@@ -135,21 +135,17 @@ export default function Drawer(props) {
                                 <hr />
                                 <li className="w-full">
                                     <Link
-                                        href={
-                                            props.id
-                                                ? ''
-                                                : '/auth/login'
-                                        }
+                                        href={props.id ? '' : '/auth/login'}
                                         className={`${
-                                            props
+                                            props.id
                                                 ? 'text-red-600 hover:bg-red-600/30'
                                                 : 'text-green-600 hover:bg-green-600/30'
                                         } w-full h-full rounded flex items-center gap-4 link p-2 `}
-                                        onClick={handleClick}
+                                        onClick={props.id ? props.logout : null}
                                     >
-                                        {props ? (
+                                        {props.id ? (
                                             <>
-                                                <Icons className={'w-5 h-5'} onClick={logout}>
+                                                <Icons className={'w-5 h-5'}>
                                                     <Icons.Logout />
                                                 </Icons>
                                                 Logout
