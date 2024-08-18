@@ -110,7 +110,7 @@ export default function Drawer(props) {
                             >
                                 <li className="w-full">
                                     <Link
-                                        href="#"
+                                        href="/my-book"
                                         className="text-white w-full h-full rounded flex items-center gap-4 link p-2 hover:bg-amber-600/30 hover:text-amber-950"
                                         onClick={handleClick}
                                     >
@@ -123,7 +123,7 @@ export default function Drawer(props) {
                                 <li className="w-full">
                                     <Link
                                         onClick={handleClick}
-                                        href="#"
+                                        href="/dashboard"
                                         className="text-white w-full h-full rounded flex items-center gap-4 link p-2 hover:bg-amber-600/30 hover:text-amber-950"
                                     >
                                         <Icons className={'w-5 h-5'}>
