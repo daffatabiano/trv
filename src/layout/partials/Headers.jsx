@@ -68,7 +68,7 @@ export default function Headers(props) {
                     </div>
                 ))}
             </div>
-            <div className="w-2/12 me-4">
+            <div className="w-2/12 me-4 flex justify-end">
                 {props.id ? (
                     <div className="flex gap-1 items-center w-full">
                         <p className="text-amber-400 font-medium italic w-full">
@@ -150,6 +150,7 @@ export default function Headers(props) {
                         onClick={() => {
                             push('/auth/login');
                         }}
+                        className="w-full h-full"
                     />
                 )}
             </div>
