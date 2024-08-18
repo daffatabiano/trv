@@ -70,7 +70,7 @@ export default function Headers(props) {
             </div>
             <div className="w-2/12 me-4">
                 {props.id ? (
-                    <div className="flex gap-2 items-center w-full">
+                    <div className="flex gap-1 items-center w-full">
                         <p className="text-amber-400 font-medium italic w-full">
                             Hello,{' '}
                             <span className="text-stone-100 font-bold capitalize not-italic">

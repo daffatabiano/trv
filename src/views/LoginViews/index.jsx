@@ -73,7 +73,7 @@ export default function Login() {
                     <InputPassword name="password" className="text-white" />
                     <button
                         type="submit"
-                        className="w-full bg-amber-300 rounded-full px-4 py-2 text-white font-bold"
+                        className="w-full bg-amber-300 mt-2 rounded-full px-4 py-2 text-white font-bold"
                     >
                         Login
                     </button>
@@ -86,6 +86,11 @@ export default function Login() {
                             className="text-amber-300 font-normal"
                         >
                             Sign Up
+                        </Link>
+                    </p>
+                    <p className="text-white text-center text-md">
+                        <Link href="/home" className="text-amber-300 font-bold">
+                            Guest Mode
                         </Link>
                     </p>
                 </div>
