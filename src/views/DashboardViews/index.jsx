@@ -1,6 +1,5 @@
 import useGet from '@/hooks/useGet';
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
 import WarningModals from '@/components/ui/Modals/warning-modals';
 
 export default function DashboardViews() {

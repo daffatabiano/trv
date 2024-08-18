@@ -124,12 +124,12 @@ export default function Headers(props) {
                                         onClick={props.id ? props.logout : ''}
                                     >
                                         {props.id ? (
-                                            <div>
+                                            <>
                                                 <Icons className={'w-5 h-5'}>
                                                     <Icons.Logout />
                                                 </Icons>
                                                 Logout
-                                            </div>
+                                            </>
                                         ) : (
                                             <>
                                                 <Icons className={'w-5 h-5'}>
