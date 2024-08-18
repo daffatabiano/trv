@@ -58,7 +58,7 @@ export const InputImage = (prop) => {
             <img
                 src={image.length > 0 ? image : SUB_EMPTY_PROFILE}
                 alt={'profile-picture-user'}
-                className="w-24 h-24 m-auto rounded-lg"
+                className="w-24 h-24 m-auto rounded-lg object-cover"
             />
             {image.length > 0 ? (
                 <span

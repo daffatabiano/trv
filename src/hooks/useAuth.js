@@ -2,7 +2,7 @@ import { AUTH_HEADERS, BASE_HEADERS, BASE_URL } from '@/services/BASE/data';
 import axios from 'axios';
 
 export default function useAuth() {
-    const login = async (url, option) => {
+    const auth = async (url, option) => {
         const resp = await axios.post(`${BASE_URL}/${url}`, option, {
             headers: AUTH_HEADERS,
         });
@@ -29,5 +29,5 @@ export default function useAuth() {
             console.log(error);
         }
     };
-    return { login, logout };
+    return { auth, logout };
 }

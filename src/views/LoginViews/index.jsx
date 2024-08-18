@@ -17,7 +17,7 @@ export default function Login() {
             password: e.target.password.value,
         };
 
-        await login('login', body)
+        await auth('login', body)
             .then((res) => {
                 console.log(res);
                 if (res.status === 200) {

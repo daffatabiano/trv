@@ -27,11 +27,11 @@ export default function RegisterViews() {
             return;
         }
 
-        if (file.size > 10000) {
+        if (file.size > 1000000) {
             setToast({
                 variant: 'error',
                 title: 'Too big size',
-                message: ' Maximum upload 1 MB',
+                message: `Maximum upload 1 MB , your file size ${file.size}`,
                 show: true,
             });
             return;
@@ -78,7 +78,7 @@ export default function RegisterViews() {
         };
 
         try {
-            const res = await login('register', body);
+            const res = await auth('register', body);
             if (res.status === 200) {
                 setToast({
                     variant: 'success',
@@ -112,9 +112,6 @@ export default function RegisterViews() {
             message: 'Picture success to remove',
             show: true,
         });
-        setTimeout(() => {
-            window.location.reload();
-        }, 1000);
     };
 
     return (
