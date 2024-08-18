@@ -52,9 +52,6 @@ export default function RegisterViews() {
                             show: true,
                         });
                         setImageUrl(res.data.url);
-                        setTimeout(() => {
-                            push('/auth/login');
-                        }, 3000);
                     })
                     .catch((err) => {
                         setToast({
@@ -90,6 +87,9 @@ export default function RegisterViews() {
                     message: res.data.message,
                     show: true,
                 });
+                setTimeout(() => {
+                    push('/auth/login');
+                }, 3000);
             } else {
                 setToast({
                     variant: 'error',

@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useRouter } from 'next/navigation';
 
-export default function Headers() {
+export default function Headers(props) {
     const [isScrolled, setIsScrolled] = useState(false);
     const md = useMediaQuery('(max-width: 768px)');
     const { push } = useRouter();
@@ -15,7 +15,7 @@ export default function Headers() {
     useEffect(() => {
         const stickyTop = document.querySelector('.sticky');
         const handleScroll = () => {
-            if (window.scrollY >= 'sticky') {
+            if (window.scrollY >= 1) {
                 setIsScrolled(true);
             } else {
                 setIsScrolled(false);
@@ -30,7 +30,9 @@ export default function Headers() {
 
     return (
         <nav
-            className={`flex gap-4 w-full h-24 items-center bg-transparent backdrop-blur-md sticky top-0 text-slate-950 px-4 pt-2`}
+            className={`flex gap-4 w-full h-24 items-center bg-transparent backdrop-blur-md sticky top-0 px-4 pt-2 ${
+                isScrolled ? 'shadow-sm' : ''
+            }`}
         >
             <div className="w-1/6 xl:pt-16 lg:pt-10 md:6">
                 <img

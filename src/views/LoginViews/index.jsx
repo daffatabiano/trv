@@ -21,14 +21,16 @@ export default function Login() {
 
         await auth('login', body)
             .then((res) => {
-                console.log(res);
                 if (res.status === 200) {
                     setToast({
                         variant: 'success',
-                        title: 'Login successful',
-                        message: res.data.message,
+                        title: res.data.message,
+                        message: `Hello ${res.data.data.name}, Welcome to TRV!`,
                         show: true,
                     });
+                    if (typeof window !== 'undefined') {
+                        localStorage.setItem('token', res.data.token);
+                    }
                     setTimeout(() => {
                         push('/home');
                     }, 3000);
