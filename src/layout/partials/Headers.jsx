@@ -38,7 +38,7 @@ export default function Headers(props) {
     const take = props.name;
     let name = '';
     if (take) {
-        name = take.slice(0, 5);
+        name = take.slice(0, 12);
     }
 
     return (

@@ -28,13 +28,13 @@ export default function DashboardViews() {
 
     return (
         <>
-            {data?.role !== 'admin' && (
+            {data && data?.role !== 'admin' ? (
                 <WarningModals
                     title={'Access Denied'}
                     message={'You do not have permission to access this page'}
                     onClick={() => window.history.back()}
                 />
-            )}
+            ) : null}
             <div>Admin Dashboard</div>
         </>
     );
