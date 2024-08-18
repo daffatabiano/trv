@@ -31,9 +31,10 @@ export default function Login() {
                     if (typeof window !== 'undefined') {
                         localStorage.setItem('token', res.data.token);
                     }
+                    push('/home');
                     setTimeout(() => {
-                        push('/home');
-                    }, 3000);
+                        window.location.reload();
+                    }, 2000);
                 } else {
                     setToast({
                         variant: 'error',

@@ -9,24 +9,14 @@ export default function useAuth() {
         return resp;
     };
 
-    const logout = async (url, callback, token) => {
+    const logout = async (url, token) => {
         try {
-            setLoading(true);
             const response = await axios.get(`${BASE_URL}/${url}`, {
                 headers: BASE_HEADERS(token),
             });
-            if (url === 'logout') {
-                localStorage.removeItem('token');
-                callback(response);
-            } else if (url === 'user') {
-                callback(response.data.data);
-            } else if (url === 'all-user') {
-                callback(response.data.data);
-            }
-            setLoading(false);
+            return response;
         } catch (error) {
-            setLoading(false);
-            console.log(error);
+            return error;
         }
     };
     return { auth, logout };

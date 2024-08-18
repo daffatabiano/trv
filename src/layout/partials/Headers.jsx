@@ -69,12 +69,12 @@ export default function Headers(props) {
                 ))}
             </div>
             <div className="w-2/12 me-4">
-                {props ? (
+                {props.id ? (
                     <div className="flex gap-2 items-center w-full">
                         <p className="text-amber-400 font-medium italic w-full">
                             Hello,{' '}
                             <span className="text-stone-100 font-bold capitalize not-italic">
-                                {name}
+                                {name || 'Guest'}
                             </span>
                         </p>
                         <img
@@ -115,25 +115,21 @@ export default function Headers(props) {
                                 <hr />
                                 <li className="w-full">
                                     <Link
-                                        href={
-                                            props
-                                                ? '/auth/logout'
-                                                : '/auth/login'
-                                        }
+                                        href={props.id ? '' : '/auth/login'}
                                         className={`${
-                                            props
+                                            props.id
                                                 ? 'text-red-600 hover:bg-red-600/30'
                                                 : 'text-green-600 hover:bg-green-600/30'
                                         } w-full h-full rounded flex items-center gap-4 link p-2 `}
-                                        onClick={handleDropdown}
+                                        onClick={props.id ? props.logout : ''}
                                     >
-                                        {props ? (
-                                            <>
+                                        {props.id ? (
+                                            <div>
                                                 <Icons className={'w-5 h-5'}>
                                                     <Icons.Logout />
                                                 </Icons>
                                                 Logout
-                                            </>
+                                            </div>
                                         ) : (
                                             <>
                                                 <Icons className={'w-5 h-5'}>

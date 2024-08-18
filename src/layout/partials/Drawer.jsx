@@ -137,7 +137,7 @@ export default function Drawer(props) {
                                     <Link
                                         href={
                                             props.id
-                                                ? '/auth/logout'
+                                                ? ''
                                                 : '/auth/login'
                                         }
                                         className={`${
@@ -149,7 +149,7 @@ export default function Drawer(props) {
                                     >
                                         {props ? (
                                             <>
-                                                <Icons className={'w-5 h-5'}>
+                                                <Icons className={'w-5 h-5'} onClick={logout}>
                                                     <Icons.Logout />
                                                 </Icons>
                                                 Logout
