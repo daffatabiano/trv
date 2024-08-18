@@ -35,8 +35,11 @@ export default function Headers(props) {
         };
     }, []);
 
-    const take = props[0].name;
-    const name = take.slice(0, 5);
+    const take = props.name;
+    let name = '';
+    if (take) {
+        name = take.slice(0, 5);
+    }
 
     return (
         <nav
@@ -66,7 +69,7 @@ export default function Headers(props) {
                 ))}
             </div>
             <div className="w-2/12 me-4">
-                {props[0] ? (
+                {props ? (
                     <div className="flex gap-2 items-center w-full">
                         <p className="text-amber-400 font-medium italic w-full">
                             Hello,{' '}
@@ -75,10 +78,8 @@ export default function Headers(props) {
                             </span>
                         </p>
                         <img
-                            src={
-                                props[0].profilePictureUrl || SUB_EMPTY_PROFILE
-                            }
-                            alt={`profile-picture-${props[0].name}`}
+                            src={props.profilePictureUrl || SUB_EMPTY_PROFILE}
+                            alt={`profile-picture-${props.name}`}
                             onClick={handleDropdown}
                             className="w-10 h-10 rounded-full object-cover cursor-pointer"
                         />

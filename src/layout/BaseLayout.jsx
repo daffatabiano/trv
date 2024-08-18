@@ -40,7 +40,7 @@ export default function BaseLayout({ children }) {
                 <>
                     {paths.includes(pathname) &&
                         (md ? (
-                            <Headers {...[data]} />
+                            <Headers {...data} />
                         ) : (
                             <>
                                 <Drawer {...data} />
