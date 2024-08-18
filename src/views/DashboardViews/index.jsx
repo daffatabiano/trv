@@ -29,7 +29,7 @@ export default function Dashboard() {
 
     return (
         <>
-            {data && data?.role !== 'admin' ? (
+            {isToken && data?.role !== 'admin' ? (
                 <WarningModals
                     title={'Access Denied'}
                     message={'You do not have permission to access this page'}
