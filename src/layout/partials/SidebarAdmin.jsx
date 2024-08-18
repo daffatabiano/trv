@@ -32,7 +32,7 @@ export function SidebarAdmin(props) {
                             <img
                                 src="/img/logo/single-logo.png"
                                 alt="company-logo"
-                                className="w-18 h-18 object-cover"
+                                className="w-20 h-20 object-cover"
                             />
                         )}
                         <div className="mt-8 flex flex-col gap-2">

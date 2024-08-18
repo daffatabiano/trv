@@ -345,6 +345,7 @@ const Close = (w) => {
     );
 };
 
+
 Icons.Home = Home;
 Icons.Promo = Promo;
 Icons.Top = Top;
