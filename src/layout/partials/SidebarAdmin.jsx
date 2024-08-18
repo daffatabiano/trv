@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { lists } from '@/services/Headers/data';
+import { lists, listsDashboard } from '@/services/Headers/data';
 import { Sidebar, SidebarBody, SidebarLink } from '@/components/ui/Sidebar';
 import { SUB_EMPTY_PROFILE } from '@/services/SUB_DATA/data';
 
@@ -36,7 +36,7 @@ export function SidebarAdmin(props) {
                             />
                         )}
                         <div className="mt-8 flex flex-col gap-2">
-                            {lists.map((link, idx) => (
+                            {listsDashboard.map((link, idx) => (
                                 <SidebarLink key={idx} link={link} />
                             ))}
                         </div>

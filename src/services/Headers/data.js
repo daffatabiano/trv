@@ -23,3 +23,41 @@ export const lists = [
         className: '',
     },
 ];
+
+export const listsDashboard = [
+    {
+        id: 1,
+        name: 'Dashboard',
+        path: '/dashboard',
+        icon: <Icons.Dashboard />,
+        className: '',
+    },
+    {
+        id: 2,
+        name: 'Banner',
+        path: '/dashboard/banner',
+        icon: <Icons.Banner />,
+        className: '',
+    },
+    {
+        id: 3,
+        name: 'Promo',
+        path: '/dashboard/promo',
+        icon: <Icons.Promo />,
+        className: '',
+    },
+    {
+        id: 4,
+        name: 'Category',
+        path: '/dashboard/category',
+        icon: <Icons.Category />,
+        className: '',
+    },
+    {
+        id: 5,
+        name: 'Activity',
+        path: '/dashboard/activity',
+        icon: <Icons.Top />,
+        className: '',
+    },
+];
