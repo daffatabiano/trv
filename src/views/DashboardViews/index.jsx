@@ -1,6 +1,7 @@
 import useGet from '@/hooks/useGet';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import WarningModals from '@/components/ui/Modals/warning-modals';
 
 export default function DashboardViews() {
     const { getData } = useGet();
@@ -43,7 +44,10 @@ export default function DashboardViews() {
                     },
                 }}
             >
-                <h1>Access Denied</h1>
+                <WarningModals
+                    title="Access Denied"
+                    message="You do not have permission to access this page"
+                />
             </motion.div>
         );
     }
