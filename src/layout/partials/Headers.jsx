@@ -47,7 +47,7 @@ export default function Headers(props) {
                 isScrolled ? 'shadow-sm' : ''
             }`}
         >
-            <div className="w-1/6 xl:pt-16 lg:pt-10 md:6">
+            <div className="w-[10%] xl:pt-8 lg:pt-6 md:pt-4">
                 <img
                     className="w-full object-cover h-full"
                     src="/img/logo/main-logo.png"
