@@ -4,11 +4,35 @@ import Headers from './partials/Headers';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import Drawer from './partials/Drawer';
 import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
+import useGet from '@/hooks/useGet';
 
 export default function BaseLayout({ children }) {
     const md = useMediaQuery('(min-width: 768px)');
     const { pathname } = useRouter();
     const paths = ['/home', '/promo', '/popular'];
+    const [isToken, setIsToken] = useState('');
+    const { getData } = useGet();
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setIsToken(localStorage.getItem('token'));
+        }
+    }, []);
+
+    const getProfile = async () => {
+        try {
+            const res = await getData('user', isToken);
+            setData(res?.data?.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        getProfile();
+    }, [isToken]);
 
     return (
         <>
@@ -16,10 +40,10 @@ export default function BaseLayout({ children }) {
                 <>
                     {paths.includes(pathname) &&
                         (md ? (
-                            <Headers />
+                            <Headers {...[data]} />
                         ) : (
                             <>
-                                <Drawer />
+                                <Drawer {...data} />
                                 <div className="w-20 xs:w-[20%] sm:w-[15%] bg-transparent h-screen" />
                             </>
                         ))}
