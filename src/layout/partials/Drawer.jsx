@@ -1,5 +1,6 @@
 import { Icons } from '@/components/Icons';
 import { lists } from '@/services/Headers/data';
+import { SUB_EMPTY_PROFILE } from '@/services/SUB_DATA/data';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -82,14 +83,16 @@ export default function Drawer(props) {
             >
                 <div className="flex gap-2">
                     <img
-                        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
-                        alt="profile"
-                        className="w-14 h-14 rounded-lg"
+                        src={props.profilePictureUrl || SUB_EMPTY_PROFILE}
+                        alt={`profile-picture-${props.name}`}
+                        className="w-14 h-14 rounded-lg object-cover"
                     />
                     {!show ? (
-                        <span className="flex flex-col text-white font-normal w-fit h-fit p-2 items-start text-center text-sm rounded-lg bg-gradient-to-l from-amber-400 to-amber-500 text-amber-950">
-                            {'Guest'}
-                            <em>{'Empty Email'}</em>
+                        <span className="flex flex-col text-white capitalize font-bold w-fit h-fit p-2 items-start text-center text-sm rounded-lg bg-gradient-to-l from-amber-400 to-amber-500 text-amber-950">
+                            {props.name || 'Guest'}
+                            <em className="font-normal normal-case">
+                                {props.email || 'Empty Email'}
+                            </em>
                         </span>
                     ) : null}
                 </div>
@@ -133,7 +136,7 @@ export default function Drawer(props) {
                                 <li className="w-full">
                                     <Link
                                         href={
-                                            props
+                                            props.id
                                                 ? '/auth/logout'
                                                 : '/auth/login'
                                         }
