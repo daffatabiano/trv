@@ -5,10 +5,12 @@ import Toast from '@/components/ui/Toast';
 import useAuth from '@/hooks/useAuth';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
-    const { login } = useAuth();
+    const { auth } = useAuth();
     const [toast, setToast] = useState({});
+    const { push } = useRouter();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -27,6 +29,9 @@ export default function Login() {
                         message: res.data.message,
                         show: true,
                     });
+                    setTimeout(() => {
+                        push('/home');
+                    }, 3000);
                 } else {
                     setToast({
                         variant: 'error',

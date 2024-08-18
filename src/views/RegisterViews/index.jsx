@@ -5,13 +5,14 @@ import Toast from '@/components/ui/Toast';
 import useAuth from '@/hooks/useAuth';
 import useUpload from '@/hooks/useUpload';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function RegisterViews() {
-    const { login } = useAuth();
+    const { auth } = useAuth();
     const { upload } = useUpload();
     const [toast, setToast] = useState({});
-    const [file, setFile] = useState({});
+    const { push } = useRouter();
     const [imageUrl, setImageUrl] = useState('');
 
     const changeFile = (e) => {
@@ -51,6 +52,9 @@ export default function RegisterViews() {
                             show: true,
                         });
                         setImageUrl(res.data.url);
+                        setTimeout(() => {
+                            push('/auth/login');
+                        }, 3000);
                     })
                     .catch((err) => {
                         setToast({
