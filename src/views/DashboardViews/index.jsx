@@ -2,7 +2,7 @@ import useGet from '@/hooks/useGet';
 import { useEffect, useState } from 'react';
 import WarningModals from '@/components/ui/Modals/warning-modals';
 
-export default function DashboardViews() {
+export default function Dashboard() {
     const { getData } = useGet();
     const [isToken, setIsToken] = useState('');
     const [data, setData] = useState([]);
