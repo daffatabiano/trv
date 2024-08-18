@@ -1,6 +1,7 @@
 import useGet from '@/hooks/useGet';
 import { useEffect, useState } from 'react';
 import WarningModals from '@/components/ui/Modals/warning-modals';
+import AdminLayout from '@/layout/AdminLayout';
 
 export default function Dashboard() {
     const { getData } = useGet();
@@ -35,7 +36,7 @@ export default function Dashboard() {
                     onClick={() => window.history.back()}
                 />
             ) : null}
-            <div>Admin Dashboard</div>
+            <AdminLayout>Admin Dashboard</AdminLayout>
         </>
     );
 }

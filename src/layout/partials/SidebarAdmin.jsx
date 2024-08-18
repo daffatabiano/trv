@@ -1,20 +1,19 @@
 'use client';
 import React, { useState } from 'react';
-import { Sidebar, SidebarBody, SidebarLink } from '../ui/sidebar';
-import {
-    IconArrowLeft,
-    IconBrandTabler,
-    IconSettings,
-    IconUserBolt,
-} from '@tabler/icons-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { lists } from '@/services/Headers/data';
+import { Sidebar, SidebarBody, SidebarLink } from '@/components/ui/Sidebar';
+import { SUB_EMPTY_PROFILE } from '@/services/SUB_DATA/data';
 
-export function SidebarAdmin() {
+export function SidebarAdmin(props) {
+    const { children } = props;
     const [open, setOpen] = useState(false);
+
+    console.log(props, 'propss');
+
     return (
         <div
             className={cn(
@@ -35,11 +34,14 @@ export function SidebarAdmin() {
                     <div>
                         <SidebarLink
                             link={{
-                                label: 'Manu Arora',
+                                label: props.name || 'Admin',
                                 href: '#',
                                 icon: (
                                     <Image
-                                        src="https://assets.aceternity.com/manu.png"
+                                        src={
+                                            props.profilePictureUrl ||
+                                            SUB_EMPTY_PROFILE
+                                        }
                                         className="h-7 w-7 flex-shrink-0 rounded-full"
                                         width={50}
                                         height={50}
@@ -51,7 +53,7 @@ export function SidebarAdmin() {
                     </div>
                 </SidebarBody>
             </Sidebar>
-            <Dashboard />
+            <Dashboard>{children}</Dashboard>
         </div>
     );
 }
