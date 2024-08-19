@@ -62,7 +62,7 @@ export const Logo = () => {
             className="font-normal flex space-x-2 items-center text-lg text-black py-1 relative z-20"
         >
             <img
-                src="/img/logo/sec-logo.png"
+                src="/img/logo/single-logo.png"
                 alt="company-logo-opened"
                 className="w-20 h-20 object-cover"
             />
