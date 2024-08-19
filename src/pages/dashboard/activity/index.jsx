@@ -1,5 +1,10 @@
+import AdminLayout from '@/layout/AdminLayout';
 import Activity from '@/views/DashboardViews/ActivityViews';
 
 export default function Page() {
-    return <Activity />;
+    return (
+        <AdminLayout>
+            <Activity />;
+        </AdminLayout>
+    );
 }
