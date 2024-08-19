@@ -106,7 +106,7 @@ export default function Profile() {
 
     const getProfile = async () => {
         const res = await getData('user', token);
-        setData(res.data.data);
+        setData(res?.data?.data);
     };
 
     useEffect(() => {

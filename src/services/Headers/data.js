@@ -5,14 +5,14 @@ export const lists = [
         id: 1,
         name: 'Home',
         path: '/home',
-        icon: <Icons.Home />,
+        icon: <Icons.Home w={24} />,
         className: '',
     },
     {
         id: 2,
         name: 'Promo',
         path: '/promo',
-        icon: <Icons.Promo />,
+        icon: <Icons.Promo w={24} />,
         className: '',
     },
     {

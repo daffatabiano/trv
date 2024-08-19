@@ -6,12 +6,12 @@ export function Icons({ children, className, onClick }) {
     );
 }
 
-const Home = () => {
+const Home = ({ w }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width={w}
+            height={w}
             viewBox="0 0 24 24"
             style={{ fill: 'rgba(255, 255, 255, 1)' }}
         >
@@ -20,7 +20,7 @@ const Home = () => {
     );
 };
 
-const Top = (w) => {
+const Top = ({ w }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -32,15 +32,19 @@ const Top = (w) => {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="lucide lucide-roller-coaster"
+            className="lucide lucide-building"
         >
-            <path d="M6 19V5" />
-            <path d="M10 19V6.8" />
-            <path d="M14 19v-7.8" />
-            <path d="M18 5v4" />
-            <path d="M18 19v-6" />
-            <path d="M22 19V9" />
-            <path d="M2 19V9a4 4 0 0 1 4-4c2 0 4 1.33 6 4s4 4 6 4a4 4 0 1 0-3-6.65" />
+            <rect width="16" height="20" x="4" y="2" rx="2" ry="2" />
+            <path d="M9 22v-4h6v4" />
+            <path d="M8 6h.01" />
+            <path d="M16 6h.01" />
+            <path d="M12 6h.01" />
+            <path d="M12 10h.01" />
+            <path d="M12 14h.01" />
+            <path d="M16 10h.01" />
+            <path d="M16 14h.01" />
+            <path d="M8 10h.01" />
+            <path d="M8 14h.01" />
         </svg>
     );
 };
@@ -140,7 +144,7 @@ const Logout = () => {
     );
 };
 
-const Dashboard = (w) => {
+const Dashboard = ({ w }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -162,7 +166,7 @@ const Dashboard = (w) => {
     );
 };
 
-const Login = (w) => {
+const Login = ({ w }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -183,12 +187,12 @@ const Login = (w) => {
     );
 };
 
-const Cart = (w) => {
+const Cart = ({ w }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width={w}
+            height={w}
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -206,12 +210,12 @@ const Cart = (w) => {
     );
 };
 
-const Eye = (w) => {
+const Eye = ({ w }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width={w}
+            height={w}
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -226,12 +230,12 @@ const Eye = (w) => {
     );
 };
 
-const EyeOff = (w) => {
+const EyeOff = ({ w }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width={w}
+            height={w}
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -248,7 +252,7 @@ const EyeOff = (w) => {
     );
 };
 
-const Success = (w) => {
+const Success = ({ w }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -268,7 +272,7 @@ const Success = (w) => {
     );
 };
 
-const Error = (w) => {
+const Error = ({ w }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -289,12 +293,12 @@ const Error = (w) => {
     );
 };
 
-const Warning = (w) => {
+const Warning = ({ w }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width={w}
+            height={w}
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -310,7 +314,7 @@ const Warning = (w) => {
     );
 };
 
-const Close = (w) => {
+const Close = ({ w }) => {
     return (
         <svg
             className={w}
@@ -330,7 +334,7 @@ const Close = (w) => {
     );
 };
 
-const Promo = (w) => {
+const Promo = ({ w }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -352,7 +356,7 @@ const Promo = (w) => {
     );
 };
 
-const Banner = (w) => {
+const Banner = ({ w }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -373,7 +377,7 @@ const Banner = (w) => {
     );
 };
 
-const Refresh = (w) => {
+const Refresh = ({ w }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -395,7 +399,7 @@ const Refresh = (w) => {
     );
 };
 
-const Copy = (w) => {
+const Copy = ({ w }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -415,7 +419,7 @@ const Copy = (w) => {
     );
 };
 
-const Category = (w) => {
+const Category = ({ w }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
