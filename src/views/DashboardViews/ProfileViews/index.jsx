@@ -114,8 +114,12 @@ export default function Profile(props) {
     }, [token]);
 
     return (
-        <div className="bg-slate-500">
-            <h1>Profile</h1>
+        <div className="bg-slate-500 w-full h-full">
+            <header>
+            <div><h1>Dashboard Profile</h1></div>
+            </header>
+            <main>
+                <main>
         </div>
     );
 }
