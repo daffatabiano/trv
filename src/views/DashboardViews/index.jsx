@@ -1,7 +1,6 @@
 import useGet from '@/hooks/useGet';
 import { useEffect, useState } from 'react';
 import WarningModals from '@/components/ui/Modals/warning-modals';
-import AdminLayout from '@/layout/AdminLayout';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 export default function Dashboard() {
@@ -15,8 +14,6 @@ export default function Dashboard() {
             setIsToken(localStorage.getItem('token'));
         }
     }, []);
-
-    console.log(!md, 'mediaquery');
 
     const getProfile = async () => {
         try {

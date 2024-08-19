@@ -33,7 +33,7 @@ export function SidebarAdmin(props) {
                         <SidebarLink
                             link={{
                                 label: props.name || 'Admin',
-                                href: '#',
+                                href: '/dashboard/profile',
                                 icon: (
                                     <Image
                                         src={

@@ -1,5 +1,10 @@
-import Profile from "@/views/DashboardViews/ProfileViews";
+import AdminLayout from '@/layout/AdminLayout';
+import Profile from '@/views/DashboardViews/ProfileViews';
 
-export default function Page (){
-    return <Profile/>
+export default function Page() {
+    return (
+        <AdminLayout>
+            <Profile />
+        </AdminLayout>
+    );
 }

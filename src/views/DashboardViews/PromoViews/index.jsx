@@ -1,7 +1,29 @@
-export default function Promo (){
+import useGet from '@/hooks/useGet';
+import { useEffect, useState } from 'react';
+
+export default function Promo() {
+    const { getData } = useGet();
+    const [data, setData] = useState([]);
+    const [token, setToken] = useState('');
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setToken(localStorage.getItem('token'));
+        }
+    }, []);
+
+    const getProfile = async () => {
+        const res = await getData('banners', token);
+        setData(res.data.data);
+    };
+
+    useEffect(() => {
+        getProfile();
+    }, [token]);
+
     return (
         <div>
             <h1>PROMO PAGE VIEWS</h1>
         </div>
-    )
+    );
 }

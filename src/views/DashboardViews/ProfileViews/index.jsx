@@ -14,13 +14,11 @@ export default function Profile() {
 
     const getProfile = async () => {
         const res = await getData('user', token);
-        setData(res);
+        setData(res.data.data);
     };
 
-    console.log(Data);
-
     useEffect(() => {
-        getProfile;
+        getProfile();
     }, [token]);
 
     return (
