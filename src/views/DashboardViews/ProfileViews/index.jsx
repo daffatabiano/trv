@@ -2,7 +2,7 @@ import useGet from '@/hooks/useGet';
 import usePost from '@/hooks/usePost';
 import { useState, useEffect } from 'react';
 
-export default function Profile() {
+export default function Profile(props) {
     const { getData } = useGet();
     const [data, setData] = useState([]);
     const [token, setToken] = useState('');
