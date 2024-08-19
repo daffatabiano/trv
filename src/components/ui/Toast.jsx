@@ -3,13 +3,13 @@ import { Icons } from '../Icons';
 
 const toasterVariant = {
     success: {
-        icon: <Icons.Success w={12} />,
+        icon: <Icons.Success w={32} />,
         color: 'bg-emerald-600',
         barColor: 'bg-emerald-800',
         textColor: 'text-emerald-700',
     },
     error: {
-        icon: <Icons.Error w={12} />,
+        icon: <Icons.Error w={32} />,
         color: 'bg-rose-600',
         barColor: 'bg-rose-800',
         textColor: 'text-rose-700',
@@ -23,7 +23,7 @@ export default function Toast(prop) {
 
     const startTimer = () => {
         timerRef.current = setInterval(() => {
-            setLengthBar((prevCurrent) => prevCurrent - 0.1);
+            setLengthBar((prevCurrent) => prevCurrent - 0.14);
         }, 1);
     };
 
