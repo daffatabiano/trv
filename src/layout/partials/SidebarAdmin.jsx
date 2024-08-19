@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { lists, listsDashboard } from '@/services/Headers/data';
+import { listsDashboard } from '@/services/Headers/data';
 import { Sidebar, SidebarBody, SidebarLink } from '@/components/ui/Sidebar';
 import { SUB_EMPTY_PROFILE } from '@/services/SUB_DATA/data';
 
@@ -22,19 +22,7 @@ export function SidebarAdmin(props) {
             <Sidebar open={open} setOpen={setOpen}>
                 <SidebarBody className="justify-between gap-10">
                     <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-                        {open ? (
-                            <img
-                                src="/img/logo/sec-logo.png"
-                                alt="company-logo-opened"
-                                className="w-20 h-20"
-                            />
-                        ) : (
-                            <img
-                                src="/img/logo/single-logo.png"
-                                alt="company-logo"
-                                className="w-20 h-20 object-cover"
-                            />
-                        )}
+                        {open ? <Logo /> : <LogoIcon />}
                         <div className="mt-8 flex flex-col gap-2">
                             {listsDashboard.map((link, idx) => (
                                 <SidebarLink key={idx} link={link} />
@@ -71,15 +59,19 @@ export const Logo = () => {
     return (
         <Link
             href="#"
-            className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
+            className="font-normal flex space-x-2 items-center text-lg text-black py-1 relative z-20"
         >
-            <div className="h-5 w-6 bg-black dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
+            <img
+                src="/img/logo/sec-logo.png"
+                alt="company-logo-opened"
+                className="w-20 h-20"
+            />
             <motion.span
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="font-medium text-black dark:text-white whitespace-pre"
+                className="font-bold text-white dark:text-white whitespace-pre"
             >
-                Acet Labs
+                Control Panel
             </motion.span>
         </Link>
     );
@@ -90,7 +82,11 @@ export const LogoIcon = () => {
             href="#"
             className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
         >
-            <div className="h-5 w-6 bg-black dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
+            <img
+                src="/img/logo/single-logo.png"
+                alt="company-logo"
+                className="w-20 h-20 object-cover"
+            />
         </Link>
     );
 };

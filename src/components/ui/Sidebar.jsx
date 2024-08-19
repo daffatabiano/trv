@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import React, { useState, createContext, useContext } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Icons } from '@/components/Icons';
 // import { IconMenu2, IconX } from '@tabler/icons-react';
 
 const SidebarContext = createContext(undefined);
@@ -124,12 +125,12 @@ export const SidebarLink = ({ link, className, ...props }) => {
         <Link
             href={`${link.path || link.href}`}
             className={cn(
-                'flex items-center justify-start gap-2  group/sidebar py-2',
+                'flex items-center justify-start gap-2  group/sidebar py-2 text-white',
                 className
             )}
             {...props}
         >
-            {link.icon}
+            <Icons className="w-8 ms-4">{link.icon}</Icons>
 
             <motion.span
                 animate={{
@@ -140,7 +141,7 @@ export const SidebarLink = ({ link, className, ...props }) => {
                         : 'inline-block',
                     opacity: animate ? (open ? 1 : 0) : 1,
                 }}
-                className="text-neutral-700 dark:text-neutral-200 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
+                className="text-white dark:text-neutral-200 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
             >
                 {link.name || link.label}
             </motion.span>
