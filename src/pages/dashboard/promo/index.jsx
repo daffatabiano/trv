@@ -4,7 +4,7 @@ import Promo from '@/views/DashboardViews/PromoViews';
 export default function Page() {
     return (
         <AdminLayout>
-            <Promo />;
+            <Promo />
         </AdminLayout>
     );
 }
