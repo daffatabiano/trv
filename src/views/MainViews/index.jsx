@@ -1,5 +1,4 @@
 import Button from '@/components/ui/Button';
-import BaseLayout from '@/layout/BaseLayout';
 import { cn } from '@/lib/utils';
 import styles from '@/views/MainViews/style.module.scss';
 import { motion } from 'framer-motion';
