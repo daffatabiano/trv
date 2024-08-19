@@ -1,5 +1,5 @@
-import useGet from "@/hooks/useGet";
-import { useEffect, useState } from "react";
+import useGet from '@/hooks/useGet';
+import { useEffect, useState } from 'react';
 
 export default function Category() {
     const { getData } = useGet();
@@ -12,13 +12,13 @@ export default function Category() {
         }
     }, []);
 
-    const getProfile = async () => {
+    const getCategory = async () => {
         const res = await getData('categories', token);
         setData(res.data.data);
     };
 
     useEffect(() => {
-        getProfile();
+        getCategory();
     }, [token]);
 
     return (

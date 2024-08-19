@@ -15,7 +15,7 @@ export default function Dashboard() {
         }
     }, []);
 
-    const getProfile = async () => {
+    const getPromo = async () => {
         try {
             const res = await getData('user', isToken);
             setData(res?.data?.data);
@@ -25,7 +25,7 @@ export default function Dashboard() {
     };
 
     useEffect(() => {
-        getProfile();
+        getPromo();
     }, [isToken]);
 
     return (

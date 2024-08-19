@@ -12,13 +12,13 @@ export default function Banner() {
         }
     }, []);
 
-    const getProfile = async () => {
+    const getBanner = async () => {
         const res = await getData('banners', token);
         setData(res.data.data);
     };
 
     useEffect(() => {
-        getProfile();
+        getBanner();
     }, [token]);
     return (
         <div>

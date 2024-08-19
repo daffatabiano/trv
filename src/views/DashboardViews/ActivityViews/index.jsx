@@ -1,5 +1,5 @@
-import useGet from "@/hooks/useGet";
-import { useEffect, useState } from "react";
+import useGet from '@/hooks/useGet';
+import { useEffect, useState } from 'react';
 
 export default function Activity() {
     const { getData } = useGet();
@@ -12,13 +12,15 @@ export default function Activity() {
         }
     }, []);
 
-    const getProfile = async () => {
+    const getActivity = async () => {
         const res = await getData('activities', token);
         setData(res.data.data);
     };
 
+    console.log(data);
+
     useEffect(() => {
-        getProfile();
+        getActivity();
     }, [token]);
 
     return (
