@@ -1,4 +1,5 @@
 import useGet from '@/hooks/useGet';
+import usePost from '@/hooks/usePost';
 import { useEffect, useState } from 'react';
 
 export default function Activity() {
