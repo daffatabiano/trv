@@ -15,7 +15,7 @@ export function SidebarAdmin(props) {
     return (
         <div
             className={cn(
-                'rounded-md h-screen flex flex-col md:flex-row bg-indigo-600 dark:bg-neutral-800 w-screen flex-1 border border-indigo-200 dark:border-neutral-700 overflow-hidden',
+                'rounded-md h-screen flex flex-col md:flex-row bg-indigo-600 dark:bg-neutral-800 w-full flex-1 border border-indigo-200 dark:border-neutral-700 overflow-hidden',
                 'min-h-screen min-w-screen'
             )}
         >
@@ -40,7 +40,7 @@ export function SidebarAdmin(props) {
                                             props.profilePictureUrl ||
                                             SUB_EMPTY_PROFILE
                                         }
-                                        className="h-7 w-7 flex-shrink-0 rounded-full"
+                                        className="h-8 w-8 flex-shrink-0 rounded-full"
                                         width={50}
                                         height={50}
                                         alt="Avatar"
@@ -64,12 +64,12 @@ export const Logo = () => {
             <img
                 src="/img/logo/sec-logo.png"
                 alt="company-logo-opened"
-                className="w-20 h-20"
+                className="w-20 h-20 object-cover"
             />
             <motion.span
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="font-bold text-white dark:text-white whitespace-pre"
+                className="font-bold text-amber-300 dark:text-white whitespace-pre"
             >
                 Control Panel
             </motion.span>
