@@ -1,5 +1,10 @@
+import AdminLayout from '@/layout/AdminLayout';
 import Dashboard from '@/views/DashboardViews';
 
 export default function Page() {
-    return <Dashboard />;
+    return (
+        <AdminLayout>
+            <Dashboard />;
+        </AdminLayout>
+    )
 }

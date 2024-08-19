@@ -49,7 +49,7 @@ export default function Dashboard() {
                     onClick={() => window.history.back()}
                 />
             )}
-            <AdminLayout>Admin Dashboard</AdminLayout>
+            <div>Admin Dashboard</div>
         </>
     );
 }
