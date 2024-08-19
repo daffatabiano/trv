@@ -2,17 +2,21 @@ import useGet from '@/hooks/useGet';
 import { useEffect, useState } from 'react';
 import WarningModals from '@/components/ui/Modals/warning-modals';
 import AdminLayout from '@/layout/AdminLayout';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 export default function Dashboard() {
     const { getData } = useGet();
     const [isToken, setIsToken] = useState('');
     const [data, setData] = useState([]);
+    const md = useMediaQuery('(min-width: 768px)');
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
             setIsToken(localStorage.getItem('token'));
         }
     }, []);
+
+    console.log(!md, 'mediaquery');
 
     const getProfile = async () => {
         try {
@@ -36,6 +40,15 @@ export default function Dashboard() {
                     onClick={() => window.history.back()}
                 />
             ) : null}
+            {!md && (
+                <WarningModals
+                    title={'Only Desktop'}
+                    message={
+                        'You just can access this page with Computer or Laptop'
+                    }
+                    onClick={() => window.history.back()}
+                />
+            )}
             <AdminLayout>Admin Dashboard</AdminLayout>
         </>
     );
