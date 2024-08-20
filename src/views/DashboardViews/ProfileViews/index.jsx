@@ -136,7 +136,8 @@ export default function Profile(props) {
                         />
                         <div className="flex flex-col">
                             <p className="text-lg font-bold text-stone-800">
-                                {data?.name}
+                                <span className="me-4 rounded-full bg-emerald-500 px-1 " />
+                                {data?.name}{' '}
                             </p>
                             <p className="text-stone-500 font-normal text-sm italic">
                                 {data?.email}
