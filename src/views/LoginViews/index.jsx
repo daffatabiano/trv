@@ -32,7 +32,7 @@ export default function Login() {
                         localStorage.setItem('token', res.data.token);
                     }
                     setTimeout(() => {
-                        push('/home');
+                        window.location.href = '/home';
                     }, 6000);
                 } else {
                     setToast({
