@@ -1,5 +1,7 @@
+import { Icons } from '@/components/Icons';
 import useGet from '@/hooks/useGet';
 import usePost from '@/hooks/usePost';
+import { SUB_EMPTY_PROFILE } from '@/services/SUB_DATA/data';
 import { useState, useEffect } from 'react';
 
 export default function Profile(props) {
@@ -9,6 +11,7 @@ export default function Profile(props) {
     const [toast, setToast] = useState({});
     const { post } = usePost();
     const [imageUrl, setImageUrl] = useState({});
+    const [dropdown, setDropdown] = useState(false);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -109,22 +112,50 @@ export default function Profile(props) {
         setData(res?.data?.data);
     };
 
+
     useEffect(() => {
         getProfile();
     }, [token]);
 
     return (
         <div className="w-full h-full">
-            <header className="bg-slate-50 shadow-md rounded-lg overflow-hidden">
+            <header className="bg-slate-50 shadow-md rounded-lg overflow-hidden relative">
                 <div className="w-full">
                     <img
                         src="/img/general/dashboard.jpg"
                         alt="jumbotron-profile"
-                        className="w-full h-48 object-cover object-center"
+                        className="w-full h-52 object-cover object-center"
                     />
                 </div>
-                <div>
-                    <h1>Dashboard Profile</h1>
+                <div className="absolute w-[90%] px-4 h-1/3 flex justify-between rounded-lg bg-transparent backdrop-blur-sm top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-md ">
+                    <div className="flex items-center gap-4">
+                        <img
+                            src={data?.profilePictureUrl || SUB_EMPTY_PROFILE}
+                            alt="profile"
+                            className="w-20 h-20 my-auto object-cover rounded-full"
+                        />
+                        <div className="flex flex-col">
+                            <p className="text-lg font-bold text-stone-800">
+                                {data?.name}
+                            </p>
+                            <p className="text-stone-500 font-normal text-sm italic">
+                                {data?.email}
+                            </p>
+                        </div>
+                    </div>
+                    <div className="flex items-center">
+                        <button
+                            onClick={() => setDropdown((curr) => !curr)}
+                            className="p-4 rounded-full bg-slate-400/30 hover:bg-slate-400 text-white"
+                        >
+                            <Icons.ThreeDots w={24} />
+                        </button>
+                    </div>
+                </div>
+                <div className="px-2 pt-16 text-stone-600">
+                    <h1 className="text-xl font-bold ps-6">
+                        Dashboard Profile
+                    </h1>
                 </div>
             </header>
             <main></main>
