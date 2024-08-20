@@ -114,12 +114,20 @@ export default function Profile(props) {
     }, [token]);
 
     return (
-        <div className="bg-slate-500 w-full h-full">
-            <header>
-            <div><h1>Dashboard Profile</h1></div>
+        <div className="w-full h-full">
+            <header className="bg-slate-50 shadow-md rounded-lg overflow-hidden">
+                <div className="w-full">
+                    <img
+                        src="/img/general/dashboard.jpg"
+                        alt="jumbotron-profile"
+                        className="w-full h-48 object-cover object-center"
+                    />
+                </div>
+                <div>
+                    <h1>Dashboard Profile</h1>
+                </div>
             </header>
-            <main>
-                <main>
+            <main></main>
         </div>
     );
 }

@@ -56,7 +56,7 @@ export const DesktopSidebar = ({ className, children, ...props }) => {
         <>
             <motion.div
                 className={cn(
-                    'h-screen px-4 py-4 hidden  md:flex md:flex-col  bg-indigo-600 dark:bg-neutral-800 w-[300px] flex-shrink-0',
+                    'h-screen px-4 py-4 hidden  md:flex md:flex-col  bg-stone-50 dark:bg-neutral-800 w-[300px] flex-shrink-0',
                     className
                 )}
                 animate={{
@@ -107,7 +107,7 @@ export const MobileSidebar = ({ className, children, ...props }) => {
                                 className="absolute right-10 top-10 z-50 text-neutral-800 dark:text-neutral-200"
                                 onClick={() => setOpen(!open)}
                             >
-                                {/* <IconX /> */}s
+                                {/* <IconX /> */}
                             </div>
                             {children}
                         </motion.div>
@@ -125,7 +125,7 @@ export const SidebarLink = ({ link, className, ...props }) => {
         <Link
             href={`${link.path || link.href}`}
             className={cn(
-                'flex items-center justify-start gap-2  group/sidebar py-2 text-white',
+                'flex items-center justify-start gap-2  group/sidebar py-2 text-stone-700',
                 className
             )}
             {...props}
@@ -141,7 +141,7 @@ export const SidebarLink = ({ link, className, ...props }) => {
                         : 'inline-block',
                     opacity: animate ? (open ? 1 : 0) : 1,
                 }}
-                className="text-white dark:text-neutral-200 text-md font-medium group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
+                className="text-stone-700 dark:text-neutral-200 text-md font-medium group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
             >
                 {link.name || link.label}
             </motion.span>
