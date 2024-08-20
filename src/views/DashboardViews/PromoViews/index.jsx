@@ -1,3 +1,4 @@
+import WarningModals from '@/components/ui/Modals/warning-modals';
 import useGet from '@/hooks/useGet';
 import usePost from '@/hooks/usePost';
 import { useEffect, useState } from 'react';
@@ -77,6 +78,17 @@ export default function Promo() {
 
     return (
         <div>
+            {token &&
+                data?.role !==
+                    'admin'(
+                        <WarningModals
+                            title={'Access Denied'}
+                            message={
+                                'You do not have permission to access this page'
+                            }
+                            onClick={() => window.history.back()}
+                        />
+                    )}
             <h1>PROMO PAGE VIEWS</h1>
         </div>
     );
