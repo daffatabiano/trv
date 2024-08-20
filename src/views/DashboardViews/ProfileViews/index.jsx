@@ -2,6 +2,7 @@ import { Icons } from '@/components/Icons';
 import useGet from '@/hooks/useGet';
 import usePost from '@/hooks/usePost';
 import { SUB_EMPTY_PROFILE } from '@/services/SUB_DATA/data';
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
 export default function Profile(props) {
@@ -112,7 +113,6 @@ export default function Profile(props) {
         setData(res?.data?.data);
     };
 
-
     useEffect(() => {
         getProfile();
     }, [token]);
@@ -150,6 +150,52 @@ export default function Profile(props) {
                         >
                             <Icons.ThreeDots w={24} />
                         </button>
+                        {dropdown && (
+                            <ul
+                                className={`w-36 px-2 py-2 flex flex-col gap-2 absolute top-20 right-6 z-50 rounded-lg bg-amber-300 text-amber-950`}
+                            >
+                                <li className="w-full">
+                                    <Link
+                                        onClick={handleDropdown}
+                                        href="/dashboard"
+                                        className="text-white w-full h-full rounded flex items-center gap-4 link p-2 hover:bg-amber-600/30 hover:text-amber-950"
+                                    >
+                                        <Icons className={'w-5 h-5'}>
+                                            <Icons.Edit w={20} />
+                                        </Icons>
+                                        Edit
+                                    </Link>
+                                </li>
+                                <hr />
+                                <li className="w-full">
+                                    <Link
+                                        href={props.id ? '' : '/auth/login'}
+                                        className={`${
+                                            props.id
+                                                ? 'text-red-600 hover:bg-red-600/30'
+                                                : 'text-green-600 hover:bg-green-600/30'
+                                        } w-full h-full rounded flex items-center gap-4 link p-2 `}
+                                        onClick={props.id ? props.logout : ''}
+                                    >
+                                        {props.id ? (
+                                            <>
+                                                <Icons className={'w-5 h-5'}>
+                                                    <Icons.Logout />
+                                                </Icons>
+                                                Logout
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Icons className={'w-5 h-5'}>
+                                                    <Icons.Login />
+                                                </Icons>
+                                                Login
+                                            </>
+                                        )}
+                                    </Link>
+                                </li>
+                            </ul>
+                        )}
                     </div>
                 </div>
                 <div className="px-2 pt-16 text-stone-600">
