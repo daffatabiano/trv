@@ -1,4 +1,3 @@
-import WarningModals from '@/components/ui/Modals/warning-modals';
 import useGet from '@/hooks/useGet';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import usePost from '@/hooks/usePost';
@@ -80,22 +79,6 @@ export default function Promo() {
 
     return (
         <div>
-            {/* {token && data?.role !== 'admin' ? (
-                <WarningModals
-                    title={'Access Denied'}
-                    message={'You do not have permission to access this page'}
-                    onClick={() => window.history.back()}
-                />
-            ) : null}
-            {!md && (
-                <WarningModals
-                    title={'Only Desktop'}
-                    message={
-                        'You just can access this page with Computer or Laptop'
-                    }
-                    onClick={() => window.history.back()}
-                />
-            )} */}
             <h1>PROMO PAGE VIEWS</h1>
         </div>
     );

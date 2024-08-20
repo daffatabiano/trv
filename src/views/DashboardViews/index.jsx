@@ -1,6 +1,5 @@
 import useGet from '@/hooks/useGet';
 import { useEffect, useState } from 'react';
-import WarningModals from '@/components/ui/Modals/warning-modals';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 export default function Dashboard() {
@@ -30,22 +29,6 @@ export default function Dashboard() {
 
     return (
         <>
-            {/* {isToken && data?.role !== 'admin' ? (
-                <WarningModals
-                    title={'Access Denied'}
-                    message={'You do not have permission to access this page'}
-                    onClick={() => window.history.back()}
-                />
-            ) : null}
-            {!md && (
-                <WarningModals
-                    title={'Only Desktop'}
-                    message={
-                        'You just can access this page with Computer or Laptop'
-                    }
-                    onClick={() => window.history.back()}
-                />
-            )} */}
             <div>Admin Dashboard</div>
         </>
     );
