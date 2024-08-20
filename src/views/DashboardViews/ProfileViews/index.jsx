@@ -152,16 +152,15 @@ export default function Profile(props) {
                         </button>
                         {dropdown && (
                             <ul
-                                className={`w-36 px-2 py-2 flex flex-col gap-2 absolute top-20 right-6 z-50 rounded-lg bg-amber-300 text-amber-950`}
+                                className={`w-36 px-2 py-2 flex flex-col gap-2 absolute top-20 right-6 z-50 rounded-lg bg-stone-300 text-amber-950`}
                             >
                                 <li className="w-full">
                                     <Link
-                                        onClick={handleDropdown}
                                         href="/dashboard"
-                                        className="text-white w-full h-full rounded flex items-center gap-4 link p-2 hover:bg-amber-600/30 hover:text-amber-950"
+                                        className="text-white w-full h-full rounded flex items-center gap-4 link p-2 hover:bg-stone-600/30 hover:text-stone-950"
                                     >
                                         <Icons className={'w-5 h-5'}>
-                                            <Icons.Edit w={20} />
+                                            <Icons.Edit w={24} />
                                         </Icons>
                                         Edit
                                     </Link>
@@ -169,29 +168,14 @@ export default function Profile(props) {
                                 <hr />
                                 <li className="w-full">
                                     <Link
-                                        href={props.id ? '' : '/auth/login'}
-                                        className={`${
-                                            props.id
-                                                ? 'text-red-600 hover:bg-red-600/30'
-                                                : 'text-green-600 hover:bg-green-600/30'
-                                        } w-full h-full rounded flex items-center gap-4 link p-2 `}
-                                        onClick={props.id ? props.logout : ''}
+                                        href={data.id ? '' : '/auth/login'}
+                                        className={`${'text-red-600 hover:bg-red-600/30'} w-full h-full rounded flex items-center gap-4 link p-2 `}
+                                        onClick={data.id ? props.logout : ''}
                                     >
-                                        {props.id ? (
-                                            <>
-                                                <Icons className={'w-5 h-5'}>
-                                                    <Icons.Logout />
-                                                </Icons>
-                                                Logout
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Icons className={'w-5 h-5'}>
-                                                    <Icons.Login />
-                                                </Icons>
-                                                Login
-                                            </>
-                                        )}
+                                        <Icons className={'w-5 h-5'}>
+                                            <Icons.Logout />
+                                        </Icons>
+                                        Logout
                                     </Link>
                                 </li>
                             </ul>
