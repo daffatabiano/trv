@@ -30,7 +30,7 @@ export default function Dashboard() {
 
     return (
         <>
-            {isToken && data?.role !== 'admin' ? (
+            {/* {isToken && data?.role !== 'admin' ? (
                 <WarningModals
                     title={'Access Denied'}
                     message={'You do not have permission to access this page'}
@@ -45,7 +45,7 @@ export default function Dashboard() {
                     }
                     onClick={() => window.history.back()}
                 />
-            )}
+            )} */}
             <div>Admin Dashboard</div>
         </>
     );
