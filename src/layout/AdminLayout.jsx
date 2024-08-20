@@ -31,7 +31,7 @@ export default function AdminLayout({ children }) {
                 <WarningModals
                     title={'Access Denied'}
                     message={'You do not have permission to access this page'}
-                    onClick={() => window.history.back()}
+                    onClick={() => (window.location.href = '/home')}
                 />
             ) : null}
             {!md && (
@@ -40,7 +40,7 @@ export default function AdminLayout({ children }) {
                     message={
                         'You just can access this page with Computer or Laptop'
                     }
-                    onClick={() => window.history.back()}
+                    onClick={() => (window.location.href = '/home')}
                 />
             )}
             {children}
