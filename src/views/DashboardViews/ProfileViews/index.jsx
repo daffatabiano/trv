@@ -1,10 +1,37 @@
 import { Icons } from '@/components/Icons';
-import Input from '@/components/ui/Input';
+import Toast from '@/components/ui/Toast';
 import useGet from '@/hooks/useGet';
 import usePost from '@/hooks/usePost';
+import useUpload from '@/hooks/useUpload';
 import { SUB_EMPTY_PROFILE } from '@/services/SUB_DATA/data';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+
+const Input = (props) => {
+    const [isActive, setIsActive] = useState(false);
+
+    return (
+        <div className="w-full gap-1 flex flex-col relative ">
+            <label className="ps-2">{props.text}</label>
+            <input
+                type={props.type}
+                name={props.name}
+                className={`w-full rounded-full p-2 focus:outline-none cursor-${
+                    isActive ? 'text' : 'not-allowed opacity-50'
+                }`}
+                defaultValue={props?.defaultValue}
+                disabled={isActive ? false : true}
+            />
+            <button
+                onClick={() => setIsActive(true)}
+                className="absolute right-2 top-1/2 -translate-y-1/2"
+                type="button"
+            >
+                <Icons.Edit w={12} />
+            </button>
+        </div>
+    );
+};
 
 export default function Profile(props) {
     const { getData } = useGet();
@@ -12,9 +39,10 @@ export default function Profile(props) {
     const [token, setToken] = useState('');
     const [toast, setToast] = useState({});
     const { post } = usePost();
-    const [imageUrl, setImageUrl] = useState({});
+    const [imageUrl, setImageUrl] = useState('');
     const [dropdown, setDropdown] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const { upload } = useUpload();
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -115,12 +143,14 @@ export default function Profile(props) {
         setData(res?.data?.data);
     };
 
+
     useEffect(() => {
         getProfile();
     }, [token]);
 
     return (
         <div className="w-full h-full">
+            <Toast setToast={setToast} {...toast} duration={3000} />
             {showModal && (
                 <div
                     className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-black/60 z-50"
@@ -133,6 +163,7 @@ export default function Profile(props) {
                         <div className="uppercase flex justify-between text-lg w-full bg-slate-400/40 text-stone-700 font-bold p-4">
                             <h1>edit profile</h1>
                             <button
+                                type="button"
                                 onClick={() => setShowModal(false)}
                                 className="p-2 rounded-full bg-slate-100 hover:bg-slate-400 hover:text-stone-800"
                             >
@@ -143,29 +174,49 @@ export default function Profile(props) {
                             className="overflow-y-auto overflow-x-hidden w-full h-full flex flex-col gap-4 py-4 px-8"
                             onSubmit={editProfile}
                         >
-                            <div className="w-full gap-1 flex flex-col justify-center">
+                            <div className="w-full gap-1 flex flex-col mx-auto items-center  justify-center">
                                 <label className="ps-2">Profile Picture</label>
                                 <img
-                                    src={data?.profilePictureUrl || SUB_EMPTY_PROFILE}
+                                    src={
+                                        imageUrl.length > 0
+                                            ? imageUrl
+                                            : data?.profilePictureUrl ||
+                                              SUB_EMPTY_PROFILE
+                                    }
                                     alt={`profile picture ${data?.name}`}
                                     className="w-24 h-24 object-cover rounded-full"
                                 />
                                 <input
                                     type="file"
                                     name="profilePictureUrl"
-                                    className="focus:outline-none file:hidden "
+                                    className="focus:outline-none file:hidden mt-2 cursor-pointer p-2 rounded-full bg-slate-300/80 text-white"
                                     onChange={uploadFile}
                                 />
                             </div>
-                            <div className="w-full gap-1 flex flex-col ">
-                                <label className="ps-2">Name</label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    className="w-full rounded-full p-2 focus:outline-none"
-                                    defaultValue={data?.name}
-                                />
-                            </div>
+                            <Input
+                                text="Name"
+                                name="name"
+                                type="text"
+                                defaultValue={data?.name}
+                            />
+                            <Input
+                                text="Email"
+                                name="email"
+                                type="email"
+                                defaultValue={data?.email}
+                            />
+                            <Input
+                                text="Phone Number"
+                                type="number"
+                                name="phoneNumber"
+                                defaultValue={data?.phoneNumber}
+                            />
+                            <button
+                                type="submit"
+                                className="p-2 w-full bg-emerald-600 rounded-full mt-4 font-medium hover:bg-emerald-700 text-neutral-50"
+                            >
+                                Save Change
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -213,6 +264,7 @@ export default function Profile(props) {
                                             setShowModal(true);
                                             setDropdown(false);
                                         }}
+                                        type="button"
                                         className="text-white w-full h-full rounded flex items-center gap-4 link p-2 hover:bg-stone-600/30 hover:text-stone-950"
                                     >
                                         <Icons className={'w-5 h-5'}>
@@ -224,8 +276,9 @@ export default function Profile(props) {
                                 <hr />
                                 <li className="w-full">
                                     <button
+                                        type="button"
                                         className={`${'text-red-600 hover:bg-red-600/30'} w-full h-full rounded flex items-center gap-4 link p-2 `}
-                                        onClick={data.id ? props.logout : ''}
+                                        onClick={handleLogout}
                                     >
                                         <Icons className={'w-5 h-5'}>
                                             <Icons.Logout />
