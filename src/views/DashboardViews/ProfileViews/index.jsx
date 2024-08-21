@@ -34,6 +34,24 @@ const Input = (props) => {
     );
 };
 
+const Tutorial = (props) => {
+    return (
+        <div className="flex gap-2 w-1/3 items-center">
+            {/* <img
+                            src="/vid/step-1.png"
+                            alt=""
+                            className={`rounded-lg absolute z-3 w-[200px]`}
+                        /> */}
+            <video className="rounded-lg" width={200} autoPlay controls loop>
+                <source src={props?.video} type="video/mp4" />
+            </video>
+            <div>
+                <p className="text-sm text-justify">{props.text}</p>
+            </div>
+        </div>
+    );
+};
+
 export default function Profile() {
     const { getData } = useGet();
     const [data, setData] = useState([]);
@@ -108,11 +126,11 @@ export default function Profile() {
             const body = {
                 name: e.target.name.value,
                 email: e.target.email.value,
-                profilePictureUrl: imageUrl,
+                profilePictureUrl:
+                    imageUrl.length > 0 ? imageUrl : data.profilePictureUrl,
                 phoneNumber: e.target.phoneNumber.value,
             };
             const res = await post('update-profile', body, token);
-            console.log(res);
             if (res.status === 200) {
                 setToast({
                     variant: 'success',
@@ -355,31 +373,41 @@ export default function Profile() {
                 <h1 className="text-xl text-stone-600 font-bold ps-8">
                     Guide to Update Profile
                 </h1>
-                <div className="px-8 flex w-full ">
-                    <div className="flex gap-2 w-1/3 items-center">
-                        {/* <img
-                            src="/vid/step-1.png"
-                            alt=""
-                            className={`rounded-lg absolute z-3 w-[200px]`}
-                        /> */}
-                        <video
-                            className="rounded-lg"
-                            width={200}
-                            autoPlay
-                            controls
-                            loop
-                        >
-                            <source src="/vid/step-1.mp4" type="video/mp4" />
-                        </video>
-                        <div>
-                            <p>
+                <div className="px-8 flex gap-2 w-full ">
+                    <Tutorial
+                        text={
+                            <>
+                                {' '}
                                 Go to sidebar admin and click on profile bar,
                                 then click three dots button{' '}
                                 <span>{`(•••)`}</span> in the top right corner
                                 and select edit profile.
-                            </p>
-                        </div>
-                    </div>
+                            </>
+                        }
+                        video="/vid/step-1.mp4"
+                    />
+                    <Tutorial
+                        text={
+                            <>
+                                Click edit profile and you can see your data
+                                profile, and the form is disable first, you
+                                should click right corner, and edit with you
+                                want
+                            </>
+                        }
+                        video="/vid/step-2.mp4"
+                    />
+                    <Tutorial
+                        text={
+                            <>
+                                Also if you want change the profile picture, you
+                                can upload file with terms max.1mb, and format
+                                {'(.jpg,.png,.jpeg'} if you finish, you could
+                                click Save Change.
+                            </>
+                        }
+                        video="/vid/step-3.mp4"
+                    />
                 </div>
             </section>
         </div>
