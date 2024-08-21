@@ -1,4 +1,5 @@
 import { Icons } from '@/components/Icons';
+import Input from '@/components/ui/Input';
 import useGet from '@/hooks/useGet';
 import usePost from '@/hooks/usePost';
 import { SUB_EMPTY_PROFILE } from '@/services/SUB_DATA/data';
@@ -13,6 +14,7 @@ export default function Profile(props) {
     const { post } = usePost();
     const [imageUrl, setImageUrl] = useState({});
     const [dropdown, setDropdown] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -119,7 +121,56 @@ export default function Profile(props) {
 
     return (
         <div className="w-full h-full">
-            <header className="bg-slate-50 shadow-md rounded-lg overflow-hidden relative">
+            {showModal && (
+                <div
+                    className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-black/60 z-50"
+                    onClick={() => setShowModal(false)}
+                >
+                    <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="w-1/2 h-[90%] bg-slate-100 rounded-lg overflow-hidden"
+                    >
+                        <div className="uppercase flex justify-between text-lg w-full bg-slate-400/40 text-stone-700 font-bold p-4">
+                            <h1>edit profile</h1>
+                            <button
+                                onClick={() => setShowModal(false)}
+                                className="p-2 rounded-full bg-slate-100 hover:bg-slate-400 hover:text-stone-800"
+                            >
+                                <Icons.Close w={'w-4'} />
+                            </button>
+                        </div>
+                        <form
+                            className="overflow-y-auto overflow-x-hidden w-full h-full flex flex-col gap-4 py-4 px-8"
+                            onSubmit={editProfile}
+                        >
+                            <div className="w-full gap-1 flex flex-col justify-center">
+                                <label className="ps-2">Profile Picture</label>
+                                <img
+                                    src={data?.profilePictureUrl || SUB_EMPTY_PROFILE}
+                                    alt={`profile picture ${data?.name}`}
+                                    className="w-24 h-24 object-cover rounded-full"
+                                />
+                                <input
+                                    type="file"
+                                    name="profilePictureUrl"
+                                    className="focus:outline-none file:hidden "
+                                    onChange={uploadFile}
+                                />
+                            </div>
+                            <div className="w-full gap-1 flex flex-col ">
+                                <label className="ps-2">Name</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    className="w-full rounded-full p-2 focus:outline-none"
+                                    defaultValue={data?.name}
+                                />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+            <header className="bg-slate-50 h-[65%] shadow-md rounded-lg overflow-hidden relative">
                 <div className="w-full">
                     <img
                         src="/img/general/dashboard.jpg"
@@ -127,7 +178,7 @@ export default function Profile(props) {
                         className="w-full h-52 object-cover object-center"
                     />
                 </div>
-                <div className="absolute w-[90%] px-4 h-1/3 flex justify-between rounded-lg bg-transparent backdrop-blur-sm top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-md ">
+                <div className="absolute w-[90%] px-4 h-1/3 flex justify-between rounded-lg bg-transparent backdrop-blur-sm top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-md ">
                     <div className="flex items-center gap-4">
                         <img
                             src={data?.profilePictureUrl || SUB_EMPTY_PROFILE}
@@ -146,6 +197,7 @@ export default function Profile(props) {
                     </div>
                     <div className="flex items-center">
                         <button
+                            type="button"
                             onClick={() => setDropdown((curr) => !curr)}
                             className="p-4 rounded-full bg-slate-400/30 hover:bg-slate-400 text-white"
                         >
@@ -156,20 +208,22 @@ export default function Profile(props) {
                                 className={`w-36 px-2 py-2 flex flex-col gap-2 absolute top-20 right-6 z-50 rounded-lg bg-stone-300 text-amber-950`}
                             >
                                 <li className="w-full">
-                                    <Link
-                                        href="/dashboard"
+                                    <button
+                                        onClick={() => {
+                                            setShowModal(true);
+                                            setDropdown(false);
+                                        }}
                                         className="text-white w-full h-full rounded flex items-center gap-4 link p-2 hover:bg-stone-600/30 hover:text-stone-950"
                                     >
                                         <Icons className={'w-5 h-5'}>
                                             <Icons.Edit w={24} />
                                         </Icons>
                                         Edit
-                                    </Link>
+                                    </button>
                                 </li>
                                 <hr />
                                 <li className="w-full">
-                                    <Link
-                                        href={data.id ? '' : '/auth/login'}
+                                    <button
                                         className={`${'text-red-600 hover:bg-red-600/30'} w-full h-full rounded flex items-center gap-4 link p-2 `}
                                         onClick={data.id ? props.logout : ''}
                                     >
@@ -177,19 +231,48 @@ export default function Profile(props) {
                                             <Icons.Logout />
                                         </Icons>
                                         Logout
-                                    </Link>
+                                    </button>
                                 </li>
                             </ul>
                         )}
                     </div>
                 </div>
-                <div className="px-2 pt-16 text-stone-600">
-                    <h1 className="text-xl font-bold ps-6">
-                        Dashboard Profile
-                    </h1>
+                <div className=" pt-20 pb-4 ps-7 pe-6 text-stone-600">
+                    <h1 className="text-xl font-bold ">Dashboard Profile</h1>
+                    <p className={`ps-1 mt-1`}>
+                        Hello{' '}
+                        <span className="font-medium italic uppercase">
+                            {data?.name}
+                        </span>
+                        , Welcome to
+                        <span className="bg-stone-300/30 hover:bg-stone-600/30 hover:cursor-default hover:text-stone-950 p-1 rounded-lg">
+                            Dashboard Profile
+                        </span>{' '}
+                        is used to manage your account. you can edit your
+                        profile here, with your{' '}
+                        <span className="bg-stone-300/30 hover:bg-stone-600/30 hover:cursor-default hover:text-stone-950 p-1 rounded-lg">
+                            {' '}
+                            name, email, phone number, and also your picture
+                            profile.
+                        </span>{' '}
+                        follow the steps below to edit your profile. and also
+                        you can remove your account with the{' '}
+                        <span className="bg-stone-300/30 hover:bg-stone-600/30 hover:cursor-default hover:text-stone-950 p-1 rounded-lg">
+                            logout
+                        </span>{' '}
+                        button in three dots button{' '}
+                        <span className="bg-stone-300/30 hover:bg-stone-600/30 hover:cursor-default hover:text-stone-950 p-1 rounded-lg">
+                            {'(•••)'}
+                        </span>{' '}
+                        above.
+                    </p>
                 </div>
             </header>
-            <main></main>
+            <section className="w-full my-3 py-2 bg-slate-50 h-[35%] shadow-md rounded-lg overflow-hidden relative">
+                <h1 className="text-xl text-stone-600 font-bold ps-8">
+                    Step to Edit Profile
+                </h1>
+            </section>
         </div>
     );
 }
