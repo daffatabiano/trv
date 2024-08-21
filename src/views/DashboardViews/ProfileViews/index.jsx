@@ -167,7 +167,7 @@ export default function Profile() {
 
     const handleLogout = async () => {
         try {
-            const res = await logout('logout', isToken);
+            const res = await logout('logout', token);
             if (res.status === 200) {
                 setToast({
                     variant: 'success',
@@ -175,6 +175,7 @@ export default function Profile() {
                     message: res.data.message,
                     show: true,
                 });
+                setDropdown(false);
                 setTimeout(() => {
                     if (typeof window !== 'undefined') {
                         localStorage.removeItem('token');
@@ -183,6 +184,7 @@ export default function Profile() {
                 }, 3000);
             }
         } catch (error) {
+            setDropdown(false);
             setToast({
                 variant: 'error',
                 title: 'Logout Failed',
