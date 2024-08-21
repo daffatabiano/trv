@@ -27,13 +27,15 @@ export default function AdminLayout({ children }) {
 
     return (
         <SidebarAdmin {...data}>
-            {token && data?.role !== 'admin' ? (
+            {token && data?.role === 'admin' ? (
+                children
+            ) : (
                 <WarningModals
                     title={'Access Denied'}
                     message={'You do not have permission to access this page'}
                     onClick={() => (window.location.href = '/home')}
                 />
-            ) : null}
+            )}
             {!md && (
                 <WarningModals
                     title={'Only Desktop'}
@@ -43,7 +45,6 @@ export default function AdminLayout({ children }) {
                     onClick={() => (window.location.href = '/home')}
                 />
             )}
-            {children}
         </SidebarAdmin>
     );
 }

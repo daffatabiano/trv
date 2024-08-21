@@ -58,7 +58,7 @@ export function SidebarAdmin(props) {
 export const Logo = () => {
     return (
         <Link
-            href="#"
+            href="/home"
             className="font-normal flex space-x-2 items-center text-lg text-black py-1 relative z-20"
         >
             <img
