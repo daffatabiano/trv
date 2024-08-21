@@ -34,7 +34,6 @@ export default function BaseLayout({ children }) {
         }
     };
     const handleLogout = async () => {
-        console.log('logout');
         try {
             const res = await logout('logout', isToken);
             if (res.status === 200) {

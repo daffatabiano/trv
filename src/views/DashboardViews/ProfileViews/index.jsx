@@ -1,5 +1,6 @@
 import { Icons } from '@/components/Icons';
 import Toast from '@/components/ui/Toast';
+import useAuth from '@/hooks/useAuth';
 import useGet from '@/hooks/useGet';
 import usePost from '@/hooks/usePost';
 import useUpload from '@/hooks/useUpload';
@@ -43,6 +44,7 @@ export default function Profile(props) {
     const [dropdown, setDropdown] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const { upload } = useUpload();
+    const { logout } = useAuth();
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -143,6 +145,32 @@ export default function Profile(props) {
         setData(res?.data?.data);
     };
 
+    const handleLogout = async () => {
+        try {
+            const res = await logout('logout', isToken);
+            if (res.status === 200) {
+                setToast({
+                    variant: 'success',
+                    title: 'Logout Success',
+                    message: res.data.message,
+                    show: true,
+                });
+                setTimeout(() => {
+                    if (typeof window !== 'undefined') {
+                        localStorage.removeItem('token');
+                    }
+                    window.location.href = '/auth/login';
+                }, 3000);
+            }
+        } catch (error) {
+            setToast({
+                variant: 'error',
+                title: 'Logout Failed',
+                message: error?.response?.data?.message,
+                show: true,
+            });
+        }
+    };
 
     useEffect(() => {
         getProfile();
