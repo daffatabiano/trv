@@ -353,8 +353,34 @@ export default function Profile() {
             </header>
             <section className="w-full my-3 py-2 bg-slate-50 h-[35%] shadow-md rounded-lg overflow-hidden relative">
                 <h1 className="text-xl text-stone-600 font-bold ps-8">
-                    Step to Edit Profile
+                    Guide to Update Profile
                 </h1>
+                <div className="px-8 flex w-full ">
+                    <div className="flex gap-2 w-1/3 items-center">
+                        {/* <img
+                            src="/vid/step-1.png"
+                            alt=""
+                            className={`rounded-lg absolute z-3 w-[200px]`}
+                        /> */}
+                        <video
+                            className="rounded-lg"
+                            width={200}
+                            autoPlay
+                            controls
+                            loop
+                        >
+                            <source src="/vid/step-1.mp4" type="video/mp4" />
+                        </video>
+                        <div>
+                            <p>
+                                Go to sidebar admin and click on profile bar,
+                                then click three dots button{' '}
+                                <span>{`(•••)`}</span> in the top right corner
+                                and select edit profile.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </section>
         </div>
     );
