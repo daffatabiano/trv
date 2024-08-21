@@ -1,4 +1,5 @@
-import { BASE_HEADERS } from '@/services/BASE/data';
+import { BASE_HEADERS, BASE_URL } from '@/services/BASE/data';
+import axios from 'axios';
 
 export default function usePost() {
     const post = async (url, body, token) => {

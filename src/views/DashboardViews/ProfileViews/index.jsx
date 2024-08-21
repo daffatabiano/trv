@@ -17,14 +17,14 @@ const Input = (props) => {
             <input
                 type={props.type}
                 name={props.name}
-                className={`w-full rounded-full p-2 focus:outline-none cursor-${
-                    isActive ? 'text' : 'not-allowed opacity-50'
+                className={`w-full rounded-full p-2 focus:outline-none ${
+                    isActive ? 'cursor-text' : 'cursor-not-allowed opacity-50'
                 }`}
                 defaultValue={props?.defaultValue}
                 disabled={isActive ? false : true}
             />
             <button
-                onClick={() => setIsActive(true)}
+                onClick={() => setIsActive((curr) => !curr)}
                 className="absolute right-2 top-1/2 -translate-y-1/2"
                 type="button"
             >
@@ -34,7 +34,7 @@ const Input = (props) => {
     );
 };
 
-export default function Profile(props) {
+export default function Profile() {
     const { getData } = useGet();
     const [data, setData] = useState([]);
     const [token, setToken] = useState('');
@@ -112,6 +112,7 @@ export default function Profile(props) {
                 phoneNumber: e.target.phoneNumber.value,
             };
             const res = await post('update-profile', body, token);
+            console.log(res);
             if (res.status === 200) {
                 setToast({
                     variant: 'success',
@@ -119,14 +120,15 @@ export default function Profile(props) {
                     message: res.data.message,
                     show: true,
                 });
+                setShowModal(false);
                 setTimeout(() => {
-                    window.location.reload();
+                    getProfile();
                 }, 3000);
             } else {
                 setToast({
                     variant: 'error',
                     title: 'Edit Failed',
-                    message: res.response.data.message,
+                    message: 'Something went wrong!',
                     show: true,
                 });
             }
