@@ -4,6 +4,7 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { CanvasRevealEffect } from '@/components/ui/canvas-reveal';
 import { Icons } from '@/components/Icons';
 import { AnimatePresence, motion } from 'framer-motion';
+import { BorderAnimation } from '@/components/ui/moving-borders';
 
 export const Icon = ({ className, ...rest }) => {
     return (
@@ -64,8 +65,9 @@ export default function Dashboard() {
     const [promos, setPromos] = useState([]);
     const [banners, setBanners] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [activites, setActivites] = useState([]);
+    const [activities, setActivities] = useState([]);
     const [profile, setProfile] = useState([]);
+    const [allUsers, setAllUsers] = useState([]);
     const md = useMediaQuery('(min-width: 768px)');
 
     useEffect(() => {
@@ -73,6 +75,11 @@ export default function Dashboard() {
             setIsToken(localStorage.getItem('token'));
         }
     }, []);
+
+    const getAllUsers = async () => {
+        const res = await getData('all-user', isToken);
+        setAllUsers(res?.data?.data);
+    };
 
     const getPromo = async () => {
         try {
@@ -100,7 +107,7 @@ export default function Dashboard() {
     };
     const getActivites = async () => {
         try {
-            const res = await getData('activites', isToken);
+            const res = await getData('activities', isToken);
             setActivities(res?.data?.data);
         } catch (error) {
             console.log(error);
@@ -118,6 +125,7 @@ export default function Dashboard() {
         getCategories();
         getActivites();
         getProfile();
+        getAllUsers();
     }, [isToken]);
 
     return (
@@ -176,7 +184,7 @@ export default function Dashboard() {
                     </Card>
                     <Card
                         title="Activities"
-                        total={activites?.length}
+                        total={activities?.length}
                         icon={<Icons.Top w={36} />}
                     >
                         <CanvasRevealEffect
@@ -188,7 +196,69 @@ export default function Dashboard() {
                 </div>
             </div>
             <div className="w-full h-[60%] bg-stone-50 rounded-b-2xl shadow-md ">
-                <div></div>
+                <div className="w-full p-4 text-xl bg-stone-200/70 flex justify-between items-center text-stone-700">
+                    <h1 className="font-normal flex gap-2">
+                        <Icons.User w={24} /> User{' '}
+                        <span className="font-bold">Management</span>
+                    </h1>
+                    <BorderAnimation
+                        borderRadius="1.75rem"
+                        className="bg-emerald-300/40 dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800"
+                    >
+                        <span className="font-extrabold text-emerald-600 pe-2">
+                            • {allUsers?.length}{' '}
+                        </span>{' '}
+                        Total Active
+                    </BorderAnimation>
+                </div>
+                <table
+                    cellSpacing="0"
+                    cellPadding="0"
+                    border="1"
+                    className="w-full"
+                >
+                    <thead>
+                        <th colSpan={1}>
+                            <p className="text-lg font-bold">#</p>
+                        </th>
+                        <th colSpan={1}>
+                            <p className="text-lg font-bold">User</p>
+                        </th>
+                        <th colSpan={1}>
+                            <p className="text-lg font-bold">Email</p>
+                        </th>
+                        <th>
+                            <p className="text-lg font-bold">Status</p>
+                        </th>
+                        <th>
+                            <p className="text-lg font-bold">Action</p>
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p className="text-lg font-normal">
+                                    {allUsers?.length}
+                                </p>
+                            </td>
+                            <td>
+                                <p className="text-lg font-normal">
+                                    {allUsers?.length}
+                                </p>
+                            </td>
+                            <td>
+                                <p className="text-lg font-normal">
+                                    {allUsers?.length}
+                                </p>
+                            </td>
+                            <td>
+                                <p className="text-lg font-normal">
+                                    {allUsers?.length}
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     );
