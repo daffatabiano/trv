@@ -62,25 +62,109 @@ const Card = ({ title, icon, children, total }) => {
 };
 
 const ModalRole = (props) => {
+    const [show, setShow] = useState(false);
+    const [value, setValue] = useState('');
+    const { post } = usePost();
+
+    const updateRole = async () => {
+        const res = await post(
+            `update-user-role/${props?.data?.id}`,
+            {
+                role: value,
+            },
+            props?.token
+        );
+        console.log(res);
+    };
+
     return (
-        <div className="w-full h-full fixed inset-0 bg-slate-900/70 z-[60]">
-            <div className="w-1/3 m-auto mt-20 bg-white p-5 rounded-md">
-                <h1 className="w-full p-2">Change user role</h1>
-                <div>
-                    <form action="">
-                        <div>
-                            <label htmlFor="role">Role</label>
-                            <select name="role" id="role">
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option>
-                            </select>
+        <div
+            className={`w-full h-full fixed inset-0 bg-slate-900/70 z-[60] ${
+                props?.show ? 'visible' : 'invisible'
+            }`}
+        >
+            <div
+                className={`w-1/3 m-auto mt-20 rounded-lg p-4 ${
+                    props?.data?.role === 'admin'
+                        ? 'bg-emerald-100 border-emerald-400/80'
+                        : 'bg-rose-100 border-rose-400/80'
+                }`}
+            >
+                <div className="w-full bg-stone-400/30 py-2 px-4 rounded-lg flex justify-between">
+                    <h1>Change user role</h1>{' '}
+                    <button type="button" onClick={() => setShow(false)}>
+                        <Icons.Close w={'w-4'} />
+                    </button>
+                </div>
+                <div className="p-4">
+                    <div className="flex flex-col">
+                        <label
+                            htmlFor="role"
+                            className="font-thin text-stone-400/70"
+                        >
+                            Choose Role
+                        </label>
+                        <div className="relative ">
+                            <button
+                                type="button"
+                                onClick={() => setShow((prev) => !prev)}
+                                className={`w-full py-2 ps-4 text-start font-bold  rounded-lg uppercase ${
+                                    props?.data?.role === 'admin'
+                                        ? 'bg-emerald-300 text-emerald-600'
+                                        : 'bg-rose-300 text-rose-600'
+                                } `}
+                            >
+                                {!value ? props?.data?.role : value}
+                            </button>
+                            <span
+                                className="absolute right-4 top-0 translate-y-[40%] cursor-pointer"
+                                onClick={() => setShow((prev) => !prev)}
+                            >
+                                {show ? (
+                                    <Icons.CharretUp w={24} />
+                                ) : (
+                                    <Icons.CharretDown w={24} />
+                                )}
+                            </span>
                         </div>
-                        <div>
-                            <button className="p-2 w-full rounded-full bg-rose-600 text-white">
-                                Save Change
+
+                        <div
+                            className={`flex flex-col w-full rounded-lg bg-emerald-300 mt-2 overflow-hidden p-2 ${
+                                show ? 'visible' : 'invisible'
+                            }`}
+                        >
+                            <button
+                                className="py-2 ps-4 text-start bg-transparent w-full font-bold uppercase hover:bg-emerald-100 mb-2 rounded-lg cursor-pointer"
+                                onClick={() => {
+                                    setValue('admin');
+                                    setShow(false);
+                                }}
+                                type="button"
+                            >
+                                Admin
+                            </button>
+                            <hr className="mx-4" />
+                            <button
+                                className="py-2 ps-4 text-start bg-transparent w-full font-bold uppercase hover:bg-emerald-100 mb-2 rounded-lg cursor-pointer"
+                                onClick={() => {
+                                    setValue('user');
+                                    setShow(false);
+                                }}
+                                type="button"
+                            >
+                                User
                             </button>
                         </div>
-                    </form>
+                    </div>
+                    <div>
+                        <button
+                            type="button"
+                            onClick={() => updateRole()}
+                            className="p-2 mt-4 w-full rounded-full bg-rose-600 text-white"
+                        >
+                            Save Change
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -89,7 +173,6 @@ const ModalRole = (props) => {
 
 export default function Dashboard() {
     const { getData } = useGet();
-    const { post } = usePost();
     const [isToken, setIsToken] = useState('');
     const [promos, setPromos] = useState([]);
     const [banners, setBanners] = useState([]);
@@ -97,7 +180,11 @@ export default function Dashboard() {
     const [activities, setActivities] = useState([]);
     const [profile, setProfile] = useState([]);
     const [allUsers, setAllUsers] = useState([]);
-    const [showRole, setShowRole] = useState({ show: false, data: '' });
+    const [showRole, setShowRole] = useState({
+        show: false,
+        data: '',
+        token: '',
+    });
     const md = useMediaQuery('(min-width: 768px)');
 
     useEffect(() => {
@@ -151,12 +238,12 @@ export default function Dashboard() {
 
     const changeRole = async (e) => {
         setShowRole({
-            show: true,
+            ...showRole,
+            show: (curr) => !curr,
             data: e,
+            token: isToken,
         });
     };
-
-    console.log(showRole);
 
     useEffect(() => {
         getAllUsers();
@@ -169,7 +256,7 @@ export default function Dashboard() {
 
     return (
         <div className="w-full h-full flex flex-col gap-4">
-            {/* <ModalRole {...showRole} /> */}
+            <ModalRole {...showRole} />
             <div className="rounded-t-2xl overflow-hidden w-full shadow-md h-[40%] bg-stone-50  text-center text-stone-700/70 ">
                 <div className="relative">
                     <img
