@@ -66,6 +66,8 @@ const ModalRole = (props) => {
     const [value, setValue] = useState('');
     const { post } = usePost();
 
+    console.log(props);
+
     const updateRole = async () => {
         const res = await post(
             `update-user-role/${props?.data?.id}`,
@@ -78,11 +80,7 @@ const ModalRole = (props) => {
     };
 
     return (
-        <div
-            className={`w-full h-full fixed inset-0 bg-slate-900/70 z-[60] ${
-                props?.show ? 'visible' : 'invisible'
-            }`}
-        >
+        <div className={`w-full h-full fixed inset-0 bg-slate-900/70 z-[60]`}>
             <div
                 className={`w-1/3 m-auto mt-20 rounded-lg p-4 ${
                     props?.data?.role === 'admin'
@@ -92,7 +90,7 @@ const ModalRole = (props) => {
             >
                 <div className="w-full bg-stone-400/30 py-2 px-4 rounded-lg flex justify-between">
                     <h1>Change user role</h1>{' '}
-                    <button type="button" onClick={() => setShow(false)}>
+                    <button type="button" onClick={props.close}>
                         <Icons.Close w={'w-4'} />
                     </button>
                 </div>
@@ -181,10 +179,10 @@ export default function Dashboard() {
     const [profile, setProfile] = useState([]);
     const [allUsers, setAllUsers] = useState([]);
     const [showRole, setShowRole] = useState({
-        show: false,
         data: '',
         token: '',
     });
+    const [showModalChangeRole, setShowModalChangeRole] = useState(false);
     const md = useMediaQuery('(min-width: 768px)');
 
     useEffect(() => {
@@ -237,9 +235,9 @@ export default function Dashboard() {
     };
 
     const changeRole = async (e) => {
+        setShowModalChangeRole(true);
         setShowRole({
             ...showRole,
-            show: (curr) => !curr,
             data: e,
             token: isToken,
         });
@@ -256,7 +254,13 @@ export default function Dashboard() {
 
     return (
         <div className="w-full h-full flex flex-col gap-4">
-            <ModalRole {...showRole} />
+            {showModalChangeRole && (
+                <ModalRole
+                    {...showRole}
+                    close={() => setShowModalChangeRole(false)}
+                />
+            )}
+
             <div className="rounded-t-2xl overflow-hidden w-full shadow-md h-[40%] bg-stone-50  text-center text-stone-700/70 ">
                 <div className="relative">
                     <img
