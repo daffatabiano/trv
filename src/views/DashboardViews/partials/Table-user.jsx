@@ -14,7 +14,6 @@ export const Th = ({ text }) => {
 };
 
 export default function TableUser(props) {
-    console.log(props);
     return (
         <table className="w-full divide-y divide-gray-200">
             <thead className="bg-stone-400/50 font-medium text-stone-800">
@@ -43,18 +42,18 @@ export default function TableUser(props) {
                         <td>
                             <p
                                 className={`${
-                                    props?.role === 'admin'
+                                    data?.role === 'admin'
                                         ? 'bg-emerald-300/60 text-emerald-700'
                                         : 'bg-rose-300/60 text-rose-700'
                                 } text-center w-fit rounded-full py-1 px-4 opacity-50`}
                             >
-                                {props?.role}
+                                {data?.role === 'admin' ? 'Admin' : 'User'}
                             </p>
                         </td>
                         <td className="text-end ">
                             <button
                                 type="button"
-                                onClick={props?.changeRole}
+                                onClick={() => props?.changeRole(data?.id)}
                                 className="bg-amber-300 hover:bg-amber-400  font-bold py-2 px-4 rounded text-stone-50 hover:text-stone-900 me-2"
                             >
                                 Change Role

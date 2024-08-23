@@ -6,6 +6,7 @@ import { Icons } from '@/components/Icons';
 import { AnimatePresence, motion } from 'framer-motion';
 import { BorderAnimation } from '@/components/ui/moving-borders';
 import TableUser from './partials/Table-user';
+import usePost from '@/hooks/usePost';
 
 export const Icon = ({ className, ...rest }) => {
     return (
@@ -60,8 +61,35 @@ const Card = ({ title, icon, children, total }) => {
     );
 };
 
+const ModalRole = (props) => {
+    return (
+        <div className="w-full h-full fixed inset-0 bg-slate-900/70 z-[60]">
+            <div className="w-1/3 m-auto mt-20 bg-white p-5 rounded-md">
+                <h1 className="w-full p-2">Change user role</h1>
+                <div>
+                    <form action="">
+                        <div>
+                            <label htmlFor="role">Role</label>
+                            <select name="role" id="role">
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button className="p-2 w-full rounded-full bg-rose-600 text-white">
+                                Save Change
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 export default function Dashboard() {
     const { getData } = useGet();
+    const { post } = usePost();
     const [isToken, setIsToken] = useState('');
     const [promos, setPromos] = useState([]);
     const [banners, setBanners] = useState([]);
@@ -69,6 +97,7 @@ export default function Dashboard() {
     const [activities, setActivities] = useState([]);
     const [profile, setProfile] = useState([]);
     const [allUsers, setAllUsers] = useState([]);
+    const [showRole, setShowRole] = useState({ show: false, data: '' });
     const md = useMediaQuery('(min-width: 768px)');
 
     useEffect(() => {
@@ -120,6 +149,15 @@ export default function Dashboard() {
         setProfile(res?.data?.data);
     };
 
+    const changeRole = async (e) => {
+        setShowRole({
+            show: true,
+            data: e,
+        });
+    };
+
+    console.log(showRole);
+
     useEffect(() => {
         getAllUsers();
         getPromo();
@@ -131,6 +169,7 @@ export default function Dashboard() {
 
     return (
         <div className="w-full h-full flex flex-col gap-4">
+            {/* <ModalRole {...showRole} /> */}
             <div className="rounded-t-2xl overflow-hidden w-full shadow-md h-[40%] bg-stone-50  text-center text-stone-700/70 ">
                 <div className="relative">
                     <img
@@ -212,8 +251,11 @@ export default function Dashboard() {
                         Total Active
                     </BorderAnimation>
                 </div>
-                <div className="overflow-hidden">
-                    <TableUser {...[allUsers]} />
+                <div className="overflow-y-auto">
+                    <TableUser
+                        {...[allUsers]}
+                        changeRole={(e) => changeRole(e)}
+                    />
                 </div>
             </div>
         </div>
