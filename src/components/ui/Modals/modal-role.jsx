@@ -43,7 +43,13 @@ export default function ModalRole(props) {
                         >
                             Choose Role
                         </label>
-                        <DropdownDashboardProfile show={show} value={value} />
+                        <DropdownDashboardProfile
+                            show={show}
+                            value={value}
+                            setShow={setShow}
+                            setValue={setValue}
+                            {...props?.data}
+                        />
                         {/* <div className="relative ">
                             <button
                                 type="button"

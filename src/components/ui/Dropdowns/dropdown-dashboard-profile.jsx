@@ -1,23 +1,25 @@
 import { Icons } from '@/components/Icons';
 
 export default function DropdownDashboardProfile(props) {
+    console.log(props, 'propss');
+
     return (
         <>
             <div className="relative ">
                 <button
                     type="button"
-                    onClick={() => setShow((prev) => !prev)}
+                    onClick={() => props?.setShow((prev) => !prev)}
                     className={`w-full py-2 ps-4 text-start font-bold  rounded-lg uppercase ${
-                        props?.data?.role === 'admin'
+                        props?.role === 'admin'
                             ? 'bg-emerald-300 text-emerald-600'
                             : 'bg-rose-300 text-rose-600'
                     } `}
                 >
-                    {!props?.value ? props?.data?.role : props?.value}
+                    {props?.value ? props?.value : props?.role}
                 </button>
                 <span
                     className="absolute right-4 top-0 translate-y-[40%] cursor-pointer"
-                    onClick={() => setShow((prev) => !prev)}
+                    onClick={() => props?.setShow((prev) => !prev)}
                 >
                     {props?.show ? (
                         <Icons.CharretUp w={24} />
@@ -34,8 +36,8 @@ export default function DropdownDashboardProfile(props) {
                 <button
                     className="py-2 ps-4 text-start bg-transparent w-full font-bold uppercase hover:bg-emerald-100 mb-2 rounded-lg cursor-pointer"
                     onClick={() => {
-                        setValue('admin');
-                        setShow(false);
+                        props?.setValue('admin');
+                        props?.setShow(false);
                     }}
                     type="button"
                 >
@@ -45,8 +47,8 @@ export default function DropdownDashboardProfile(props) {
                 <button
                     className="py-2 ps-4 text-start bg-transparent w-full font-bold uppercase hover:bg-emerald-100 mb-2 rounded-lg cursor-pointer"
                     onClick={() => {
-                        setValue('user');
-                        setShow(false);
+                        props?.setValue('user');
+                        props?.setShow(false);
                     }}
                     type="button"
                 >
