@@ -66,7 +66,7 @@ export default function BaseLayout({ children }) {
 
     return (
         <>
-            {!paths.includes(['/dashboard']) ? (
+            {!paths.includes(['/dashboard/**']) ? (
                 <AuroraBackground>
                     <Toast {...toast} setToast={setToast} duration={3000} />
                     <>

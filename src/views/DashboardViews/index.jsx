@@ -153,7 +153,7 @@ export default function Dashboard() {
     }, [isToken]);
 
     return (
-        <div className="w-full h-full flex flex-col gap-4">
+        <div className="w-full h-full flex flex-col gap-4 max-h-screen">
             {showModalChangeRole && (
                 <ModalRole
                     {...showRole}
@@ -161,7 +161,7 @@ export default function Dashboard() {
                 />
             )}
 
-            <div className="rounded-t-2xl overflow-hidden w-full shadow-md h-[40%] bg-stone-50  text-center text-stone-700/70 ">
+            <div className="rounded-t-2xl w-full shadow-md h-[40%] bg-stone-50  text-center text-stone-700/70 ">
                 <div className="relative">
                     <img
                         src="/img/general/amber-color.png"
@@ -227,13 +227,13 @@ export default function Dashboard() {
                 </div>
             </div>
 
-            <div className="w-full h-[60%] overflow-hidden bg-stone-50 rounded-b-2xl shadow-md ">
+            <div className="w-full h-[60%] max-h-[60%] bg-stone-50 overflow-hidden rounded-b-2xl shadow-md ">
                 <div className="w-full p-4 text-xl bg-stone-200/70 flex justify-between items-center text-stone-700">
                     <h1 className="font-normal flex gap-2">
                         <Icons.User w={24} /> User{' '}
                         <span className="font-bold">Management</span>
                     </h1>
-                    <div className="flex gap-4 bg-stone-800 items-center relative">
+                    <div className="flex gap-4 items-center relative">
                         <div className="flex gap-1 ">
                             <DropdownDashboardProfile
                                 show={showDropdown}
@@ -277,11 +277,11 @@ export default function Dashboard() {
                                 •{' '}
                                 {valueDropdown ? totalUsers : allUsers?.length}{' '}
                             </span>{' '}
-                            {valueDropdown ? valueDropdown :  'All'} Role
+                            {valueDropdown ? valueDropdown : 'All'} Role
                         </BorderAnimation>
                     </div>
                 </div>
-                <div className="overflow-y-auto">
+                <div className="overflow-auto h-full pb-24">
                     <TableUser
                         {...[allUsers]}
                         filter={valueDropdown}

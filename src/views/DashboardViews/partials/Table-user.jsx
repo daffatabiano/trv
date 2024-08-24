@@ -35,25 +35,21 @@ const Toggle = (props) => {
 };
 
 export default function TableUser(props) {
-    console.log(props?.filter);
-
-    console.log(props[0]?.filter((user) => user?.role === props?.filter));
-
     return (
-        <table className="w-full divide-y divide-gray-200">
-            <thead className="bg-stone-400/50 font-medium text-stone-800">
+        <table className="w-full divide-gray-200 divide-y">
+            <thead className="bg-stone-400 font-medium text-stone-50 sticky top-0 w-full z-[51]">
                 <tr>
                     {listTh?.map((th) => (
                         <Th text={th} key={th} />
                     ))}
                 </tr>
             </thead>
-            <tbody className="overflow-y-auto">
+            <tbody className="overflow-y-auto overflow-x-hidden w-full relative">
                 {props?.filter
                     ? props[0]
                           ?.filter((user) => user?.role === props?.filter)
                           ?.map((data, i) => (
-                              <tr className="border-b overflow-y-auto" key={i}>
+                              <tr className="border-b p-2" key={i}>
                                   <td>
                                       <img
                                           src={
@@ -91,7 +87,7 @@ export default function TableUser(props) {
                               </tr>
                           ))
                     : props[0]?.map((data, i) => (
-                          <tr className="border-b overflow-y-auto" key={i}>
+                          <tr className="border-b p-2" key={i}>
                               <td>
                                   <img
                                       src={

@@ -15,13 +15,13 @@ export function SidebarAdmin(props) {
     return (
         <div
             className={cn(
-                'rounded-md h-screen flex flex-col md:flex-row bg-stone-50 dark:bg-neutral-800 w-full flex-1 border border-indigo-200 dark:border-neutral-700 overflow-hidden',
+                'rounded-md h-full flex max-h-screen overflow-hidden flex-col md:flex-row bg-stone-50 dark:bg-neutral-800 w-full flex-1 border border-indigo-200 dark:border-neutral-700',
                 'min-h-screen min-w-screen'
             )}
         >
             <Sidebar open={open} setOpen={setOpen}>
                 <SidebarBody className="justify-between gap-10">
-                    <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+                    <div className="flex flex-col flex-1 overflow-hidden">
                         {open ? <Logo /> : <LogoIcon />}
                         <div className="mt-8 flex flex-col gap-2">
                             {listsDashboard.map((link, idx) => (
@@ -96,7 +96,7 @@ export const LogoIcon = () => {
 const Dashboard = ({ children }) => {
     return (
         <div className="flex flex-1">
-            <div className="p-2 md:p-8 rounded-tl-2xl border border-stone-200 dark:border-neutral-700 bg-stone-200 dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full">
+            <div className="p-2 md:p-8 max-h-screen overflow-hidden rounded-tl-2xl border border-stone-200 dark:border-neutral-700 bg-stone-200 dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full">
                 {children}
             </div>
         </div>

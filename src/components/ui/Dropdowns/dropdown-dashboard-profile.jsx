@@ -46,7 +46,7 @@ export default function DropdownDashboardProfile(props) {
                 className={`flex flex-col  rounded-lg bg-emerald-300  overflow-hidden  ${
                     props?.role
                         ? 'mt-2 inherit w-full p-2'
-                        : 'absolute top-12 p-1'
+                        : 'absolute top-12 p-1 z-[52]'
                 } ${props?.show ? 'visible' : 'invisible'}`}
             >
                 {props.children}
