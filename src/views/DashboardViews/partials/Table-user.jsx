@@ -35,7 +35,6 @@ const Toggle = (props) => {
 };
 
 export default function TableUser(props) {
-    console.log(props?.filter, 'filter');
     return (
         <table className="w-full divide-gray-200 divide-y ">
             <thead

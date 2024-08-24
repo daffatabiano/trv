@@ -2,13 +2,15 @@ import { Icons } from '@/components/Icons';
 import usePost from '@/hooks/usePost';
 import { useState } from 'react';
 import DropdownDashboardProfile from '../Dropdowns/dropdown-dashboard-profile';
+import Toast from '../Toast';
 
 export default function ModalRole(props) {
     const [show, setShow] = useState(false);
     const [value, setValue] = useState('');
     const { post } = usePost();
+    const [toast, setToast] = useState({});
 
-    console.log(props);
+    console.log(value);
 
     const updateRole = async () => {
         const res = await post(
@@ -18,13 +20,31 @@ export default function ModalRole(props) {
             },
             props?.token
         );
-        console.log(res);
+        if (res?.status === 200) {
+            setToast({
+                variant: 'success',
+                title: 'Role Updated',
+                message: res?.data?.message,
+                show: true,
+            });
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000);
+        } else {
+            setToast({
+                variant: 'error',
+                title: 'Error Update Role',
+                message: 'Something went wrong!',
+                show: true,
+            });
+        }
     };
     return (
         <div className={`w-full h-full fixed inset-0 bg-slate-900/70 z-[60]`}>
+            <Toast {...toast} setToast={setToast} duration={3000} />
             <div
                 className={`w-1/3 m-auto mt-20 rounded-lg p-4 ${
-                    props?.data?.role === 'admin' || value === 'admin'
+                    value === 'admin' || props?.data?.role === 'admin'
                         ? 'bg-emerald-100 border-emerald-400/80'
                         : 'bg-rose-100 border-rose-400/80'
                 }`}

@@ -40,7 +40,7 @@ export default function Toast(prop) {
 
     return (
         <div
-            className={`absolute mx-auto left-0 right-0 top-4 z-50 overflow-hidden sm:mx-0 sm:left-auto sm:right-4 origin-top transition-all duration-300 ${
+            className={`absolute mx-auto left-0 right-0 top-4 z-[999] overflow-hidden sm:mx-0 sm:left-auto sm:right-4 origin-top transition-all duration-300 ${
                 show ? 'w-[90%] sm:w-1/3 md:w-1/5' : 'w-0'
             }`}
         >
