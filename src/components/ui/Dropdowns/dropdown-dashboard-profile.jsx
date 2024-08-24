@@ -10,12 +10,19 @@ export default function DropdownDashboardProfile(props) {
                     type="button"
                     onClick={() => props?.setShow((prev) => !prev)}
                     className={`w-full py-2 ps-4 text-start font-bold  rounded-lg uppercase ${
-                        props?.role === 'admin'
-                            ? 'bg-emerald-300 text-emerald-600'
-                            : 'bg-rose-300 text-rose-600'
+                        props?.role
+                            ? (props?.role === 'admin'
+                                ? 'bg-emerald-300 text-emerald-600'
+                                : 'bg-rose-300 text-rose-600')
+                            : 'bg-transparent'
                     } `}
                 >
-                    {props?.value ? props?.value : props?.role}
+                    {props?.value ? (props?.value ? props?.value : props?.role) : (
+    <>
+        <Icons.Filter w={24}/> Filter
+    </>
+)}
+
                 </button>
                 <span
                     className="absolute right-4 top-0 translate-y-[40%] cursor-pointer"
@@ -33,27 +40,7 @@ export default function DropdownDashboardProfile(props) {
                     props?.show ? 'visible' : 'invisible'
                 }`}
             >
-                <button
-                    className="py-2 ps-4 text-start bg-transparent w-full font-bold uppercase hover:bg-emerald-100 mb-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                        props?.setValue('admin');
-                        props?.setShow(false);
-                    }}
-                    type="button"
-                >
-                    Admin
-                </button>
-                <hr className="mx-4" />
-                <button
-                    className="py-2 ps-4 text-start bg-transparent w-full font-bold uppercase hover:bg-emerald-100 mb-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                        props?.setValue('user');
-                        props?.setShow(false);
-                    }}
-                    type="button"
-                >
-                    User
-                </button>
+              {props.children}
             </div>
         </>
     );

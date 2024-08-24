@@ -76,13 +76,6 @@ export default function TableUser(props) {
                                 role={data?.role}
                                 setRole={() => props?.changeRole(data)}
                             />
-                            {/* <button
-                                type="button"
-                                onClick={() => props?.changeRole(data?.id)}
-                                className="bg-amber-300 hover:bg-amber-400  font-bold py-2 px-4 rounded text-stone-50 hover:text-stone-900 me-2"
-                            >
-                                Change Role
-                            </button> */}
                         </td>
                     </tr>
                 ))}
