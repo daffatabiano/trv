@@ -38,7 +38,7 @@ const Card = ({ title, icon, children, total, path }) => {
             onClick={path}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-            className="group/canvas-card rounded-lg overflow-hidden bg-stone-100  flex items-center justify-center  max-w-sm w-full mx-auto h-24 p-4 relative"
+            className="group/canvas-card rounded-lg overflow-hidden bg-stone-100  flex items-center justify-center  max-w-sm w-full mx-auto h-full p-4 relative"
         >
             <AnimatePresence>
                 {hovered && (

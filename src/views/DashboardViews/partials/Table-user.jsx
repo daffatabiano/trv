@@ -6,7 +6,7 @@ export const Th = ({ text }) => {
     return (
         <th
             scope="col"
-            className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase tracking-wider last:text-right"
+            className="px-6 py-3 text-start text-xs font-medium uppercase tracking-wider last:text-right"
         >
             {text}
         </th>
@@ -16,7 +16,7 @@ export const Th = ({ text }) => {
 const Toggle = (props) => {
     return (
         <label className="inline-flex items-center cursor-pointer p-2">
-            <span className="me-3 text-sm font-medium text-rose-400 dark:text-gray-300">
+            <span className="me-3 text-sm font-medium text-rose-400 ">
                 User
             </span>
             <input
@@ -35,9 +35,18 @@ const Toggle = (props) => {
 };
 
 export default function TableUser(props) {
+    console.log(props?.filter, 'filter');
     return (
-        <table className="w-full divide-gray-200 divide-y">
-            <thead className="bg-stone-400 font-medium text-stone-50 sticky top-0 w-full z-[51]">
+        <table className="w-full divide-gray-200 divide-y ">
+            <thead
+                className={`${
+                    props?.filter
+                        ? props?.filter === 'admin'
+                            ? 'bg-emerald-400 text-emerald-800'
+                            : 'bg-rose-400 text-rose-800'
+                        : 'bg-stone-400 text-stone-50'
+                } font-medium  sticky top-0 w-full z-[51]`}
+            >
                 <tr>
                     {listTh?.map((th) => (
                         <Th text={th} key={th} />
