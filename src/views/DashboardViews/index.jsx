@@ -9,6 +9,7 @@ import TableUser from './partials/Table-user';
 import usePost from '@/hooks/usePost';
 import ModalRole from '@/components/ui/Modals/modal-role';
 import DropdownDashboardProfile from '@/components/ui/Dropdowns/dropdown-dashboard-profile';
+import { useRouter } from 'next/navigation';
 
 export const Icon = ({ className, ...rest }) => {
     return (
@@ -30,10 +31,11 @@ export const Icon = ({ className, ...rest }) => {
     );
 };
 
-const Card = ({ title, icon, children, total }) => {
+const Card = ({ title, icon, children, total, path }) => {
     const [hovered, setHovered] = React.useState(false);
     return (
         <div
+            onClick={path}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             className="group/canvas-card rounded-lg overflow-hidden bg-stone-100  flex items-center justify-center  max-w-sm w-full mx-auto h-24 p-4 relative"
@@ -80,6 +82,7 @@ export default function Dashboard() {
     const [showDropdown, setShowDropdown] = useState(false);
     const [valueDropdown, setValueDropdown] = useState(false);
     const md = useMediaQuery('(min-width: 768px)');
+    const { push } = useRouter();
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -184,6 +187,7 @@ export default function Dashboard() {
                         title="Banner"
                         total={banners?.length}
                         icon={<Icons.Banner w={36} />}
+                        path={() => push('/dashboard/banner')}
                     >
                         <CanvasRevealEffect
                             animationSpeed={5.1}
@@ -195,6 +199,7 @@ export default function Dashboard() {
                         title="Promos"
                         total={promos?.length}
                         icon={<Icons.Promo w={36} />}
+                        path={() => push('/dashboard/promo')}
                     >
                         <CanvasRevealEffect
                             animationSpeed={5.1}
@@ -206,6 +211,7 @@ export default function Dashboard() {
                         title="Categories"
                         total={categories?.length}
                         icon={<Icons.Category w={36} />}
+                        path={() => push('/dashboard/category')}
                     >
                         <CanvasRevealEffect
                             animationSpeed={5.1}
@@ -217,6 +223,7 @@ export default function Dashboard() {
                         title="Activities"
                         total={activities?.length}
                         icon={<Icons.Top w={36} />}
+                        path={() => push('/dashboard/activity')}
                     >
                         <CanvasRevealEffect
                             animationSpeed={5.1}
