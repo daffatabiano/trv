@@ -50,28 +50,28 @@ export default function ModalRole(props) {
                             setValue={setValue}
                             {...props?.data}
                         >
-                              <button
-                    className="py-2 ps-4 text-start bg-transparent w-full font-bold uppercase hover:bg-emerald-100 mb-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                        setValue('admin');
-                        setShow(false);
-                    }}
-                    type="button"
-                >
-                    Admin
-                </button>
-                <hr className="mx-4" />
-                <button
-                    className="py-2 ps-4 text-start bg-transparent w-full font-bold uppercase hover:bg-emerald-100 mb-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                        setValue('user');
-                        setShow(false);
-                    }}
-                    type="button"
-                >
-                    User
-                </button>
-                            </ DropdownDashboardProfile>
+                            <button
+                                className="py-2 ps-4 text-start bg-transparent w-full font-bold uppercase hover:bg-emerald-100 mb-2 rounded-lg cursor-pointer"
+                                onClick={() => {
+                                    setValue('admin');
+                                    setShow(false);
+                                }}
+                                type="button"
+                            >
+                                Admin
+                            </button>
+                            <hr className="mx-4" />
+                            <button
+                                className="py-2 ps-4 text-start bg-transparent w-full font-bold uppercase hover:bg-emerald-100 mb-2 rounded-lg cursor-pointer"
+                                onClick={() => {
+                                    setValue('user');
+                                    setShow(false);
+                                }}
+                                type="button"
+                            >
+                                User
+                            </button>
+                        </DropdownDashboardProfile>
                         {/* <div className="relative ">
                             <button
                                 type="button"

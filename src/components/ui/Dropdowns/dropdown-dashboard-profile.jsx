@@ -9,15 +9,15 @@ export default function DropdownDashboardProfile(props) {
                 <button
                     type="button"
                     onClick={() => props?.setShow((prev) => !prev)}
-                    className={`w-full py-2 ps-4 text-start font-bold  rounded-lg uppercase ${
+                    className={`text-start w-full  rounded-lg  ${
                         props?.role
                             ? props?.role === 'admin'
-                                ? 'bg-emerald-300 text-emerald-600'
-                                : 'bg-rose-300 text-rose-600'
-                            : 'bg-transparent flex gap-2'
+                                ? 'bg-emerald-300 text-emerald-600  py-2 ps-4 uppercase font-bold'
+                                : 'bg-rose-300 text-rose-600 py-2 ps-4 uppercase font-bold'
+                            : 'bg-stone-400 flex gap-2 items-center p-2'
                     } `}
                 >
-                    {props?.value ? (
+                    {props?.value || props?.role ? (
                         props?.value ? (
                             props?.value
                         ) : (
@@ -29,21 +29,25 @@ export default function DropdownDashboardProfile(props) {
                         </>
                     )}
                 </button>
-                <span
-                    className="absolute right-4 top-0 translate-y-[40%] cursor-pointer"
-                    onClick={() => props?.setShow((prev) => !prev)}
-                >
-                    {props?.show ? (
-                        <Icons.CharretUp w={24} />
-                    ) : (
-                        <Icons.CharretDown w={24} />
-                    )}
-                </span>
+                {props?.role && (
+                    <span
+                        className="absolute right-4 top-0 translate-y-[40%] cursor-pointer"
+                        onClick={() => props?.setShow((prev) => !prev)}
+                    >
+                        {props?.show ? (
+                            <Icons.CharretUp w={24} />
+                        ) : (
+                            <Icons.CharretDown w={24} />
+                        )}
+                    </span>
+                )}
             </div>
             <div
-                className={`flex flex-col w-full rounded-lg bg-emerald-300 mt-2 overflow-hidden p-2 ${
-                    props?.show ? 'visible' : 'invisible'
-                }`}
+                className={`flex flex-col  rounded-lg bg-emerald-300  overflow-hidden  ${
+                    props?.role
+                        ? 'mt-2 inherit w-full p-2'
+                        : 'absolute top-12 p-1'
+                } ${props?.show ? 'visible' : 'invisible'}`}
             >
                 {props.children}
             </div>

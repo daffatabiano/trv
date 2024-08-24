@@ -8,6 +8,7 @@ import { BorderAnimation } from '@/components/ui/moving-borders';
 import TableUser from './partials/Table-user';
 import usePost from '@/hooks/usePost';
 import ModalRole from '@/components/ui/Modals/modal-role';
+import DropdownDashboardProfile from '@/components/ui/Dropdowns/dropdown-dashboard-profile';
 
 export const Icon = ({ className, ...rest }) => {
     return (
@@ -76,6 +77,8 @@ export default function Dashboard() {
         token: '',
     });
     const [showModalChangeRole, setShowModalChangeRole] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [valueDropdown, setValueDropdown] = useState(false);
     const md = useMediaQuery('(min-width: 768px)');
 
     useEffect(() => {
@@ -136,6 +139,10 @@ export default function Dashboard() {
         });
     };
 
+    const totalUsers = allUsers
+        ?.map((user) => user?.role)
+        ?.filter((role) => role === valueDropdown)?.length;
+
     useEffect(() => {
         getAllUsers();
         getPromo();
@@ -144,11 +151,6 @@ export default function Dashboard() {
         getActivites();
         getProfile();
     }, [isToken]);
-
-    console.log(
-        allUsers?.map((user) => user.role).filter((role) => role === 'admin')
-            ?.length
-    );
 
     return (
         <div className="w-full h-full flex flex-col gap-4">
@@ -224,25 +226,65 @@ export default function Dashboard() {
                     </Card>
                 </div>
             </div>
+
             <div className="w-full h-[60%] overflow-hidden bg-stone-50 rounded-b-2xl shadow-md ">
                 <div className="w-full p-4 text-xl bg-stone-200/70 flex justify-between items-center text-stone-700">
                     <h1 className="font-normal flex gap-2">
                         <Icons.User w={24} /> User{' '}
                         <span className="font-bold">Management</span>
                     </h1>
-                    <BorderAnimation
-                        borderRadius="1.75rem"
-                        className="bg-emerald-300/40 dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800"
-                    >
-                        <span className="font-extrabold text-emerald-600 pe-2">
-                            • {allUsers?.length}{' '}
-                        </span>{' '}
-                        Total Active
-                    </BorderAnimation>
+                    <div className="flex gap-4 bg-stone-800 items-center relative">
+                        <div className="flex gap-1 ">
+                            <DropdownDashboardProfile
+                                show={showDropdown}
+                                setShow={setShowDropdown}
+                            >
+                                <button
+                                    className="p-2 text-center bg-transparent w-full hover:bg-emerald-100 mb-2 rounded-lg cursor-pointer"
+                                    onClick={() => {
+                                        setValueDropdown('admin');
+                                        setShowDropdown(false);
+                                    }}
+                                    type="button"
+                                >
+                                    Admin
+                                </button>
+                                <hr className="mx-1" />
+                                <button
+                                    className="p-2 text-center bg-transparent w-full  hover:bg-emerald-100 mt-2 rounded-lg cursor-pointer"
+                                    onClick={() => {
+                                        setValueDropdown('user');
+                                        setShowDropdown(false);
+                                    }}
+                                    type="button"
+                                >
+                                    User
+                                </button>
+                            </DropdownDashboardProfile>
+                            <button
+                                onClick={() => setValueDropdown('')}
+                                type="button"
+                                className="bg-stone-200 flex items-center cursor-pointer"
+                            >
+                                <Icons.Refresh w={24} />
+                            </button>
+                        </div>
+                        <BorderAnimation
+                            borderRadius="1.75rem"
+                            className="bg-emerald-300/40 flex w-full capitalize dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800"
+                        >
+                            <span className="font-extrabold text-emerald-600 pe-2">
+                                •{' '}
+                                {valueDropdown ? totalUsers : allUsers?.length}{' '}
+                            </span>{' '}
+                            {valueDropdown ? valueDropdown :  'All'} Role
+                        </BorderAnimation>
+                    </div>
                 </div>
                 <div className="overflow-y-auto">
                     <TableUser
                         {...[allUsers]}
+                        filter={valueDropdown}
                         changeRole={(e) => changeRole(e)}
                     />
                 </div>
