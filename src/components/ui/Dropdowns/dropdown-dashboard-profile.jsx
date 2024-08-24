@@ -14,7 +14,7 @@ export default function DropdownDashboardProfile(props) {
                             ? props?.role === 'admin' || props?.value == 'admin'
                                 ? 'bg-emerald-300 text-emerald-600  py-2 ps-4 uppercase font-bold'
                                 : 'bg-rose-300 text-rose-600 py-2 ps-4 uppercase font-bold'
-                            : 'bg-stone-400 flex gap-2 items-center p-2'
+                            : 'bg-transparent text-sm flex gap-2 items-center p-2'
                     } `}
                 >
                     {props?.value || props?.role ? (
@@ -25,7 +25,7 @@ export default function DropdownDashboardProfile(props) {
                         )
                     ) : (
                         <>
-                            <Icons.Filter w={24} /> Filter
+                            <Icons.Filter w={18} /> Filter
                         </>
                     )}
                 </button>
@@ -48,7 +48,7 @@ export default function DropdownDashboardProfile(props) {
                         ? props?.role === 'admin' || props?.value === 'admin'
                             ? 'bg-emerald-300 mt-2 inherit w-full p-2'
                             : 'bg-rose-300 mt-2 inherit w-full p-2'
-                        : 'absolute top-12 p-1 z-[52] bg-stone-300'
+                        : 'absolute top-10 p-1 z-[52] bg-stone-300'
                 } ${props?.show ? 'visible' : 'invisible'}`}
             >
                 {props.children}

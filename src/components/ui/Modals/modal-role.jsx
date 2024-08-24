@@ -29,7 +29,13 @@ export default function ModalRole(props) {
                         : 'bg-rose-100 border-rose-400/80'
                 }`}
             >
-                <div className="w-full bg-stone-400/30 py-2 px-4 rounded-lg flex justify-between">
+                <div
+                    className={`w-full py-2 px-4 rounded-lg flex justify-between ${
+                        props?.data?.role === 'admin' || value === 'admin'
+                            ? 'bg-emerald-400/30 text-emerald-600'
+                            : 'bg-rose-400/30 text-rose-600'
+                    }`}
+                >
                     <h1>Change user role</h1>{' '}
                     <button type="button" onClick={props.close}>
                         <Icons.Close w={'w-4'} />
@@ -51,7 +57,12 @@ export default function ModalRole(props) {
                             {...props?.data}
                         >
                             <button
-                                className="py-2 ps-4 text-start bg-transparent w-full font-bold uppercase hover:bg-emerald-100 mb-2 rounded-lg cursor-pointer"
+                                className={`py-2 ps-4 text-start bg-transparent w-full font-bold uppercase ${
+                                    props?.data?.role === 'admin' ||
+                                    value === 'admin'
+                                        ? 'hover:bg-emerald-100 text-emerald-800'
+                                        : 'hover:bg-rose-100 text-rose-800'
+                                } mb-2 rounded-lg cursor-pointer`}
                                 onClick={() => {
                                     setValue('admin');
                                     setShow(false);
@@ -62,7 +73,12 @@ export default function ModalRole(props) {
                             </button>
                             <hr className="mx-4" />
                             <button
-                                className="py-2 ps-4 text-start bg-transparent w-full font-bold uppercase hover:bg-emerald-100 mb-2 rounded-lg cursor-pointer"
+                                className={`py-2 ps-4 text-start bg-transparent w-full font-bold uppercase ${
+                                    props?.data?.role === 'admin' ||
+                                    value === 'admin'
+                                        ? 'hover:bg-emerald-100 text-emerald-800'
+                                        : 'hover:bg-rose-100 text-rose-800'
+                                } mb-2 rounded-lg cursor-pointer`}
                                 onClick={() => {
                                     setValue('user');
                                     setShow(false);

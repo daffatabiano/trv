@@ -240,14 +240,14 @@ export default function Dashboard() {
                         <Icons.User w={24} /> User{' '}
                         <span className="font-bold">Management</span>
                     </h1>
-                    <div className="flex gap-4 items-center relative">
+                    <div className="flex gap-6 items-center relative">
                         <div className="flex gap-1 ">
                             <DropdownDashboardProfile
                                 show={showDropdown}
                                 setShow={setShowDropdown}
                             >
                                 <button
-                                    className="p-2 text-center bg-transparent w-full hover:bg-emerald-100 mb-2 rounded-lg cursor-pointer"
+                                    className="p-2 text-start text-sm bg-transparent w-full hover:bg-stone-100 mb-2 rounded-lg cursor-pointer"
                                     onClick={() => {
                                         setValueDropdown('admin');
                                         setShowDropdown(false);
@@ -258,7 +258,7 @@ export default function Dashboard() {
                                 </button>
                                 <hr className="mx-1" />
                                 <button
-                                    className="p-2 text-center bg-transparent w-full  hover:bg-emerald-100 mt-2 rounded-lg cursor-pointer"
+                                    className="p-2 text-start text-sm bg-transparent w-full  hover:bg-stone-100 mt-2 rounded-lg cursor-pointer"
                                     onClick={() => {
                                         setValueDropdown('user');
                                         setShowDropdown(false);
@@ -271,16 +271,37 @@ export default function Dashboard() {
                             <button
                                 onClick={() => setValueDropdown('')}
                                 type="button"
-                                className="bg-stone-200 flex items-center cursor-pointer"
+                                className="bg-stone-200 p-2 rounded-full flex items-center cursor-pointer"
                             >
-                                <Icons.Refresh w={24} />
+                                <Icons.Refresh w={16} />
                             </button>
                         </div>
                         <BorderAnimation
                             borderRadius="1.75rem"
-                            className="bg-emerald-300/40 flex w-full capitalize dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800"
+                            className={`w-full py-2 px-4 rounded-lg flex justify-between ${
+                                valueDropdown
+                                    ? valueDropdown === 'admin'
+                                        ? 'bg-emerald-400/30'
+                                        : 'bg-rose-400/30'
+                                    : 'bg-stone-400/30'
+                            }`}
+                            borderClassName={
+                                valueDropdown
+                                    ? valueDropdown === 'admin'
+                                        ? 'bg-[radial-gradient(var(--emerald-500)_40%,transparent_60%)]'
+                                        : 'bg-[radial-gradient(var(--rose-500)_40%,transparent_60%)]'
+                                    : 'bg-[radial-gradient(var(--stone-500)_40%,transparent_60%)]'
+                            }
                         >
-                            <span className="font-extrabold text-emerald-600 pe-2">
+                            <span
+                                className={`font-extrabold pe-2 ${
+                                    valueDropdown
+                                        ? valueDropdown === 'admin'
+                                            ? 'text-emerald-600'
+                                            : 'text-rose-600'
+                                        : 'text-stone-600'
+                                }`}
+                            >
                                 •{' '}
                                 {valueDropdown ? totalUsers : allUsers?.length}{' '}
                             </span>{' '}
