@@ -1,6 +1,7 @@
-import { Icons } from "@/components/Icons";
-import usePost from "@/hooks/usePost";
-import { useState } from "react";
+import { Icons } from '@/components/Icons';
+import usePost from '@/hooks/usePost';
+import { useState } from 'react';
+import DropdownDashboardProfile from '../Dropdowns/dropdown-dashboard-profile';
 
 export default function ModalRole(props) {
     const [show, setShow] = useState(false);
@@ -42,7 +43,8 @@ export default function ModalRole(props) {
                         >
                             Choose Role
                         </label>
-                        <div className="relative ">
+                        <DropdownDashboardProfile show={show} value={value} />
+                        {/* <div className="relative ">
                             <button
                                 type="button"
                                 onClick={() => setShow((prev) => !prev)}
@@ -92,7 +94,7 @@ export default function ModalRole(props) {
                             >
                                 User
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                     <div>
                         <button
