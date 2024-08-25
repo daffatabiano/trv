@@ -74,7 +74,7 @@ export default function Banner() {
         getBanner();
     }, [token]);
     return (
-        <div>
+        <div className="bg-amber-300 w-full h-full">
             <h1>Banner</h1>
         </div>
     );

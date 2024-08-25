@@ -73,7 +73,7 @@ export default function Login() {
                     <InputPassword name="password" className="text-white" />
                     <button
                         type="submit"
-                        className="w-full bg-amber-300 mt-2 rounded-full px-4 py-2 text-white font-bold"
+                        className="w-full bg-amber-300 hover:bg-amber-400 hover:translate-y-1 hover:shadow-inner hover:shadow-amber-600 mt-2 rounded-full px-4 py-2 text-white font-bold"
                     >
                         Login
                     </button>
