@@ -57,7 +57,7 @@ const Card = ({ title, icon, children, total, path }) => {
                     {icon}
                     <span>{title}</span>
                 </div>
-                <h2 className="dark:text-white text-xl opacity-0 group-hover/canvas-card:opacity-100 relative z-10 text-black   font-bold group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200">
+                <h2 className="dark:text-white text-xl opacity-0 group-hover/canvas-card:opacity-100 relative z-10 text-black cursor-pointer font-bold group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200">
                     {total} {title}
                 </h2>
             </div>
@@ -167,7 +167,7 @@ export default function Dashboard() {
             <div className="rounded-t-2xl w-ful overflow-hidden shadow-md h-[40%] bg-stone-50  text-center text-stone-700/70 ">
                 <div className="relative">
                     <img
-                        src="/img/general/amber-color.png"
+                        src="/img/general/stone.jpg"
                         className="w-full h-24 object-cover object-center opacity-55 hover:opacity-100"
                     />
                     <div className="flex flex-col  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -182,7 +182,7 @@ export default function Dashboard() {
                         </p>
                     </div>
                 </div>
-                <div className="py-4 flex flex-col lg:flex-row items-center justify-center bg-white dark:bg-black w-full gap-4 mx-auto px-8">
+                <div className="pt-2 flex flex-col lg:flex-row items-center justify-center bg-white dark:bg-black w-full gap-4 mx-auto px-8">
                     <Card
                         title="Banner"
                         total={banners?.length}
