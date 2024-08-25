@@ -164,7 +164,7 @@ export default function Dashboard() {
                 />
             )}
 
-            <div className="rounded-t-2xl w-full shadow-md h-[40%] bg-stone-50  text-center text-stone-700/70 ">
+            <div className="rounded-t-2xl w-ful overflow-hidden shadow-md h-[40%] bg-stone-50  text-center text-stone-700/70 ">
                 <div className="relative">
                     <img
                         src="/img/general/amber-color.png"
