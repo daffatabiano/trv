@@ -136,7 +136,7 @@ export default function RegisterViews() {
                     </h3>
                 </div>
                 <Form onSubmit={handleRegister}>
-                    <div className="flex flex-col sm:flex-row gap-4 my-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-4 my-6">
                         <div className=" flex flex-col gap-3 sm:w-1/2">
                             <Input
                                 name="email"
