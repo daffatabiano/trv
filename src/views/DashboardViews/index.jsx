@@ -164,7 +164,7 @@ export default function Dashboard() {
                 />
             )}
 
-            <div className="rounded-t-2xl w-ful overflow-hidden shadow-md h-[40%] bg-stone-50  text-center text-stone-700/70 ">
+            <div className="rounded-t-2xl w-ful overflow-hidden shadow-md h-[40%] bg-stone-50  text-center hover:text-stone-300 text-stone-700/70 ">
                 <div className="relative">
                     <img
                         src="/img/general/stone.jpg"
@@ -247,7 +247,7 @@ export default function Dashboard() {
                                 setShow={setShowDropdown}
                             >
                                 <button
-                                    className="p-2 text-start text-sm bg-transparent w-full hover:bg-stone-100 mb-2 rounded-lg cursor-pointer"
+                                    className="p-2 text-start text-sm bg-transparent w-full hover:bg-stone-100 mb-[5px] rounded-lg cursor-pointer"
                                     onClick={() => {
                                         setValueDropdown('admin');
                                         setShowDropdown(false);
@@ -258,7 +258,7 @@ export default function Dashboard() {
                                 </button>
                                 <hr className="mx-1" />
                                 <button
-                                    className="p-2 text-start text-sm bg-transparent w-full  hover:bg-stone-100 mt-2 rounded-lg cursor-pointer"
+                                    className="p-2 text-start text-sm bg-transparent w-full  hover:bg-stone-100 mt-[5px] rounded-lg cursor-pointer"
                                     onClick={() => {
                                         setValueDropdown('user');
                                         setShowDropdown(false);
@@ -278,12 +278,12 @@ export default function Dashboard() {
                         </div>
                         <BorderAnimation
                             borderRadius="1.75rem"
-                            className={`w-full py-2 px-4 rounded-lg flex justify-between ${
+                            className={`w-full py-2 capitalize px-4 rounded-lg flex justify-between ${
                                 valueDropdown
                                     ? valueDropdown === 'admin'
-                                        ? 'bg-emerald-400/30'
-                                        : 'bg-rose-400/30'
-                                    : 'bg-stone-400/30'
+                                        ? 'bg-emerald-400/30 text-emerald-600'
+                                        : 'bg-rose-400/30 text-rose-600'
+                                    : 'bg-stone-400/30 text-stone-600'
                             }`}
                             borderClassName={
                                 valueDropdown
