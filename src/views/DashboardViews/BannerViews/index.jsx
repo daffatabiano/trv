@@ -1,3 +1,4 @@
+import { Icons } from '@/components/Icons';
 import useGet from '@/hooks/useGet';
 import usePost from '@/hooks/usePost';
 import { useEffect, useState } from 'react';
@@ -75,7 +76,16 @@ export default function Banner() {
     }, [token]);
     return (
         <div className="bg-amber-300 w-full h-full">
-            <h1>Banner</h1>
+            <div className="w-full flex justify-between h-[20%] bg-amber-300/80">
+                <h1 className="text-3xl text-amber-700">Banner Control</h1>
+                <div className="flex">
+                    <button className="text-amber-700 bg-amber-300/60 p-2 rounded-lg">
+                        <Icons.Add w={24} />
+                        Add
+                    </button>
+                </div>
+            </div>
+            <div className="bg-amber-300/45 w-full h-[80%] "></div>
         </div>
     );
 }
