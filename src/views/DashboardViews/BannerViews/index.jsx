@@ -11,6 +11,7 @@ export default function Banner() {
     const [sort, setSort] = useState('sort');
     const { post } = usePost();
     const [imageUrl, setImageUrl] = useState({});
+    const [bannerName, setBannerName] = useState('')
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -74,8 +75,18 @@ export default function Banner() {
     };
 
     const handleSort = () => {
-        setSort;
+        setSort(sort === 'oldest' ? 'oldest' : 'newest');
     };
+
+    const addBanners = async () => {
+        const body = {
+            name: bannerName,
+            imageUrl: imageUrl,
+        }
+
+        const res = await post('create-banner', body, token);
+        console.log(res)
+    }
 
     useEffect(() => {
         getBanner();
