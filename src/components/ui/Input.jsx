@@ -77,3 +77,31 @@ export const InputImage = (prop) => {
         </div>
     );
 };
+export const InputImagePoster = (prop) => {
+    const { image, onChange, clear, title } = prop;
+
+    return (
+        <div className="flex flex-col gap-4 relative">
+            <Label text={title} className="ps-2" />
+            <img
+                src={image.length > 0 ? image : SUB_EMPTY_PROFILE}
+                alt={'profile-picture-user'}
+                className="w-full h-full max-h-48 m-auto rounded-lg object-cover object-center"
+            />
+            {image.length > 0 ? (
+                <span
+                    onClick={clear}
+                    className="absolute bottom-0 right-0 w-10 h-10 p-3 text-rose-800 bg-rose-500/80 rounded-full"
+                >
+                    <Icons.Close w={20} />
+                </span>
+            ) : null}
+            <Input
+                type="file"
+                name="profilePictureUrl"
+                className="focus:outline-none file:hidden text-white"
+                onChange={onChange}
+            />
+        </div>
+    );
+};
