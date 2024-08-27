@@ -183,6 +183,9 @@ export const AddBanners = () => {
                 message: 'Banner success to be added!',
                 show: true,
             });
+            setTimeout(() => {
+                window.location.href = '/dashboard/banner';
+            }, 3000);
         } else {
             setToast({
                 variant: 'error',
@@ -207,7 +210,11 @@ export const AddBanners = () => {
         <div className="bg-amber-300/80 w-full h-screen flex flex-col">
             <Toast {...toast} duration={3000} setToast={setToast} />
             <div className="w-1/2 m-auto bg-amber-500/50 shadow-md shadow-amber-600 p-4 rounded-lg flex flex-col justify-center relative">
-                <button className="flex items-center py-2 px-6 font-bold rounded-full text-white bg-amber-700/70 absolute left-4 top-4">
+                <button
+                    type="button"
+                    onClick={() => (window.location.href = '/dashboard/banner')}
+                    className="flex items-center py-2 px-6 font-bold rounded-full text-white bg-amber-700/70 absolute left-4 top-4"
+                >
                     Back
                 </button>
                 <div className="w-full text-center text-2xl font-bold text-amber-800">
