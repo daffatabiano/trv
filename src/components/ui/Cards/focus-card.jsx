@@ -12,7 +12,7 @@ export const Card = React.memo(({ card, index, hovered, setHovered }) => (
         )}
     >
         <Image
-            src={card.src}
+            src={card.imageUrl}
             alt={card.title}
             fill
             className="object-cover absolute inset-0"
@@ -33,7 +33,7 @@ export const Card = React.memo(({ card, index, hovered, setHovered }) => (
 Card.displayName = 'Card';
 
 export function FocusCards({ cards }) {
-    const [hovered, setHovered] = (useState < number) | (null > null);
+    const [hovered, setHovered] = useState(null);
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto md:px-8 w-full">

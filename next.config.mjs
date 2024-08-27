@@ -15,6 +15,12 @@ const nextConfig = {
                 port: '',
                 pathname: '/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'a.cdn-hotels.com',
+                port: '',
+                pathname: '/**',
+            },
         ],
     },
 };

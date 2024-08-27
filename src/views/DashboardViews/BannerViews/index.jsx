@@ -1,4 +1,5 @@
 import { Icons } from '@/components/Icons';
+import { FocusCards } from '@/components/ui/Cards/focus-card';
 import { InputImage, InputImagePoster } from '@/components/ui/Input';
 import { BorderAnimation } from '@/components/ui/moving-borders';
 import Toast from '@/components/ui/Toast';
@@ -26,6 +27,8 @@ export default function Banner() {
         const res = await getData('banners', token);
         setData(res.data.data);
     };
+
+    console.log(data);
 
     const handleSort = () => {
         setSort((value) => {
@@ -105,7 +108,7 @@ export default function Banner() {
                 </div>
             </div>
             <div className="bg-amber-300 w-full h-[85%] ">
-                
+                <FocusCards cards={data} />
             </div>
         </div>
     );
