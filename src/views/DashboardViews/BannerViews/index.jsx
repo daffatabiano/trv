@@ -85,7 +85,10 @@ bg-amber-200/50 p-1 rounded-lg hover:bg-amber-700 hover:text-amber-200/80 cursor
                             </button>
                             <button
                                 type="button"
-                                onClick={() => setSort('sort')}
+                                onClick={() => {
+                                    setSort('sort');
+                                    getBanner();
+                                }}
                                 className="w-8 h-8 p-2 rounded-full text-amber-700 bg-amber-200/50 hover:bg-amber-700 hover:text-amber-200/80 flex justify-center items-center"
                             >
                                 <Icons.Refresh w={18} />
@@ -120,7 +123,7 @@ bg-amber-200/50 p-1 rounded-lg hover:bg-amber-700 hover:text-amber-200/80 cursor
                     styles['scrollbar-banners']
                 )}
             >
-                <FocusCards cards={data} variant={'amber'} sorting={sort}/>
+                <FocusCards cards={data} variant={'amber'} sorting={sort} />
             </div>
         </div>
     );
