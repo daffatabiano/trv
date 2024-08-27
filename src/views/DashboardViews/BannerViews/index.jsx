@@ -42,9 +42,12 @@ export default function Banner() {
         });
     };
 
+    console.log(data);
+
     useEffect(() => {
         getBanner();
-    }, [getBanner, token]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [token]);
     return (
         <div className="rounded-lg overflow-hidden flex flex-col gap-4 w-full h-full">
             <div className="w-full flex justify-between p-2 h-[15%] bg-amber-300 shadow-lg shadow-stone-400/70">
@@ -109,11 +112,11 @@ export default function Banner() {
             </div>
             <div
                 className={cn(
-                    `bg-amber-300 p-4 w-full h-[85%] overflow-y-auto`,
+                    `bg-amber-300  p-4 w-full h-[85%] overflow-y-auto`,
                     styles['scrollbar-banners']
                 )}
             >
-                <FocusCards cards={data} />
+                <FocusCards cards={data} variant={'amber'} />
             </div>
         </div>
     );
