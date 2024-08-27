@@ -21,6 +21,7 @@ export default function Banner() {
         }
     }, []);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const getBanner = async () => {
         const res = await getData('banners', token);
         setData(res.data.data);
@@ -40,7 +41,7 @@ export default function Banner() {
 
     useEffect(() => {
         getBanner();
-    }, [token]);
+    }, [getBanner, token]);
     return (
         <div className="rounded-lg overflow-hidden flex flex-col gap-4 w-full h-full">
             <div className="w-full flex justify-between p-2 h-[15%] bg-amber-300 shadow-lg shadow-stone-400/70">
@@ -103,7 +104,9 @@ export default function Banner() {
                     </BorderAnimation>
                 </div>
             </div>
-            <div className="bg-amber-300 w-full h-[85%] "></div>
+            <div className="bg-amber-300 w-full h-[85%] ">
+                
+            </div>
         </div>
     );
 }
