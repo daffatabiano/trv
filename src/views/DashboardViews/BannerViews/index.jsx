@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styles from '@/styles/scrollbar/scrollbar.module.scss';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
 
 export default function Banner() {
     const { getData } = useGet();
@@ -55,8 +56,14 @@ export default function Banner() {
                         Banner Control
                     </h1>
                     <p className="ps-2 italic text-amber-700">
-                        “Banner control that allows you to easily add, update,
-                        or remove banners on your web pages.”
+                        “Banner control that allows you to easily{' '}
+                        <span
+                            className="text-amber-700
+bg-amber-200/50 p-1 rounded-lg"
+                        >
+                            add, update, or remove
+                        </span>{' '}
+                        banners on your web pages.”
                     </p>
                 </div>
                 <div className="flex items-center justify-between px-2 w-[40%] py-2 gap-4">
@@ -222,42 +229,62 @@ export const AddBanners = () => {
     return (
         <div className="bg-amber-300/80 w-full h-screen flex flex-col">
             <Toast {...toast} duration={3000} setToast={setToast} />
-            <div className="w-1/2 m-auto bg-amber-500/50 shadow-md shadow-amber-600 p-4 rounded-lg flex flex-col justify-center relative">
-                <button
-                    type="button"
-                    onClick={() => (window.location.href = '/dashboard/banner')}
-                    className="flex items-center py-2 px-6 font-bold rounded-full text-white bg-amber-700/70 absolute left-4 top-4"
-                >
-                    Back
-                </button>
-                <div className="w-full text-center text-2xl font-bold text-amber-800">
-                    <h1>Add New Banner Form</h1>
-                </div>
-                <div className="flex flex-col justify-center gap-2 items-center">
-                    <div className="w-full flex justify-center">
-                        <InputImagePoster
-                            image={imageUrl}
-                            onChange={uploadFile}
-                            clear={removeImage}
-                        />
-                    </div>
-                    <div className="flex flex-col text-center text-white font-medium">
-                        <label htmlFor="">Banner name</label>
-                        <input
-                            className="w-full rounded-full p-2 focus:outline-none text-amber-600 text-center"
-                            type="text"
-                            onChange={(e) => setBannerName(e?.target?.value)}
-                        />
-                    </div>
+            <motion.div
+                className="box"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                    duration: 0.3,
+                    ease: [0, 0.71, 0.2, 1.01],
+                    scale: {
+                        type: 'spring',
+                        damping: 5,
+                        stiffness: 100,
+                        restDelta: 0.001,
+                    },
+                }}
+            >
+                <div className="w-1/2 m-auto bg-amber-500/50 shadow-md shadow-amber-600 p-4 rounded-lg flex flex-col justify-center relative">
                     <button
                         type="button"
-                        onClick={addBanners}
-                        className="flex items-center py-2 px-6 font-bold rounded-full bg-white"
+                        onClick={() =>
+                            (window.location.href = '/dashboard/banner')
+                        }
+                        className="flex items-center py-2 px-6 font-bold rounded-full text-white bg-amber-700/70 absolute left-4 top-4"
                     >
-                        Add
+                        Back
                     </button>
+                    <div className="w-full text-center text-2xl font-bold text-amber-800">
+                        <h1>Add New Banner Form</h1>
+                    </div>
+                    <div className="flex flex-col justify-center gap-2 items-center">
+                        <div className="w-full flex justify-center">
+                            <InputImagePoster
+                                image={imageUrl}
+                                onChange={uploadFile}
+                                clear={removeImage}
+                            />
+                        </div>
+                        <div className="flex flex-col text-center text-white font-medium">
+                            <label htmlFor="">Banner name</label>
+                            <input
+                                className="w-full rounded-full p-2 focus:outline-none text-amber-600 text-center"
+                                type="text"
+                                onChange={(e) =>
+                                    setBannerName(e?.target?.value)
+                                }
+                            />
+                        </div>
+                        <button
+                            type="button"
+                            onClick={addBanners}
+                            className="flex items-center py-2 px-6 font-bold rounded-full bg-white"
+                        >
+                            Add
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </motion.div>
         </div>
     );
 };
