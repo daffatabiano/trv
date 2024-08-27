@@ -42,12 +42,11 @@ export default function Banner() {
         });
     };
 
-    console.log(data);
-
     useEffect(() => {
         getBanner();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token]);
+
     return (
         <div className="rounded-lg overflow-hidden flex flex-col gap-4 w-full h-full">
             <div className="w-full flex justify-between p-2 h-[15%] bg-amber-300 shadow-lg shadow-stone-400/70">

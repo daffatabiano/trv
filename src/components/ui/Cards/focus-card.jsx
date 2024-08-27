@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 
 export const Card = React.memo(
     ({ card, index, hovered, setHovered, variant }) => {
@@ -14,8 +15,11 @@ export const Card = React.memo(
         const formattedDate = `${day}/${month}/${year}`;
         const formattedTime = `${hours}:${minutes}:${cleanSeconds}`;
 
+        const { push } = useRouter();
+
         return (
             <div
+                onClick={() => push(`/dashboard/banner/${card.id}`)}
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(null)}
                 className={cn(
@@ -49,7 +53,7 @@ export const Card = React.memo(
                         </span>
                     </p>
                     <div
-                        className={`text-xl font-bold md:text-2xl bg-clip-text text-transparent bg-gradient-to-b capitalize from-${variant}-300 to-${variant}-700`}
+                        className={`text-xl font-bold md:text-2xl bg-clip-text text-transparent capitalize bg-gradient-to-r from-${variant}-300 to-${variant}-700`}
                     >
                         {card.name}
                     </div>
