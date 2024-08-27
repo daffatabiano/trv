@@ -74,14 +74,12 @@ bg-amber-200/50 p-1 rounded-lg"
                                 className="flex gap-2 text-amber-700"
                                 onClick={handleSort}
                             >
-                                {sort ? (
-                                    sort === 'newest' ? (
-                                        <Icons.CalendarArrowUp w={24} />
-                                    ) : (
-                                        <Icons.CalendarArrowDown w={24} />
-                                    )
-                                ) : (
+                                {sort === 'sort' ? (
                                     <Icons.Calendar w={24} />
+                                ) : sort === 'newest' ? (
+                                    <Icons.CalendarArrowUp w={24} />
+                                ) : (
+                                    <Icons.CalendarArrowDown w={24} />
                                 )}
                                 {sort}
                             </button>
