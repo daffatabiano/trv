@@ -1,8 +1,10 @@
 import { Icons } from '@/components/Icons';
 import { InputImage, InputImagePoster } from '@/components/ui/Input';
 import { BorderAnimation } from '@/components/ui/moving-borders';
+import Toast from '@/components/ui/Toast';
 import useGet from '@/hooks/useGet';
 import usePost from '@/hooks/usePost';
+import useUpload from '@/hooks/useUpload';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -106,10 +108,20 @@ export default function Banner() {
     );
 }
 
-export const AddBanners = (props) => {
+export const AddBanners = () => {
     const { post } = usePost();
     const [imageUrl, setImageUrl] = useState({});
     const [bannerName, setBannerName] = useState('');
+    const [toast, setToast] = useState({});
+    const { upload } = useUpload();
+    const [token, setToken] = useState('');
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setToken(localStorage.getItem('token'));
+        }
+    }, []);
+
     const uploadFile = async (e) => {
         const file = e.target.files[0];
 
@@ -138,12 +150,10 @@ export const AddBanners = (props) => {
 
                 await upload('upload-image', newFile)
                     .then((res) => {
-                        console.log(res);
                         setToast({
                             variant: 'success',
                             title: 'Upload Success',
-                            message:
-                                'Your profile picture success to be applied',
+                            message: 'Your Banner image success to be applied',
                             show: true,
                         });
                         setImageUrl(res.data.url);
@@ -166,35 +176,66 @@ export const AddBanners = (props) => {
         };
 
         const res = await post('create-banner', body, token);
-        console.log(res);
+        if (res?.status === 200) {
+            setToast({
+                variant: 'success',
+                title: 'Banner Added',
+                message: 'Banner success to be added!',
+                show: true,
+            });
+        } else {
+            setToast({
+                variant: 'error',
+                title: 'Upload Failed',
+                message: 'Something went wrong!',
+                show: true,
+            });
+        }
     };
 
     const removeImage = async () => {
         setImageUrl({});
-        console.log('image has been remove');
+        setToast({
+            variant: 'success',
+            title: 'Image Removed',
+            message: 'Banners picture success to removed!',
+            show: true,
+        });
     };
 
     return (
-        <div className="bg-amber-300 w-full h-screen flex flex-col">
-            <div className="w-1/2 m-auto">
-                <div className="w-full text-2xl font-bold text-amber-800">
+        <div className="bg-amber-300/80 w-full h-screen flex flex-col">
+            <Toast {...toast} duration={3000} setToast={setToast} />
+            <div className="w-1/2 m-auto bg-amber-500/50 shadow-md shadow-amber-600 p-4 rounded-lg flex flex-col justify-center relative">
+                <button className="flex items-center py-2 px-6 font-bold rounded-full text-white bg-amber-700/70 absolute left-4 top-4">
+                    Back
+                </button>
+                <div className="w-full text-center text-2xl font-bold text-amber-800">
                     <h1>Add New Banner Form</h1>
                 </div>
-                <div>
-                    <div>
+                <div className="flex flex-col justify-center gap-2 items-center">
+                    <div className="w-full flex justify-center">
                         <InputImagePoster
                             image={imageUrl}
                             onChange={uploadFile}
                             clear={removeImage}
                         />
                     </div>
-                    <div>
+                    <div className="flex flex-col text-center text-white font-medium">
                         <label htmlFor="">Banner name</label>
                         <input
+                            className="w-full rounded-full p-2 focus:outline-none text-amber-600 text-center"
                             type="text"
                             onChange={(e) => setBannerName(e?.target?.value)}
                         />
                     </div>
+                    <button
+                        type="button"
+                        onClick={addBanners}
+                        className="flex items-center py-2 px-6 font-bold rounded-full bg-white"
+                    >
+                        Add
+                    </button>
                 </div>
             </div>
         </div>

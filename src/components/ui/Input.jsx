@@ -3,7 +3,7 @@ import { Icons } from '../Icons';
 import { useState } from 'react';
 import styles from '@/components/ui/Input.module.scss';
 import Label from './Label';
-import { SUB_EMPTY_PROFILE } from '@/services/SUB_DATA/data';
+import { SUB_EMPTY_PROFILE, SUBT_EMPTY_IMAGE } from '@/services/SUB_DATA/data';
 
 export default function Input(props) {
     const { className, text, ...rest } = props;
@@ -53,7 +53,7 @@ export const InputImage = (prop) => {
     const { image, onChange, clear } = prop;
 
     return (
-        <div className="flex flex-col gap-4 relative">
+        <div className="flex flex-col gap-4 relative p-4">
             <Label text="Choose Profile Picture" className="ps-2" />
             <img
                 src={image.length > 0 ? image : SUB_EMPTY_PROFILE}
@@ -84,9 +84,11 @@ export const InputImagePoster = (prop) => {
         <div className="flex flex-col gap-4 relative">
             <Label text={title} className="ps-2" />
             <img
-                src={image.length > 0 ? image : SUB_EMPTY_PROFILE}
+                src={image.length > 0 ? image : SUBT_EMPTY_IMAGE}
                 alt={'profile-picture-user'}
-                className="w-full h-64 m-auto rounded-lg object-cover object-center"
+                className={`w-full h-full max-h-72 m-auto rounded-lg object-cover object-center ${
+                    image?.length > 0 ? 'opacity-100' : 'opacity-80'
+                }`}
             />
             {image.length > 0 ? (
                 <span
