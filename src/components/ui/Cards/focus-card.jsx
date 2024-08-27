@@ -53,7 +53,7 @@ export const Card = React.memo(
                         </span>
                     </p>
                     <div
-                        className={`text-xl font-bold md:text-2xl bg-clip-text text-transparent capitalize bg-gradient-to-r from-${variant}-300 to-${variant}-700`}
+                        className={`capitalize text-xl font-bold md:text-2xl bg-clip-text text-${variant}-300 tracking-wider`}
                     >
                         {card.name}
                     </div>
