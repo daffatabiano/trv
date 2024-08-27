@@ -59,7 +59,7 @@ export default function Banner() {
                         “Banner control that allows you to easily{' '}
                         <span
                             className="text-amber-700
-bg-amber-200/50 p-1 rounded-lg"
+bg-amber-200/50 p-1 rounded-lg hover:bg-amber-700 hover:text-amber-200/80 cursor-default"
                         >
                             add, update, or remove
                         </span>{' '}
@@ -86,14 +86,14 @@ bg-amber-200/50 p-1 rounded-lg"
                             <button
                                 type="button"
                                 onClick={() => setSort('sort')}
-                                className="w-8 h-8 p-2 rounded-full text-amber-700 bg-amber-200/50 flex justify-center items-center"
+                                className="w-8 h-8 p-2 rounded-full text-amber-700 bg-amber-200/50 hover:bg-amber-700 hover:text-amber-200/80 flex justify-center items-center"
                             >
                                 <Icons.Refresh w={18} />
                             </button>
                         </div>
                         <button
                             type="button"
-                            className="text-amber-700 h-fit w-fit bg-amber-200/50 p-2 rounded-lg flex gap-2"
+                            className="text-amber-700 h-fit w-fit bg-amber-200/50 hover:bg-amber-700 hover:text-amber-200/80 p-2 rounded-lg flex gap-2"
                             onClick={() => push('/dashboard/banner/add')}
                         >
                             <Icons.Add w={24} />
