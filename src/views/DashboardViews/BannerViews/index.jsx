@@ -227,7 +227,7 @@ export const AddBanners = () => {
     };
 
     return (
-        <div className="bg-amber-300/80 w-full h-screen flex flex-col">
+        <div className="bg-amber-300/80 w-full h-screen flex flex-col justify-center">
             <Toast {...toast} duration={3000} setToast={setToast} />
             <motion.div
                 className="box"
