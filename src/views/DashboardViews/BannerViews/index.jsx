@@ -120,7 +120,7 @@ bg-amber-200/50 p-1 rounded-lg hover:bg-amber-700 hover:text-amber-200/80 cursor
                     styles['scrollbar-banners']
                 )}
             >
-                <FocusCards cards={data} variant={'amber'} />
+                <FocusCards cards={data} variant={'amber'} sorting={sort}/>
             </div>
         </div>
     );

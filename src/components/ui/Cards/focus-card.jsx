@@ -53,7 +53,7 @@ export const Card = React.memo(
                         </span>
                     </p>
                     <div
-                        className={`capitalize text-xl font-bold md:text-2xl bg-clip-text text-${variant}-300 tracking-wider`}
+                        className={`capitalize text-xl font-extrabold md:text-2xl bg-clip-text tracking-wider text-${variant}-600`}
                     >
                         {card.name}
                     </div>
@@ -65,21 +65,54 @@ export const Card = React.memo(
 
 Card.displayName = 'Card';
 
-export function FocusCards({ cards, variant }) {
+export function FocusCards({ cards, variant, sorting }) {
     const [hovered, setHovered] = useState(null);
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mx-auto md:px-4 w-full">
-            {cards.map((card, index) => (
-                <Card
-                    key={card.name}
-                    card={card}
-                    index={index}
-                    hovered={hovered}
-                    setHovered={setHovered}
-                    variant={variant}
-                />
-            ))}
+            {sorting === 'sort'
+                ? cards.map((card, index) => (
+                      <Card
+                          key={card.name}
+                          card={card}
+                          index={index}
+                          hovered={hovered}
+                          setHovered={setHovered}
+                          variant={variant}
+                      />
+                  ))
+                : sorting === 'newest'
+                ? cards
+                      ?.sort(
+                          (a, b) =>
+                              new Date(b.updatedAt) - new Date(a.updatedAt)
+                      )
+                      ?.map((card, index) => (
+                          <Card
+                              key={card.name}
+                              card={card}
+                              index={index}
+                              hovered={hovered}
+                              setHovered={setHovered}
+                              variant={variant}
+                          />
+                      ))
+                : sorting === 'oldest' &&
+                  cards
+                      ?.sort(
+                          (a, b) =>
+                              new Date(a.updatedAt) - new Date(b.updatedAt)
+                      )
+                      ?.map((card, index) => (
+                          <Card
+                              key={card.name}
+                              card={card}
+                              index={index}
+                              hovered={hovered}
+                              setHovered={setHovered}
+                              variant={variant}
+                          />
+                      ))}
         </div>
     );
 }
