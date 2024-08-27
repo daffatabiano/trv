@@ -44,7 +44,7 @@ export default function TableUser(props) {
                             ? 'bg-emerald-400 text-emerald-800'
                             : 'bg-rose-400 text-rose-800'
                         : 'bg-stone-400 text-stone-50'
-                } font-medium  sticky top-0 w-full z-[51]`}
+                } font-medium  sticky top-0 w-full z-[10]`}
             >
                 <tr>
                     {listTh?.map((th) => (

@@ -86,7 +86,7 @@ export const InputImagePoster = (prop) => {
             <img
                 src={image.length > 0 ? image : SUB_EMPTY_PROFILE}
                 alt={'profile-picture-user'}
-                className="w-full h-full max-h-48 m-auto rounded-lg object-cover object-center"
+                className="w-full h-64 m-auto rounded-lg object-cover object-center"
             />
             {image.length > 0 ? (
                 <span
