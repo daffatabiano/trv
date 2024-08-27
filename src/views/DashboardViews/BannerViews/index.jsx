@@ -8,6 +8,8 @@ import usePost from '@/hooks/usePost';
 import useUpload from '@/hooks/useUpload';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import styles from '@/styles/scrollbar/scrollbar.module.scss';
+import { cn } from '@/lib/utils';
 
 export default function Banner() {
     const { getData } = useGet();
@@ -27,8 +29,6 @@ export default function Banner() {
         const res = await getData('banners', token);
         setData(res.data.data);
     };
-
-    console.log(data);
 
     const handleSort = () => {
         setSort((value) => {
@@ -107,7 +107,12 @@ export default function Banner() {
                     </BorderAnimation>
                 </div>
             </div>
-            <div className="bg-amber-300 w-full h-[85%] ">
+            <div
+                className={cn(
+                    `bg-amber-300 p-4 w-full h-[85%] overflow-y-auto`,
+                    styles['scrollbar-banners']
+                )}
+            >
                 <FocusCards cards={data} />
             </div>
         </div>
