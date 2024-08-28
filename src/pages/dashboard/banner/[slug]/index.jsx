@@ -1,3 +1,5 @@
+import { UpdateBanners } from '@/views/DashboardViews/BannerViews';
+
 export default function Page() {
-    return <div>Page</div>;
+    return <UpdateBanners />;
 }

@@ -393,16 +393,13 @@ export const UpdateBanners = () => {
     const { getData } = useGet();
     const [data, setData] = useState([]);
     const getBanner = async () => {
-        const res = await getData(`banner/${query}`, token);
-        setData(res.data.data);
+        const res = await getData(`banner/${query?.slug}`, token);
+        setData(res?.data?.data);
     };
     useEffect(() => {
         getBanner();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [token, query]);
-
-    console.log(query);
-    console.log(data, 'data');
+    }, [token, query?.slug]);
 
     return (
         <div className="bg-amber-200/80 w-full h-screen flex flex-col justify-center">
