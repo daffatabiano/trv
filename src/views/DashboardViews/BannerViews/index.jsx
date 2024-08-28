@@ -7,6 +7,7 @@ import useGet from '@/hooks/useGet';
 import usePost from '@/hooks/usePost';
 import useUpload from '@/hooks/useUpload';
 import { useRouter } from 'next/navigation';
+import { useRouter as router } from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from '@/styles/scrollbar/scrollbar.module.scss';
 import { cn } from '@/lib/utils';
@@ -282,6 +283,185 @@ export const AddBanners = () => {
                             className="flex items-center py-2 px-6 font-bold rounded-full bg-white"
                         >
                             Add
+                        </button>
+                    </div>
+                </div>
+            </motion.div>
+        </div>
+    );
+};
+
+export const UpdateBanners = () => {
+    const { post } = usePost();
+    const [imageUrl, setImageUrl] = useState({});
+    const [bannerName, setBannerName] = useState('');
+    const [toast, setToast] = useState({});
+    const { upload } = useUpload();
+    const [token, setToken] = useState('');
+    const { query } = router();
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setToken(localStorage.getItem('token'));
+        }
+    }, []);
+
+    const uploadFile = async (e) => {
+        const file = e.target.files[0];
+
+        if (!file.type.startsWith('image')) {
+            setToast({
+                variant: 'error',
+                title: 'Upload Failed',
+                message: 'Format file should be .jpg/.png/.jpeg/.gif/.svg',
+                show: true,
+            });
+            return;
+        }
+
+        if (file.size > 1000000) {
+            setToast({
+                variant: 'error',
+                title: 'Too big size',
+                message: `Maximum upload 1 MB , your file size ${file.size}`,
+                show: true,
+            });
+            return;
+        } else {
+            setTimeout(async () => {
+                const newFile = new FormData();
+                newFile.append('image', file);
+
+                await upload('upload-image', newFile)
+                    .then((res) => {
+                        setToast({
+                            variant: 'success',
+                            title: 'Upload Success',
+                            message: 'Your Banner image success to be applied',
+                            show: true,
+                        });
+                        setImageUrl(res.data.url);
+                    })
+                    .catch((err) => {
+                        setToast({
+                            variant: 'error',
+                            title: 'Upload Failed',
+                            message: err?.response?.message?.data,
+                            show: true,
+                        });
+                    });
+            }, 1000);
+        }
+    };
+    const updateBanners = async () => {
+        const body = {
+            name: bannerName,
+            imageUrl: imageUrl,
+        };
+
+        const res = await post(`update-banner/${query}`, body, token);
+        if (res?.status === 200) {
+            setToast({
+                variant: 'success',
+                title: 'Banner Added',
+                message: 'Banner success to be added!',
+                show: true,
+            });
+            setTimeout(() => {
+                window.location.href = '/dashboard/banner';
+            }, 3000);
+        } else {
+            setToast({
+                variant: 'error',
+                title: 'Upload Failed',
+                message: 'Something went wrong!',
+                show: true,
+            });
+        }
+    };
+
+    const removeImage = async () => {
+        setImageUrl({});
+        setToast({
+            variant: 'success',
+            title: 'Image Removed',
+            message: 'Banners picture success to removed!',
+            show: true,
+        });
+    };
+
+    const { getData } = useGet();
+    const [data, setData] = useState([]);
+    const getBanner = async () => {
+        const res = await getData(`banner/${query}`, token);
+        setData(res.data.data);
+    };
+    useEffect(() => {
+        getBanner();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [token, query]);
+
+    console.log(query);
+    console.log(data, 'data');
+
+    return (
+        <div className="bg-amber-200/80 w-full h-screen flex flex-col justify-center">
+            <Toast {...toast} duration={3000} setToast={setToast} />
+            <motion.div
+                className="box"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                    duration: 0.3,
+                    ease: [0, 0.71, 0.2, 1.01],
+                    scale: {
+                        type: 'spring',
+                        damping: 5,
+                        stiffness: 100,
+                        restDelta: 0.001,
+                    },
+                }}
+            >
+                <div className="w-1/2 m-auto bg-amber-300/50 shadow-md shadow-amber-600 p-4 rounded-lg flex flex-col justify-center relative">
+                    <button
+                        type="button"
+                        onClick={() =>
+                            (window.location.href = '/dashboard/banner')
+                        }
+                        className="flex items-center py-2 px-6 font-bold rounded-full text-white bg-amber-700/70 absolute left-4 top-4"
+                    >
+                        Back
+                    </button>
+                    <div className="w-full text-center text-2xl font-bold text-amber-800">
+                        <h1>Update Banner </h1>
+                    </div>
+                    <div className="flex flex-col justify-center gap-2 items-center">
+                        <div className="w-full flex justify-center">
+                            <InputImagePoster
+                                image={
+                                    data?.imageUrl ? data?.imageUrl : imageUrl
+                                }
+                                onChange={uploadFile}
+                                clear={removeImage}
+                            />
+                        </div>
+                        <div className="flex flex-col text-center text-white font-medium">
+                            <label htmlFor="">Banner name</label>
+                            <input
+                                className="w-full rounded-full p-2 focus:outline-none text-amber-600 text-center"
+                                type="text"
+                                onChange={(e) =>
+                                    setBannerName(e?.target?.value)
+                                }
+                                defaultValue={data?.name}
+                            />
+                        </div>
+                        <button
+                            type="button"
+                            onClick={updateBanners}
+                            className="flex items-center py-2 px-6 font-bold rounded-full bg-white"
+                        >
+                            Save Change
                         </button>
                     </div>
                 </div>

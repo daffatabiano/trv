@@ -43,8 +43,8 @@ export const Card = React.memo(
                 >
                     <p
                         className={cn(
-                            'absolute top-2 right-2 flex flex-col text-end italic font-medium',
-                            `text-${variant}-600`
+                            `absolute top-2 right-2 flex flex-col text-end italic font-medium bg-${variant}-300 px-2 py-1 rounded-md`,
+                            `text-transparent bg-clip-text`
                         )}
                     >
                         {formattedDate}{' '}
@@ -53,7 +53,7 @@ export const Card = React.memo(
                         </span>
                     </p>
                     <div
-                        className={`capitalize text-xl font-extrabold md:text-2xl bg-clip-text tracking-wider text-${variant}-600`}
+                        className={`capitalize tracking-wider text-xl font-extrabold md:text-2xl text-transparent bg-clip-text bg-${variant}-300`}
                     >
                         {card.name}
                     </div>
