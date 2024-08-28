@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import styles from '@/styles/scrollbar/scrollbar.module.scss';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import { SUBT_EMPTY_IMAGE } from '@/services/SUB_DATA/data';
 
 export default function Banner() {
     const { getData } = useGet();
@@ -262,7 +263,11 @@ export const AddBanners = () => {
                     <div className="flex flex-col justify-center gap-2 items-center">
                         <div className="w-full flex justify-center">
                             <InputImagePoster
-                                image={imageUrl}
+                                image={
+                                    imageUrl?.length > 0
+                                        ? imageUrl
+                                        : SUBT_EMPTY_IMAGE
+                                }
                                 onChange={uploadFile}
                                 clear={removeImage}
                             />
