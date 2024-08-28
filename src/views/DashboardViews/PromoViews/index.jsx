@@ -57,7 +57,6 @@ export default function Promo() {
 export const AddPromo = () => {
     const { post } = usePost();
     const [imageUrl, setImageUrl] = useState({});
-    const [bannerName, setBannerName] = useState('');
     const [toast, setToast] = useState({});
     const { upload } = useUpload();
     const [token, setToken] = useState('');
@@ -205,9 +204,7 @@ export const AddPromo = () => {
                             <input
                                 className="w-full rounded-full p-2 focus:outline-none text-rose-600 text-center"
                                 type="text"
-                                onChange={(e) =>
-                                    setBannerName(e?.target?.value)
-                                }
+                                name="title"
                             />
                         </div>
                         <button
