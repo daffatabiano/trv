@@ -30,7 +30,7 @@ export const Card = React.memo(
                 )}
             >
                 <Image
-                    src={card.imageUrl}
+                    src={card.imageUrl || card?.imageUrls[0]}
                     alt={card.name || card?.title}
                     fill
                     className="object-cover absolute inset-0"

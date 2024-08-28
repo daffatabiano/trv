@@ -1,6 +1,7 @@
 import useGet from '@/hooks/useGet';
 import usePost from '@/hooks/usePost';
 import { useEffect, useState } from 'react';
+import ReusableDashboardActions from '@/views/DashboardViews/reusable';
 
 export default function Activity() {
     const { getData } = useGet();
@@ -9,6 +10,20 @@ export default function Activity() {
 
     const { post } = usePost();
     const [imageUrl, setImageUrl] = useState({});
+
+    const [sort, setSort] = useState('sort');
+
+    const handleSort = () => {
+        setSort((value) => {
+            if (value === 'sort') {
+                return 'newest';
+            } else if (value === 'newest') {
+                return 'oldest';
+            } else if (value === 'oldest') {
+                return 'newest';
+            }
+        });
+    };
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -71,15 +86,19 @@ export default function Activity() {
         setData(res.data.data);
     };
 
-    console.log(data);
-
     useEffect(() => {
         getActivity();
     }, [token]);
 
     return (
-        <div>
-            <h1>Activity</h1>
-        </div>
+        <ReusableDashboardActions
+            title="activity"
+            variant="sky"
+            handleSort={handleSort}
+            sort={sort}
+            // refetch={getPromos()}
+            data={data}
+            setSort={setSort}
+        />
     );
 }
