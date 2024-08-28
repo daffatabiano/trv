@@ -1,7 +1,4 @@
-import { Icons } from '@/components/Icons';
-import { FocusCards } from '@/components/ui/Cards/focus-card';
-import { InputImage, InputImagePoster } from '@/components/ui/Input';
-import { BorderAnimation } from '@/components/ui/moving-borders';
+import { InputImagePoster } from '@/components/ui/Input';
 import Toast from '@/components/ui/Toast';
 import useGet from '@/hooks/useGet';
 import usePost from '@/hooks/usePost';
@@ -9,17 +6,15 @@ import useUpload from '@/hooks/useUpload';
 import { useRouter } from 'next/navigation';
 import { useRouter as router } from 'next/router';
 import { useEffect, useState } from 'react';
-import styles from '@/styles/scrollbar/scrollbar.module.scss';
-import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { SUBT_EMPTY_IMAGE } from '@/services/SUB_DATA/data';
+import ReusableDashboardActions from '@/views/DashboardViews/reusable';
 
 export default function Banner() {
     const { getData } = useGet();
     const [data, setData] = useState([]);
     const [token, setToken] = useState('');
     const [sort, setSort] = useState('sort');
-    const { push } = useRouter();
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -51,83 +46,14 @@ export default function Banner() {
     }, [token]);
 
     return (
-        <div className="rounded-lg overflow-hidden flex flex-col gap-4 w-full h-full">
-            <div className="w-full flex justify-between p-2 h-[15%] bg-amber-300 shadow-lg shadow-stone-400/70">
-                <div className="flex flex-col p-2 w-[60%]">
-                    <h1 className="text-3xl text-amber-700 font-bold ">
-                        Banner Control
-                    </h1>
-                    <p className="ps-2 italic text-amber-700">
-                        “Banner control that allows you to easily{' '}
-                        <span
-                            className="text-amber-700
-bg-amber-200/50 p-1 rounded-lg hover:bg-amber-700 hover:text-amber-200/80 cursor-default"
-                        >
-                            add, update, or remove
-                        </span>{' '}
-                        banners on your web pages.”
-                    </p>
-                </div>
-                <div className="flex items-center justify-between px-2 w-[40%] py-2 gap-4">
-                    <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-1">
-                            <button
-                                type="button"
-                                className="flex gap-2 text-amber-700"
-                                onClick={handleSort}
-                            >
-                                {sort === 'sort' ? (
-                                    <Icons.Calendar w={24} />
-                                ) : sort === 'newest' ? (
-                                    <Icons.CalendarArrowUp w={24} />
-                                ) : (
-                                    <Icons.CalendarArrowDown w={24} />
-                                )}
-                                {sort}
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    setSort('sort');
-                                    getBanner();
-                                }}
-                                className="w-8 h-8 p-2 rounded-full text-amber-700 bg-amber-200/50 hover:bg-amber-700 hover:text-amber-200/80 flex justify-center items-center"
-                            >
-                                <Icons.Refresh w={18} />
-                            </button>
-                        </div>
-                        <button
-                            type="button"
-                            className="text-amber-700 h-fit w-fit bg-amber-200/50 hover:bg-amber-700 hover:text-amber-200/80 p-2 rounded-lg flex gap-2"
-                            onClick={() => push('/dashboard/banner/add')}
-                        >
-                            <Icons.Add w={24} />
-                            Add New
-                        </button>
-                    </div>
-                    <BorderAnimation
-                        borderRadius="1.75rem"
-                        className={`w-full py-2 capitalize px-4 rounded-lg flex justify-between bg-amber-400/30 text-amber-600 `}
-                        borderClassName={
-                            'bg-[radial-gradient(var(--amber-600)_40%,transparent_60%)]'
-                        }
-                    >
-                        <span className={`font-extrabold pe-2 text-amber-700 `}>
-                            • {data?.length}{' '}
-                        </span>{' '}
-                        Banners Total
-                    </BorderAnimation>
-                </div>
-            </div>
-            <div
-                className={cn(
-                    `bg-amber-300  p-4 w-full h-[85%] overflow-y-auto`,
-                    styles['scrollbar-banners']
-                )}
-            >
-                <FocusCards cards={data} variant={'amber'} sorting={sort} />
-            </div>
-        </div>
+        <ReusableDashboardActions
+            title="banner"
+            variant="amber"
+            handleSort={handleSort}
+            sort={sort}
+            data={data}
+            setSort={setSort}
+        />
     );
 }
 

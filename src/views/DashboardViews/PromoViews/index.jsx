@@ -2,12 +2,15 @@ import useGet from '@/hooks/useGet';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import usePost from '@/hooks/usePost';
 import { useEffect, useState } from 'react';
+import ReusableDashboardActions from '@/views/DashboardViews/reusable';
 
 export default function Promo() {
     const { getData } = useGet();
     const [data, setData] = useState([]);
     const [token, setToken] = useState('');
     const md = useMediaQuery('(min-width: 768px)');
+    const [sort, setSort] = useState('sort');
+    const [toast, setToast] = useState({});
 
     const { post } = usePost();
     const [imageUrl, setImageUrl] = useState({});
@@ -17,6 +20,18 @@ export default function Promo() {
             setToken(localStorage.getItem('token'));
         }
     }, []);
+
+    const handleSort = () => {
+        setSort((value) => {
+            if (value === 'sort') {
+                return 'newest';
+            } else if (value === 'newest') {
+                return 'oldest';
+            } else if (value === 'oldest') {
+                return 'newest';
+            }
+        });
+    };
 
     const uploadFile = async (e) => {
         const file = e.target.files[0];
@@ -68,18 +83,25 @@ export default function Promo() {
         }
     };
 
-    const getProfile = async () => {
-        const res = await getData('banners', token);
+    const getPromos = async () => {
+        const res = await getData('promos', token);
         setData(res.data.data);
     };
 
     useEffect(() => {
-        getProfile();
+        getPromos();
     }, [token]);
 
+
     return (
-        <div>
-            <h1>PROMO PAGE VIEWS</h1>
-        </div>
+        <ReusableDashboardActions
+            title="promo"
+            variant="rose"
+            handleSort={handleSort}
+            sort={sort}
+            // refetch={getPromos()}
+            data={data}
+            setSort={setSort}
+        />
     );
 }

@@ -31,7 +31,7 @@ export const Card = React.memo(
             >
                 <Image
                     src={card.imageUrl}
-                    alt={card.name}
+                    alt={card.name || card?.title}
                     fill
                     className="object-cover absolute inset-0"
                 />
@@ -55,7 +55,7 @@ export const Card = React.memo(
                     <div
                         className={`capitalize tracking-wider text-xl font-extrabold md:text-2xl text-transparent bg-clip-text bg-${variant}-300`}
                     >
-                        {card.name}
+                        {card.name || card?.title}
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@ export function FocusCards({ cards, variant, sorting }) {
             {sorting === 'sort'
                 ? cards.map((card, index) => (
                       <Card
-                          key={card.name}
+                          key={card.name || card?.title}
                           card={card}
                           index={index}
                           hovered={hovered}
@@ -89,7 +89,7 @@ export function FocusCards({ cards, variant, sorting }) {
                       )
                       ?.map((card, index) => (
                           <Card
-                              key={card.name}
+                              key={card.name || card?.title}
                               card={card}
                               index={index}
                               hovered={hovered}
@@ -105,7 +105,7 @@ export function FocusCards({ cards, variant, sorting }) {
                       )
                       ?.map((card, index) => (
                           <Card
-                              key={card.name}
+                              key={card.name || card?.title}
                               card={card}
                               index={index}
                               hovered={hovered}
