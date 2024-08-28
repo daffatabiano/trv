@@ -90,7 +90,7 @@ export const InputImagePoster = (prop) => {
                     image?.length > 0 ? 'opacity-100' : 'opacity-80'
                 }`}
             />
-            {image.length > 0 ? (
+            {image?.length > 0 ? (
                 <span
                     onClick={clear}
                     className="absolute bottom-0 right-0 w-10 h-10 p-3 text-rose-800 bg-rose-500/80 rounded-full"

@@ -293,7 +293,7 @@ export const AddBanners = () => {
 
 export const UpdateBanners = () => {
     const { post } = usePost();
-    const [imageUrl, setImageUrl] = useState({});
+    const [imageUrl, setImageUrl] = useState('');
     const [bannerName, setBannerName] = useState('');
     const [toast, setToast] = useState({});
     const { upload } = useUpload();
@@ -356,10 +356,10 @@ export const UpdateBanners = () => {
     const updateBanners = async () => {
         const body = {
             name: bannerName,
-            imageUrl: imageUrl,
+            imageUrl: imageUrl?.length > 0 ? imageUrl : data?.imageUrl,
         };
 
-        const res = await post(`update-banner/${query}`, body, token);
+        const res = await post(`update-banner/${query?.slug}`, body, token);
         if (res?.status === 200) {
             setToast({
                 variant: 'success',
@@ -436,7 +436,7 @@ export const UpdateBanners = () => {
                         <div className="w-full flex justify-center">
                             <InputImagePoster
                                 image={
-                                    imageUrl.length > 0
+                                    imageUrl?.length > 0
                                         ? imageUrl
                                         : data?.imageUrl
                                 }
