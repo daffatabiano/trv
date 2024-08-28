@@ -436,7 +436,9 @@ export const UpdateBanners = () => {
                         <div className="w-full flex justify-center">
                             <InputImagePoster
                                 image={
-                                    data?.imageUrl ? data?.imageUrl : imageUrl
+                                    imageUrl.length > 0
+                                        ? imageUrl
+                                        : data?.imageUrl
                                 }
                                 onChange={uploadFile}
                                 clear={removeImage}

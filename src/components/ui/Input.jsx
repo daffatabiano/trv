@@ -84,7 +84,7 @@ export const InputImagePoster = (prop) => {
         <div className="flex flex-col gap-4 relative">
             <Label text={title} className="ps-2" />
             <img
-                src={image.length > 0 ? image : SUBT_EMPTY_IMAGE}
+                src={image}
                 alt={'profile-picture-user'}
                 className={`w-full h-full max-h-72 m-auto rounded-lg object-cover object-center ${
                     image?.length > 0 ? 'opacity-100' : 'opacity-80'
