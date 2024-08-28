@@ -3,17 +3,17 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 import usePost from '@/hooks/usePost';
 import { useEffect, useState } from 'react';
 import ReusableDashboardActions from '@/views/DashboardViews/reusable';
+import Toast from '@/components/ui/Toast';
+import { motion } from 'framer-motion';
+import { InputImagePoster } from '@/components/ui/Input';
+import useUpload from '@/hooks/useUpload';
+import { SUBT_EMPTY_IMAGE } from '@/services/SUB_DATA/data';
 
 export default function Promo() {
     const { getData } = useGet();
     const [data, setData] = useState([]);
     const [token, setToken] = useState('');
-    const md = useMediaQuery('(min-width: 768px)');
     const [sort, setSort] = useState('sort');
-    const [toast, setToast] = useState({});
-
-    const { post } = usePost();
-    const [imageUrl, setImageUrl] = useState({});
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -32,6 +32,41 @@ export default function Promo() {
             }
         });
     };
+
+    const getPromos = async () => {
+        const res = await getData('promos', token);
+        setData(res.data.data);
+    };
+
+    useEffect(() => {
+        getPromos();
+    }, [token]);
+
+    return (
+        <ReusableDashboardActions
+            title="promo"
+            variant="rose"
+            handleSort={handleSort}
+            sort={sort}
+            // refetch={getPromos()}
+            data={data}
+            setSort={setSort}
+        />
+    );
+}
+export const AddPromo = () => {
+    const { post } = usePost();
+    const [imageUrl, setImageUrl] = useState({});
+    const [bannerName, setBannerName] = useState('');
+    const [toast, setToast] = useState({});
+    const { upload } = useUpload();
+    const [token, setToken] = useState('');
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setToken(localStorage.getItem('token'));
+        }
+    }, []);
 
     const uploadFile = async (e) => {
         const file = e.target.files[0];
@@ -61,12 +96,10 @@ export default function Promo() {
 
                 await upload('upload-image', newFile)
                     .then((res) => {
-                        console.log(res);
                         setToast({
                             variant: 'success',
                             title: 'Upload Success',
-                            message:
-                                'Your profile picture success to be applied',
+                            message: 'Your Banner image success to be applied',
                             show: true,
                         });
                         setImageUrl(res.data.url);
@@ -82,26 +115,111 @@ export default function Promo() {
             }, 1000);
         }
     };
+    const addPromo = async (e) => {
+        const body = {
+            title: e?.target?.title?.value,
+            description: e?.target?.description?.value,
+            terms_condition: <p>e?.target?.terms_condition?.value</p>,
+            promo_code: e?.target?.promo_code?.value,
+            imageUrl: imageUrl,
+            promo_discount_price: e?.target?.promo_discount_price?.value,
+            minimum_claim_price: e?.target?.minimum_claim_price?.value,
+        };
 
-    const getPromos = async () => {
-        const res = await getData('promos', token);
-        setData(res.data.data);
+        const res = await post('create-promo', body, token);
+        if (res?.status === 200) {
+            setToast({
+                variant: 'success',
+                title: 'Promo Added',
+                message: 'Promo success to be added!',
+                show: true,
+            });
+            setTimeout(() => {
+                window.location.href = '/dashboard/promo';
+            }, 3000);
+        } else {
+            setToast({
+                variant: 'error',
+                title: 'Upload Failed',
+                message: 'Something went wrong!',
+                show: true,
+            });
+        }
     };
 
-    useEffect(() => {
-        getPromos();
-    }, [token]);
-
+    const removeImage = async () => {
+        setImageUrl({});
+        setToast({
+            variant: 'success',
+            title: 'Image Removed',
+            message: 'Promo picture success to removed!',
+            show: true,
+        });
+    };
 
     return (
-        <ReusableDashboardActions
-            title="promo"
-            variant="rose"
-            handleSort={handleSort}
-            sort={sort}
-            // refetch={getPromos()}
-            data={data}
-            setSort={setSort}
-        />
+        <div className="bg-rose-300/80 w-full h-screen flex flex-col justify-center">
+            <Toast {...toast} duration={3000} setToast={setToast} />
+            <motion.div
+                className="box"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                    duration: 0.3,
+                    ease: [0, 0.71, 0.2, 1.01],
+                    scale: {
+                        type: 'spring',
+                        damping: 5,
+                        stiffness: 100,
+                        restDelta: 0.001,
+                    },
+                }}
+            >
+                <div className="w-1/2 m-auto bg-rose-500/50 shadow-md shadow-rose-600 p-4 rounded-lg flex flex-col justify-center relative">
+                    <button
+                        type="button"
+                        onClick={() =>
+                            (window.location.href = '/dashboard/banner')
+                        }
+                        className="flex items-center py-2 px-6 font-bold rounded-full text-white bg-rose-700/70 absolute left-4 top-4"
+                    >
+                        Back
+                    </button>
+                    <div className="w-full text-center text-2xl font-bold text-rose-800">
+                        <h1>Add New Banner Form</h1>
+                    </div>
+                    <div className="flex flex-col justify-center gap-2 items-center">
+                        <div className="w-full flex justify-center">
+                            <InputImagePoster
+                                image={
+                                    imageUrl?.length > 0
+                                        ? imageUrl
+                                        : SUBT_EMPTY_IMAGE
+                                }
+                                onChange={uploadFile}
+                                clear={removeImage}
+                            />
+                        </div>
+                        <div className="flex flex-col text-center text-white font-medium">
+                            <label htmlFor="">Banner name</label>
+                            <input
+                                className="w-full rounded-full p-2 focus:outline-none text-rose-600 text-center"
+                                type="text"
+                                onChange={(e) =>
+                                    setBannerName(e?.target?.value)
+                                }
+                            />
+                        </div>
+                        <button
+                            type="button"
+                            onClick={addPromo}
+                            className="flex items-center py-2 px-6 font-bold rounded-full bg-white"
+                        >
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </motion.div>
+        </div>
     );
-}
+};
