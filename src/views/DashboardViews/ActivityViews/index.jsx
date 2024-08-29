@@ -2,6 +2,9 @@ import useGet from '@/hooks/useGet';
 import usePost from '@/hooks/usePost';
 import { useEffect, useState } from 'react';
 import ReusableDashboardActions from '@/views/DashboardViews/reusable';
+import Toast from '@/components/ui/Toast';
+import { InputImagePoster } from '@/components/ui/Input';
+import { motion } from 'framer-motion';
 
 export default function Activity() {
     const { getData } = useGet();
@@ -109,6 +112,7 @@ export const AddActivity = () => {
     const [toast, setToast] = useState({});
     const { upload } = useUpload();
     const [token, setToken] = useState('');
+    const [category, setCategory] = useState([]);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -200,6 +204,15 @@ export const AddActivity = () => {
             show: true,
         });
     };
+
+    const getCategory = async () => {
+        const res = await getData('categories', token);
+        setCategory(res.data.data);
+    };
+    console.log(category);
+    useEffect(() => {
+        getCategory();
+    }, [token]);
 
     return (
         <div className="bg-amber-300/80 w-full h-screen flex flex-col justify-center">
