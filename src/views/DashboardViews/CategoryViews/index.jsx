@@ -216,7 +216,7 @@ export const AddCategory = () => {
     }, [token]);
 
     return (
-        <div className="bg-amber-300/80 w-full h-screen flex flex-col justify-center">
+        <div className="bg-emerald-300/80 w-full h-screen flex flex-col justify-center">
             <Toast {...toast} duration={3000} setToast={setToast} />
             <motion.div
                 className="box"
@@ -233,17 +233,17 @@ export const AddCategory = () => {
                     },
                 }}
             >
-                <div className="w-1/2 m-auto bg-amber-500/50 shadow-md shadow-amber-600 p-4 rounded-lg flex flex-col justify-center relative">
+                <div className="w-1/2 m-auto bg-emerald-500/50 shadow-md shadow-emerald-600 p-4 rounded-lg flex flex-col justify-center relative">
                     <button
                         type="button"
                         onClick={() =>
                             (window.location.href = '/dashboard/category')
                         }
-                        className="flex items-center py-2 px-6 font-bold rounded-full text-white bg-amber-700/70 absolute left-4 top-4"
+                        className="flex items-center py-2 px-6 font-bold rounded-full text-white bg-emerald-700/70 absolute left-4 top-4"
                     >
                         Back
                     </button>
-                    <div className="w-full text-center text-2xl font-bold text-amber-800">
+                    <div className="w-full text-center text-2xl font-bold text-emerald-800">
                         <h1>Add New Banner Form</h1>
                     </div>
                     <div className="flex flex-col justify-center gap-2 items-center">
@@ -261,7 +261,7 @@ export const AddCategory = () => {
                         <div className="flex flex-col text-center text-white font-medium">
                             <label htmlFor="">Banner name</label>
                             <input
-                                className="w-full rounded-full p-2 focus:outline-none text-amber-600 text-center"
+                                className="w-full rounded-full p-2 focus:outline-none text-emerald-600 text-center"
                                 type="text"
                                 onChange={(e) =>
                                     setBannerName(e?.target?.value)
