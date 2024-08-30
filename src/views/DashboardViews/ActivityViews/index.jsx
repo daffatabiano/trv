@@ -5,6 +5,8 @@ import ReusableDashboardActions from '@/views/DashboardViews/reusable';
 import Toast from '@/components/ui/Toast';
 import { InputImagePoster } from '@/components/ui/Input';
 import { motion } from 'framer-motion';
+import useUpload from '@/hooks/useUpload';
+import { SUBT_EMPTY_IMAGE } from '@/services/SUB_DATA/data';
 
 export default function Activity() {
     const { getData } = useGet();
@@ -96,7 +98,7 @@ export default function Activity() {
     return (
         <ReusableDashboardActions
             title="activity"
-            variant="sky"
+            variant="slate"
             handleSort={handleSort}
             sort={sort}
             // refetch={getPromos()}
@@ -113,6 +115,7 @@ export const AddActivity = () => {
     const { upload } = useUpload();
     const [token, setToken] = useState('');
     const [category, setCategory] = useState([]);
+    const { getData } = useGet();
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -171,7 +174,17 @@ export const AddActivity = () => {
     const addActivity = async (e) => {
         const body = {
             categoryId: e.target?.categoryId?.value,
-            imageUrl: imageUrl,
+            title: e?.target?.title?.value,
+            description: e?.target?.description?.value,
+            imageUrls: imageUrl,
+            price: e?.target?.price?.value,
+            price_discount: e?.target?.price_discount?.value,
+            total_reviews: e?.target?.total_reviews?.value,
+            facilties: <p>e?.target?.facilities?.value</p>,
+            address: e?.target?.address?.value,
+            provincy: e?.target?.provincy?.value,
+            city: e?.target?.location_maps?.value,
+            location_maps: e?.target?.location_maps?.value,
         };
 
         const res = await post('create-activity', body, token);
@@ -209,7 +222,6 @@ export const AddActivity = () => {
         const res = await getData('categories', token);
         setCategory(res.data.data);
     };
-    console.log(category);
     useEffect(() => {
         getCategory();
     }, [token]);
