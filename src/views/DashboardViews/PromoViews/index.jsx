@@ -54,6 +54,7 @@ export default function Promo() {
         />
     );
 }
+
 export const AddPromo = () => {
     const { post } = usePost();
     const [imageUrl, setImageUrl] = useState({});
@@ -98,7 +99,7 @@ export const AddPromo = () => {
                         setToast({
                             variant: 'success',
                             title: 'Upload Success',
-                            message: 'Your Banner image success to be applied',
+                            message: 'Your promo image success to be applied',
                             show: true,
                         });
                         setImageUrl(res.data.url);
@@ -116,11 +117,11 @@ export const AddPromo = () => {
     };
     const addPromo = async (e) => {
         const body = {
+            imageUrl: imageUrl,
             title: e?.target?.title?.value,
             description: e?.target?.description?.value,
             terms_condition: <p>e?.target?.terms_condition?.value</p>,
             promo_code: e?.target?.promo_code?.value,
-            imageUrl: imageUrl,
             promo_discount_price: e?.target?.promo_discount_price?.value,
             minimum_claim_price: e?.target?.minimum_claim_price?.value,
         };
@@ -178,14 +179,14 @@ export const AddPromo = () => {
                     <button
                         type="button"
                         onClick={() =>
-                            (window.location.href = '/dashboard/banner')
+                            (window.location.href = '/dashboard/promo')
                         }
                         className="flex items-center py-2 px-6 font-bold rounded-full text-white bg-rose-700/70 absolute left-4 top-4"
                     >
                         Back
                     </button>
                     <div className="w-full text-center text-2xl font-bold text-rose-800">
-                        <h1>Add New Banner Form</h1>
+                        <h1>Add New Promo Form</h1>
                     </div>
                     <div className="flex flex-col justify-center gap-2 items-center">
                         <div className="w-full flex justify-center">
@@ -200,7 +201,7 @@ export const AddPromo = () => {
                             />
                         </div>
                         <div className="flex flex-col text-center text-white font-medium">
-                            <label htmlFor="">Banner name</label>
+                            <label htmlFor="">promo name</label>
                             <input
                                 className="w-full rounded-full p-2 focus:outline-none text-rose-600 text-center"
                                 type="text"
