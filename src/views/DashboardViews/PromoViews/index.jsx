@@ -7,7 +7,10 @@ import Toast from '@/components/ui/Toast';
 import { motion } from 'framer-motion';
 import { InputImagePoster } from '@/components/ui/Input';
 import useUpload from '@/hooks/useUpload';
-import { SUBT_EMPTY_IMAGE } from '@/services/SUB_DATA/data';
+import {
+    SUB_EMPTY_IMAGE_PROMO,
+    SUBT_EMPTY_IMAGE,
+} from '@/services/SUB_DATA/data';
 
 export default function Promo() {
     const { getData } = useGet();
@@ -194,7 +197,7 @@ export const AddPromo = () => {
                                 image={
                                     imageUrl?.length > 0
                                         ? imageUrl
-                                        : SUBT_EMPTY_IMAGE
+                                        : SUB_EMPTY_IMAGE_PROMO
                                 }
                                 onChange={uploadFile}
                                 clear={removeImage}
