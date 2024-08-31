@@ -21,6 +21,12 @@ const nextConfig = {
                 port: '',
                 pathname: '/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'i2.wp.com',
+                port: '',
+                pathname: '/**',
+            },
         ],
     },
 };
