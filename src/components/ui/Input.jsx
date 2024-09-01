@@ -78,22 +78,22 @@ export const InputImage = (prop) => {
     );
 };
 export const InputImagePoster = (prop) => {
-    const { image, onChange, clear, title, imageEdit } = prop;
+    const { src, onChange, clear, title, imageEdit } = prop;
 
     return (
         <div className="flex flex-col gap-4 relative">
             <Label text={title} className="ps-2" />
             <img
-                src={image}
+                src={src}
                 alt={'profile-picture-user'}
                 className={cn(
                     `w-full h-full max-h-72 m-auto rounded-lg object-cover object-center ${
-                        image?.length > 0 ? 'opacity-100' : 'opacity-80'
+                        src?.length > 0 ? 'opacity-100' : 'opacity-80'
                     }`,
                     imageEdit
                 )}
             />
-            {image?.length > 0 ? (
+            {src?.length > 0 ? (
                 <span
                     onClick={clear}
                     className="absolute bottom-0 right-0 w-10 h-10 p-3 text-rose-800 bg-rose-500/80 rounded-full"

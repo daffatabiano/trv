@@ -224,18 +224,32 @@ export const AddBanners = () => {
 
 export const UpdateBanners = () => {
     const { post } = usePost();
-    const [imageUrl, setImageUrl] = useState('');
     const [bannerName, setBannerName] = useState('');
     const [toast, setToast] = useState({});
     const { upload } = useUpload();
     const [token, setToken] = useState('');
     const { query } = router();
+    const { getData } = useGet();
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
             setToken(localStorage.getItem('token'));
         }
     }, []);
+
+    const getBanner = async () => {
+        const res = await getData(`banner/${query?.slug}`, token);
+        setData(res?.data?.data);
+    };
+
+    useEffect(() => {
+        getBanner();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [token, query?.slug]);
+
+    const [imageUrl, setImageUrl] = useState('');
+    console.log(imageUrl);
 
     const uploadFile = async (e) => {
         const file = e.target.files[0];
@@ -284,6 +298,7 @@ export const UpdateBanners = () => {
             }, 1000);
         }
     };
+
     const updateBanners = async () => {
         const body = {
             name: bannerName,
@@ -321,17 +336,6 @@ export const UpdateBanners = () => {
         });
     };
 
-    const { getData } = useGet();
-    const [data, setData] = useState([]);
-    const getBanner = async () => {
-        const res = await getData(`banner/${query?.slug}`, token);
-        setData(res?.data?.data);
-    };
-    useEffect(() => {
-        getBanner();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [token, query?.slug]);
-
     return (
         <div className="bg-amber-200/80 w-full h-screen flex flex-col justify-center">
             <Toast {...toast} duration={3000} setToast={setToast} />
@@ -366,13 +370,13 @@ export const UpdateBanners = () => {
                     <div className="flex flex-col justify-center gap-2 items-center">
                         <div className="w-full flex justify-center">
                             <InputImagePoster
-                                image={
+                                src={
                                     imageUrl?.length > 0
                                         ? imageUrl
                                         : data?.imageUrl
                                 }
-                                onChange={uploadFile}
-                                clear={removeImage}
+                                onChange={() => uploadFile()}
+                                clear={() => removeImage()}
                             />
                         </div>
                         <div className="flex flex-col text-center text-white font-medium">
@@ -386,13 +390,19 @@ export const UpdateBanners = () => {
                                 defaultValue={data?.name}
                             />
                         </div>
-                        <button
-                            type="button"
-                            onClick={updateBanners}
-                            className="flex items-center py-2 px-6 font-bold rounded-full bg-white"
-                        >
-                            Save Change
-                        </button>
+                        <div className="flex gap-2 items-center mt-4">
+                            <button
+                                type="button"
+                                onClick={() => updateBanners()}
+                                className="flex items-center py-2 px-6 font-bold rounded-full bg-amber-600 text-amber-800 hover:bg-amber-700 hover:translate-y-1"
+                            >
+                                Save Change
+                            </button>
+                            <p className="text-amber-800">| or |</p>
+                            <button className="flex items-center py-2 px-6 font-bold rounded-full  bg-rose-600 text-rose-800 hover:bg-rose-700 hover:translate-y-1">
+                                Delete Banner
+                            </button>
+                        </div>
                     </div>
                 </div>
             </motion.div>

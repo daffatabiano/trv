@@ -28,7 +28,7 @@ const nextConfig = {
                 pathname: '/**',
             },
             {
-                protocol: 'https',
+                protocol: 'http',
                 hostname: 'travel-journal-api-bootcamp.do.dibimbing.id',
                 port: '',
                 pathname: '/**',
