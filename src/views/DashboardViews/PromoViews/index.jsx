@@ -130,6 +130,7 @@ export const AddPromo = () => {
         };
 
         const res = await post('create-promo', body, token);
+        console.log(res);
         if (res?.status === 200) {
             setToast({
                 variant: 'success',
@@ -143,7 +144,7 @@ export const AddPromo = () => {
         } else {
             setToast({
                 variant: 'error',
-                title: 'Upload Failed',
+                title: 'Add Promo Failed',
                 message: 'Something went wrong!',
                 show: true,
             });
@@ -224,7 +225,7 @@ export const AddPromo = () => {
                                         <input
                                             type="text"
                                             name="terms_conditions"
-                                            className="w-full rounded-full p-2 focus:outline-none"
+                                            className="w-full rounded-full p-2 focus:outline-none text-rose-600 text-center"
                                         />
                                     </label>
                                     <label>
@@ -232,7 +233,7 @@ export const AddPromo = () => {
                                         <input
                                             type="number"
                                             name="minimum_claim_price"
-                                            className="w-full rounded-full p-2 focus:outline-none"
+                                            className="w-full rounded-full p-2 focus:outline-none text-rose-600 text-center"
                                         />
                                     </label>
                                 </div>
@@ -242,7 +243,7 @@ export const AddPromo = () => {
                                         <input
                                             type="text"
                                             name="promo_code"
-                                            className="w-full rounded-full p-2 focus:outline-none"
+                                            className="w-full rounded-full p-2 focus:outline-none text-rose-600 text-center"
                                         />
                                     </label>
                                     <label>
@@ -250,7 +251,7 @@ export const AddPromo = () => {
                                         <input
                                             type="number"
                                             name="promo_discount_price"
-                                            className="w-full rounded-full p-2 focus:outline-none"
+                                            className="w-full rounded-full p-2 focus:outline-none text-rose-600 text-center"
                                         />
                                     </label>
                                 </div>
