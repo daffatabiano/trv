@@ -78,7 +78,7 @@ export const InputImage = (prop) => {
     );
 };
 export const InputImagePoster = (prop) => {
-    const { image, onChange, clear, title } = prop;
+    const { image, onChange, clear, title, imageEdit } = prop;
 
     return (
         <div className="flex flex-col gap-4 relative">
@@ -86,9 +86,12 @@ export const InputImagePoster = (prop) => {
             <img
                 src={image}
                 alt={'profile-picture-user'}
-                className={`w-full h-full max-h-72 m-auto rounded-lg object-cover object-center ${
-                    image?.length > 0 ? 'opacity-100' : 'opacity-80'
-                }`}
+                className={cn(
+                    `w-full h-full max-h-72 m-auto rounded-lg object-cover object-center ${
+                        image?.length > 0 ? 'opacity-100' : 'opacity-80'
+                    }`,
+                    imageEdit
+                )}
             />
             {image?.length > 0 ? (
                 <span

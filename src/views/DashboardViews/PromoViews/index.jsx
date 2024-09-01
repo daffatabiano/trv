@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import ReusableDashboardActions from '@/views/DashboardViews/reusable';
 import Toast from '@/components/ui/Toast';
 import { motion } from 'framer-motion';
-import { InputImagePoster } from '@/components/ui/Input';
+import Input, { InputImagePoster } from '@/components/ui/Input';
 import useUpload from '@/hooks/useUpload';
 import {
     SUB_EMPTY_IMAGE_PROMO,
@@ -123,7 +123,7 @@ export const AddPromo = () => {
             imageUrl: imageUrl,
             title: e?.target?.title?.value,
             description: e?.target?.description?.value,
-            terms_condition: <p>e?.target?.terms_condition?.value</p>,
+            terms_condition: <p>{e?.target?.terms_condition?.value}</p>,
             promo_code: e?.target?.promo_code?.value,
             promo_discount_price: e?.target?.promo_discount_price?.value,
             minimum_claim_price: e?.target?.minimum_claim_price?.value,
@@ -161,7 +161,7 @@ export const AddPromo = () => {
     };
 
     return (
-        <div className="bg-rose-300/80 w-full h-screen flex flex-col justify-center">
+        <div className="bg-rose-300/80 w-full min-h-screen h-full flex flex-col justify-center">
             <Toast {...toast} duration={3000} setToast={setToast} />
             <motion.div
                 className="box"
@@ -188,11 +188,18 @@ export const AddPromo = () => {
                     >
                         Back
                     </button>
-                    <div className="w-full text-center text-2xl font-bold text-rose-800">
+                    <div className="w-full text-center text-2xl font-bold text-rose-800 mb-2">
                         <h1>Add New Promo Form</h1>
                     </div>
                     <div className="flex flex-col justify-center gap-2 items-center">
-                        <div className="w-full flex justify-center">
+                        <div className="w-full flex flex-col justify-center">
+                            <Input
+                                text="Promo Title"
+                                name="title"
+                                type="text"
+                                defaultValue="Promo Title"
+                                className="text-center font-bold uppercase"
+                            />
                             <InputImagePoster
                                 image={
                                     imageUrl?.length > 0
@@ -203,18 +210,56 @@ export const AddPromo = () => {
                                 clear={removeImage}
                             />
                         </div>
-                        <div className="flex flex-col text-center text-white font-medium">
-                            <label htmlFor="">promo name</label>
-                            <input
-                                className="w-full rounded-full p-2 focus:outline-none text-rose-600 text-center"
+                        <div className="flex flex-col w-full text-center text-white font-medium">
+                            <label>Description</label>
+                            <textarea
+                                className="w-full resize-none rounded-full p-2 focus:outline-none text-rose-600 text-center"
                                 type="text"
                                 name="title"
                             />
+                            <div className="flex gap-4">
+                                <div className="w-1/2 flex flex-col gap-2">
+                                    <label>
+                                        Terms & Conditions
+                                        <input
+                                            type="text"
+                                            name="terms_conditions"
+                                            className="w-full rounded-full p-2 focus:outline-none"
+                                        />
+                                    </label>
+                                    <label>
+                                        Minimum Claim Price
+                                        <input
+                                            type="number"
+                                            name="minimum_claim_price"
+                                            className="w-full rounded-full p-2 focus:outline-none"
+                                        />
+                                    </label>
+                                </div>
+                                <div className="w-1/2 flex flex-col gap-2">
+                                    <label>
+                                        Promo Code
+                                        <input
+                                            type="text"
+                                            name="promo_code"
+                                            className="w-full rounded-full p-2 focus:outline-none"
+                                        />
+                                    </label>
+                                    <label>
+                                        Promo Discount Price
+                                        <input
+                                            type="number"
+                                            name="promo_discount_price"
+                                            className="w-full rounded-full p-2 focus:outline-none"
+                                        />
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <button
                             type="button"
                             onClick={addPromo}
-                            className="flex items-center py-2 px-6 font-bold rounded-full bg-white"
+                            className="flex items-center justify-center w-3/4 mt-2 py-2 text-center px-6 font-bold rounded-full bg-rose-700/70 text-white hover:bg-rose-800/70 hover:translate-y-1 transition-all"
                         >
                             Add
                         </button>
