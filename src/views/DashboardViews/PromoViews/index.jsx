@@ -119,18 +119,21 @@ export const AddPromo = () => {
         }
     };
     const addPromo = async (e) => {
+        e.preventDefault();
+
         const body = {
             imageUrl: imageUrl,
             title: e?.target?.title?.value,
             description: e?.target?.description?.value,
-            terms_condition: <p>{e?.target?.terms_condition?.value}</p>,
+            terms_condition: e?.target?.terms_condition?.value,
             promo_code: e?.target?.promo_code?.value,
-            promo_discount_price: e?.target?.promo_discount_price?.value,
-            minimum_claim_price: e?.target?.minimum_claim_price?.value,
+            promo_discount_price: Number(
+                e?.target?.promo_discount_price?.value
+            ),
+            minimum_claim_price: Number(e?.target?.minimum_claim_price?.value),
         };
 
         const res = await post('create-promo', body, token);
-        console.log(res);
         if (res?.status === 200) {
             setToast({
                 variant: 'success',
@@ -179,7 +182,7 @@ export const AddPromo = () => {
                     },
                 }}
             >
-                <div className="w-1/2 m-auto bg-rose-500/50 shadow-md shadow-rose-600 p-4 rounded-lg flex flex-col justify-center relative">
+                <div className="w-1/2 h-full my-4 mx-auto bg-rose-500/50 shadow-md shadow-rose-600 p-4 rounded-lg flex flex-col justify-center relative">
                     <button
                         type="button"
                         onClick={() =>
@@ -192,7 +195,10 @@ export const AddPromo = () => {
                     <div className="w-full text-center text-2xl font-bold text-rose-800 mb-2">
                         <h1>Add New Promo Form</h1>
                     </div>
-                    <div className="flex flex-col justify-center gap-2 items-center">
+                    <form
+                        onSubmit={addPromo}
+                        className="flex flex-col justify-center gap-2 items-center"
+                    >
                         <div className="w-full flex flex-col justify-center">
                             <Input
                                 text="Promo Title"
@@ -216,7 +222,7 @@ export const AddPromo = () => {
                             <textarea
                                 className="w-full resize-none rounded-full p-2 focus:outline-none text-rose-600 text-center"
                                 type="text"
-                                name="title"
+                                name="description"
                             />
                             <div className="flex gap-4">
                                 <div className="w-1/2 flex flex-col gap-2">
@@ -224,7 +230,7 @@ export const AddPromo = () => {
                                         Terms & Conditions
                                         <input
                                             type="text"
-                                            name="terms_conditions"
+                                            name="terms_condition"
                                             className="w-full rounded-full p-2 focus:outline-none text-rose-600 text-center"
                                         />
                                     </label>
@@ -258,13 +264,12 @@ export const AddPromo = () => {
                             </div>
                         </div>
                         <button
-                            type="button"
-                            onClick={addPromo}
+                            type="submit"
                             className="flex items-center justify-center w-3/4 mt-2 py-2 text-center px-6 font-bold rounded-full bg-rose-700/70 text-white hover:bg-rose-800/70 hover:translate-y-1 transition-all"
                         >
                             Add
                         </button>
-                    </div>
+                    </form>
                 </div>
             </motion.div>
         </div>
