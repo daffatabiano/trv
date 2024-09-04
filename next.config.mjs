@@ -11,12 +11,6 @@ const nextConfig = {
             },
             {
                 protocol: 'https',
-                hostname: 'travel-journal-api-bootcamp.do.dibimbing.id',
-                port: '',
-                pathname: '/**',
-            },
-            {
-                protocol: 'https',
                 hostname: 'a.cdn-hotels.com',
                 port: '',
                 pathname: '/**',
@@ -28,7 +22,7 @@ const nextConfig = {
                 pathname: '/**',
             },
             {
-                protocol: 'http',
+                protocol: 'https',
                 hostname: 'travel-journal-api-bootcamp.do.dibimbing.id',
                 port: '',
                 pathname: '/**',
