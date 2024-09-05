@@ -81,7 +81,7 @@ export default function Headers(props) {
                             src={props.profilePictureUrl || SUB_EMPTY_PROFILE}
                             alt={`profile-picture-${props.name}`}
                             onClick={handleDropdown}
-                            className="w-10 h-10 rounded-full object-cover cursor-pointer"
+                            className="w-10 h-10 rounded-full object-fit cursor-pointer"
                         />
 
                         {dropdown && (
