@@ -19,7 +19,7 @@ const ModalDelete = (props, event) => {
 
   const handleDelete = async () => {
     e.preventDefault();
-    const res = await deleteData(event?.id, token);
+    const res = await deleteData(`/delete-${title}/${event?.id}`, token);
     console.log(res);
   };
 
@@ -54,3 +54,5 @@ const ModalDelete = (props, event) => {
     </div>
   );
 };
+
+export default ModalDelete;
