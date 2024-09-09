@@ -2,7 +2,8 @@ const { default: useDelete } = require('@/hooks/useDelete');
 const { Icons } = require('../Icons');
 const { useState, useEffect } = require('react');
 
-const ModalDelete = ({ title, show, setShow }) => {
+const ModalDelete = (props, event) => {
+  const { title, show, setShow } = props;
   const [token, setToken] = useState('');
   const { deleteData } = useDelete();
 
@@ -16,9 +17,9 @@ const ModalDelete = ({ title, show, setShow }) => {
     setShow(false);
   };
 
-  const handleDelete = async (e) => {
+  const handleDelete = async () => {
     e.preventDefault();
-    const res = await deleteData(e?.id, token);
+    const res = await deleteData(event?.id, token);
     console.log(res);
   };
 
