@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { SUBT_EMPTY_IMAGE } from '@/services/SUB_DATA/data';
 import ReusableDashboardActions from '@/views/DashboardViews/reusable';
-import ModalDelete from '@/components/modals/modal-delete';
+import ModalDelete from '@/components/ui/Modals/modal-delete';
 
 export default function Banner() {
   const { getData } = useGet();
