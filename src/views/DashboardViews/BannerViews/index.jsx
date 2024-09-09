@@ -221,6 +221,7 @@ export const UpdateBanners = () => {
   const { query } = router();
   const { getData } = useGet();
   const [data, setData] = useState([]);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -329,7 +330,7 @@ export const UpdateBanners = () => {
   return (
     <div className="bg-amber-200/80 w-full h-screen flex flex-col justify-center">
       <Toast {...toast} duration={3000} setToast={setToast} />
-      <ModalDelete title="banner" />
+      <ModalDelete title="banner" show={show} setShow={setShow} id={data?.id} />
       <motion.div
         className="box"
         initial={{ opacity: 0, scale: 0.5 }}
@@ -379,7 +380,10 @@ export const UpdateBanners = () => {
                 Save Change
               </button>
               <p className="text-amber-800">| or |</p>
-              <button className="flex items-center py-2 px-6 font-bold rounded-full  bg-rose-600 text-rose-800 hover:bg-rose-700 hover:translate-y-1">
+              <button
+                type="button"
+                onClick={() => setShow(true)}
+                className="flex items-center py-2 px-6 font-bold rounded-full  bg-rose-600 text-rose-800 hover:bg-rose-700 hover:translate-y-1">
                 Delete Banner
               </button>
             </div>

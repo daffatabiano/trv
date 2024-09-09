@@ -1,4 +1,5 @@
 import { BASE_HEADERS, BASE_URL } from '@/services/BASE/data';
+import axios from 'axios';
 
 export default function useDelete() {
   const deleteData = async (url, token) => {
