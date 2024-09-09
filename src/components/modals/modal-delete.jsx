@@ -1,7 +1,6 @@
-const { default: useDelete } = require('@/hooks/useDelete');
-const { Icons } = require('../Icons');
-const { useState, useEffect } = require('react');
-const { motion } = require('framer-motion');
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import useDelete from '@/hooks/useDelete';
 
 const ModalDelete = (props) => {
   const { title, show, setShow, id } = props;
@@ -21,7 +20,7 @@ const ModalDelete = (props) => {
   };
 
   const handleDelete = async () => {
-    const res = await deleteData(`/delete-${title}/${id}`, token);
+    const res = await deleteData(`delete-${title}/${id}`, token);
     console.log(res);
   };
 
