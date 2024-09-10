@@ -388,12 +388,15 @@ export const UpdatePromo = () => {
     });
   };
 
-  console.log(data);
-
   return (
     <div className="bg-rose-300/80 w-full min-h-screen h-full flex flex-col justify-center">
       <Toast {...toast} duration={3000} setToast={setToast} />
-      <ModalDelete title="promo" show={show} setShow={setShow} />
+      <ModalDelete
+        title="promo"
+        show={show}
+        setShow={setShow}
+        id={query?.slug}
+      />
       <motion.div
         className="box"
         initial={{ opacity: 0, scale: 0.5 }}
