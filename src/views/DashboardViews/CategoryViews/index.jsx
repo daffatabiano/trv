@@ -8,7 +8,10 @@ import { InputImagePoster } from '@/components/ui/Input';
 import { motion } from 'framer-motion';
 import ModalDelete from '@/components/ui/Modals/modal-delete';
 import { useRouter } from 'next/router';
-import { SUBT_EMPTY_IMAGE } from '@/services/SUB_DATA/data';
+import {
+  SUB_EMPTY_IMAGE_PROMO,
+  SUBT_EMPTY_IMAGE,
+} from '@/services/SUB_DATA/data';
 
 export default function Category() {
   const { getData } = useGet();
@@ -209,14 +212,6 @@ export const AddCategory = () => {
     });
   };
 
-  const getCategory = async () => {
-    const res = await getData('categories', token);
-    setCategory(res.data.data);
-  };
-  useEffect(() => {
-    getCategory();
-  }, [token]);
-
   return (
     <div className="bg-emerald-300/80 w-full h-screen flex flex-col justify-center">
       <Toast {...toast} duration={3000} setToast={setToast} />
@@ -247,7 +242,7 @@ export const AddCategory = () => {
           <div className="flex flex-col justify-center gap-2 items-center">
             <div className="w-full flex justify-center">
               <InputImagePoster
-                image={imageUrl?.length > 0 ? imageUrl : SUBT_EMPTY_IMAGE}
+                src={imageUrl?.length > 0 ? imageUrl : SUB_EMPTY_IMAGE_PROMO}
                 onChange={uploadFile}
                 clear={removeImage}
               />
@@ -422,7 +417,7 @@ export const UpdateCategory = () => {
           <div className="flex flex-col justify-center gap-2 items-center">
             <div className="w-full flex justify-center">
               <InputImagePoster
-                image={imageUrl?.length > 0 ? imageUrl : data?.imageUrl}
+                src={imageUrl?.length > 0 ? imageUrl : data?.imageUrl}
                 onChange={uploadFile}
                 clear={removeImage}
               />
