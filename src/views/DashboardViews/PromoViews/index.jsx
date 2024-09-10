@@ -346,11 +346,16 @@ export const UpdatePromo = () => {
 
   const updatePromo = async (e) => {
     const body = {
-      name: bannerName,
-      imageUrl: imageUrl?.length > 0 ? imageUrl : data?.imageUrl,
+      imageUrl: imageUrl,
+      title: e?.target?.title?.value,
+      description: e?.target?.description?.value,
+      terms_condition: e?.target?.terms_condition?.value,
+      promo_code: e?.target?.promo_code?.value,
+      promo_discount_price: Number(e?.target?.promo_discount_price?.value),
+      minimum_claim_price: Number(e?.target?.minimum_claim_price?.value),
     };
 
-    const res = await post(`update-banner/${query?.slug}`, body, token);
+    const res = await post(`update-promo/${query?.slug}`, body, token);
     if (res?.status === 200) {
       setToast({
         variant: 'success',
