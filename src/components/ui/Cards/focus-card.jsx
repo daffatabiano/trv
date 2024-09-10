@@ -71,6 +71,7 @@ export function FocusCards({ cards, variant, sorting, slug }) {
               hovered={hovered}
               setHovered={setHovered}
               variant={variant}
+              slug={slug}
             />
           ))
         : sorting === 'newest'
@@ -84,6 +85,7 @@ export function FocusCards({ cards, variant, sorting, slug }) {
                 hovered={hovered}
                 setHovered={setHovered}
                 variant={variant}
+                slug={slug}
               />
             ))
         : sorting === 'oldest' &&
