@@ -54,6 +54,7 @@ export default function Banner() {
       sort={sort}
       data={data}
       setSort={setSort}
+      slug="banner"
     />
   );
 }
