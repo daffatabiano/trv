@@ -9,8 +9,6 @@ const ModalDelete = (props) => {
   const { deleteData } = useDelete();
   const [toast, setToast] = useState({});
 
-  console.log(id);
-
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setToken(localStorage.getItem('token'));
