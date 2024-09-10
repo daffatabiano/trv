@@ -359,7 +359,7 @@ export const UpdatePromo = () => {
         show: true,
       });
       setTimeout(() => {
-        window.location.href = '/dashboard/banner';
+        window.location.href = '/dashboard/promo';
       }, 3000);
     } else {
       setToast({
