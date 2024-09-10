@@ -345,8 +345,9 @@ export const UpdatePromo = () => {
   };
 
   const updatePromo = async (e) => {
+    e.preventDefault();
     const body = {
-      imageUrl: imageUrl,
+      imageUrl: imageUrl || data?.image_url,
       title: e?.target?.title?.value,
       description: e?.target?.description?.value,
       terms_condition: e?.target?.terms_condition?.value,
@@ -356,6 +357,7 @@ export const UpdatePromo = () => {
     };
 
     const res = await post(`update-promo/${query?.slug}`, body, token);
+    console.log(res);
     if (res?.status === 200) {
       setToast({
         variant: 'success',
@@ -484,11 +486,20 @@ export const UpdatePromo = () => {
                 </div>
               </div>
             </div>
-            <button
-              type="submit"
-              className="flex items-center justify-center w-3/4 mt-2 py-2 text-center px-6 font-bold rounded-full bg-rose-700/70 text-white hover:bg-rose-800/70 hover:translate-y-1 transition-all">
-              Save Changes
-            </button>
+            <div className="flex gap-2 items-center mt-4">
+              <button
+                type="submit"
+                className="flex items-center py-2 px-6 font-bold rounded-full bg-emerald-600 text-emerald-800 hover:bg-emerald-700 hover:translate-y-1">
+                Save Change
+              </button>
+              <p className="text-emerald-800">| or |</p>
+              <button
+                type="button"
+                onClick={() => setShow(true)}
+                className="flex items-center py-2 px-6 font-bold rounded-full  bg-rose-600 text-rose-800 hover:bg-rose-700 hover:translate-y-1">
+                Delete Banner
+              </button>
+            </div>
           </form>
         </div>
       </motion.div>
