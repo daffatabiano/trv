@@ -304,7 +304,7 @@ export const UpdateCategory = () => {
   const uploadFile = async (e) => {
     const file = e.target.files[0];
 
-    if (!file.type.startsWith('image')) {
+    if (!file?.type.startsWith('image')) {
       setToast({
         variant: 'error',
         title: 'Upload Failed',
@@ -352,7 +352,7 @@ export const UpdateCategory = () => {
   const updateCategory = async () => {
     const body = {
       name: categoryName,
-      imageUrl: imageUrl?.length > 0 ? imageUrl : data?.imageUrl,
+      imageUrl: imageUrl || data?.imageUrl,
     };
 
     const res = await post(`update-category/${query?.slug}`, body, token);
@@ -389,7 +389,12 @@ export const UpdateCategory = () => {
   return (
     <div className="bg-emerald-300/80 w-full h-screen flex flex-col justify-center">
       <Toast {...toast} duration={3000} setToast={setToast} />
-      <ModalDelete show={show} setShow={setShow} id={query?.slug} />
+      <ModalDelete
+        show={show}
+        setShow={setShow}
+        id={query?.slug}
+        title="category"
+      />
       <motion.div
         className="box"
         initial={{ opacity: 0, scale: 0.5 }}
