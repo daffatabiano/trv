@@ -66,7 +66,6 @@ export default function Category() {
 
         await upload('upload-image', newFile)
           .then((res) => {
-            console.log(res);
             setToast({
               variant: 'success',
               title: 'Upload Success',
@@ -386,8 +385,6 @@ export const UpdateCategory = () => {
       show: true,
     });
   };
-
-  console.log(data);
 
   return (
     <div className="bg-emerald-300/80 w-full h-screen flex flex-col justify-center">

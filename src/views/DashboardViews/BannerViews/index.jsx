@@ -241,7 +241,6 @@ export const UpdateBanners = () => {
   }, [token, query?.slug]);
 
   const [imageUrl, setImageUrl] = useState('');
-  console.log(imageUrl);
 
   const uploadFile = async (e) => {
     const file = e.target.files[0];

@@ -294,8 +294,6 @@ export const UpdatePromo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, query?.slug]);
 
-  console.log(imageUrl);
-
   const uploadFile = async (e) => {
     const file = e.target.files[0];
 
@@ -357,7 +355,6 @@ export const UpdatePromo = () => {
     };
 
     const res = await post(`update-promo/${query?.slug}`, body, token);
-    console.log(res);
     if (res?.status === 200) {
       setToast({
         variant: 'success',

@@ -98,7 +98,6 @@ export default function Profile() {
 
                 await upload('upload-image', newFile)
                     .then((res) => {
-                        console.log(res);
                         setToast({
                             variant: 'success',
                             title: 'Upload Success',

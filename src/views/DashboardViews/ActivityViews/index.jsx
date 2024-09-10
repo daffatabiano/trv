@@ -64,7 +64,6 @@ export default function Activity() {
 
                 await upload('upload-image', newFile)
                     .then((res) => {
-                        console.log(res);
                         setToast({
                             variant: 'success',
                             title: 'Upload Success',
