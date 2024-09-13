@@ -174,37 +174,25 @@ export const AddBanners = () => {
             restDelta: 0.001,
           },
         }}>
-        <div className="w-1/2 m-auto bg-amber-500/50 shadow-md shadow-amber-600 p-4 rounded-lg flex flex-col justify-center relative">
-          <button
-            type="button"
-            onClick={() => (window.location.href = '/dashboard/banner')}
-            className="flex items-center py-2 px-6 font-bold rounded-full text-white bg-amber-700/70 absolute left-4 top-4">
-            Back
-          </button>
-          <div className="w-full text-center text-2xl font-bold text-amber-800">
-            <h1>Add New Banner Form</h1>
-          </div>
-          <div className="flex flex-col justify-center gap-2 items-center">
-            <div className="w-full flex justify-center">
-              <InputImagePoster
-                image={imageUrl?.length > 0 ? imageUrl : SUBT_EMPTY_IMAGE}
-                onChange={uploadFile}
-                clear={removeImage}
-              />
+        <div className="relative">
+          <div className="w-1/3 m-auto bg-white rounded-3xl flex flex-col justify-start h-48 items-center pb-6 absolute inset-0 -translate-y-48 pt-8">
+            <div className="w-full text-center text-2xl font-bold text-amber-800">
+              <h1>Add New Banner Form</h1>
             </div>
-            <div className="flex flex-col text-center text-white font-medium">
-              <label htmlFor="">Banner name</label>
+          </div>
+          <div className="w-1/3 m-auto bg-slate-100 rounded-3xl flex flex-col h-[435px] items-center p-4 absolute inset-0 hover:translate-y-2 -translate-y-10 transition-all">
+            <div className="w-full relative bg-white text-amber-400 border-amber-400 h-[35%] overflow-hidden border border-dashed rounded-3xl flex justify-center items-center py-4">
+              <p>📎</p>
+              <p>Attach your files</p>
               <input
-                className="w-full rounded-full p-2 focus:outline-none text-amber-600 text-center"
-                type="text"
-                onChange={(e) => setBannerName(e?.target?.value)}
+                type="file"
+                className="absolute w-full h-full opacity-1 py-4 flex justify-center items-center opacity-0"
               />
             </div>
             <button
               type="button"
-              onClick={addBanners}
-              className="flex items-center py-2 px-6 font-bold rounded-full bg-white">
-              Add
+              className="bg-amber-800 w-full flex justify-end  underlined text-sm text-rose-600">
+              clear
             </button>
           </div>
         </div>
