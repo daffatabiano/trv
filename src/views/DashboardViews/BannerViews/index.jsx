@@ -191,7 +191,7 @@ export const AddBanners = () => {
             </div>
             <button
               type="button"
-              className="bg-amber-800 w-full flex justify-end  underlined text-sm text-rose-600">
+              className=" w-full flex justify-end underlined text-md p-2 underlined text-rose-600">
               clear
             </button>
           </div>
