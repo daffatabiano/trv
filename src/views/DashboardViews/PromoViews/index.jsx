@@ -1,7 +1,7 @@
 import useGet from '@/hooks/useGet';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import usePost from '@/hooks/usePost';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import ReusableDashboardActions from '@/views/DashboardViews/reusable';
 import Toast from '@/components/ui/Toast';
 import { motion } from 'framer-motion';
@@ -13,6 +13,8 @@ import {
 } from '@/services/SUB_DATA/data';
 import ModalDelete from '@/components/ui/Modals/modal-delete';
 import { useRouter } from 'next/router';
+import Form, { InputForm } from '@/components/forms';
+import { Icons } from '@/components/Icons';
 
 export default function Promo() {
   const { getData } = useGet();
@@ -67,6 +69,8 @@ export const AddPromo = () => {
   const [toast, setToast] = useState({});
   const { upload } = useUpload();
   const [token, setToken] = useState('');
+  const [hoverActive, setHoverActive] = useState(false);
+  const [promoName, setPromoName] = useState('');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -126,9 +130,9 @@ export const AddPromo = () => {
 
     const body = {
       imageUrl: imageUrl,
-      title: e?.target?.title?.value,
+      title: promoName,
       description: e?.target?.description?.value,
-      terms_condition: e?.target?.terms_condition?.value,
+      terms_condition: e?.target?.terms_conditions?.value,
       promo_code: e?.target?.promo_code?.value,
       promo_discount_price: Number(e?.target?.promo_discount_price?.value),
       minimum_claim_price: Number(e?.target?.minimum_claim_price?.value),
@@ -154,6 +158,12 @@ export const AddPromo = () => {
       });
     }
   };
+
+  const handleHover = useMemo(() => {
+    return () => {
+      setHoverActive(!hoverActive);
+    };
+  }, [hoverActive]);
 
   const removeImage = async () => {
     setImageUrl({});
@@ -182,85 +192,112 @@ export const AddPromo = () => {
             restDelta: 0.001,
           },
         }}>
-        <div className="w-1/2 h-full my-4 mx-auto bg-rose-500/50 shadow-md shadow-rose-600 p-4 rounded-lg flex flex-col justify-center relative">
-          <button
-            type="button"
-            onClick={() => (window.location.href = '/dashboard/promo')}
-            className="flex items-center py-2 px-6 font-bold rounded-full text-white bg-rose-700/70 absolute left-4 top-4">
-            Back
-          </button>
-          <div className="w-full text-center text-2xl font-bold text-rose-800 mb-2">
-            <h1>Add New Promo Form</h1>
-          </div>
-          <form
-            onSubmit={addPromo}
-            className="flex flex-col justify-center gap-2 items-center">
-            <div className="w-full flex flex-col justify-center">
-              <Input
-                text="Promo Title"
-                name="title"
-                type="text"
-                defaultValue="Promo Title"
-                className="text-center font-bold uppercase"
-              />
-              <InputImagePoster
-                src={imageUrl?.length > 0 ? imageUrl : SUB_EMPTY_IMAGE_PROMO}
-                onChange={uploadFile}
-                clear={removeImage}
-              />
+        <div
+          onMouseEnter={handleHover}
+          className={` m-auto bg-white h-[85vh] rounded-3xl overflow-hidden transition-all duration-300 ${
+            hoverActive ? 'w-[85%] flex' : 'w-1/2'
+          }`}>
+          <div
+            className={`${
+              hoverActive ? 'w-1/2' : 'w-full'
+            } p-4 bg-white flex flex-col h-full items-center `}>
+            <div className="w-full justify-between px-4 text-center text-2xl flex font-bold text-amber-800">
+              <h1 className="text-3xl font-bold text-rose-500 ">
+                New Promo Form
+              </h1>
+              <button
+                type="button"
+                onClick={() => window.history.back()}
+                className="bg-transparent text-amber-800 text-sm font-light hover:underline underline-offset-4">
+                ← Back
+              </button>
             </div>
-            <div className="flex flex-col w-full text-center text-white font-medium">
-              <label>Description</label>
-              <textarea
-                className="w-full resize-none rounded-full p-2 focus:outline-none text-rose-600 text-center"
-                type="text"
-                name="description"
-              />
-              <div className="flex gap-4">
-                <div className="w-1/2 flex flex-col gap-2">
-                  <label>
-                    Terms & Conditions
-                    <input
-                      type="text"
-                      name="terms_condition"
-                      className="w-full rounded-full p-2 focus:outline-none text-rose-600 text-center"
-                    />
-                  </label>
-                  <label>
-                    Minimum Claim Price
-                    <input
-                      type="number"
-                      name="minimum_claim_price"
-                      className="w-full rounded-full p-2 focus:outline-none text-rose-600 text-center"
-                    />
-                  </label>
+            <div className="w-full h-[55%] mt-5">
+              {imageUrl.length > 0 ? (
+                <img
+                  src={imageUrl}
+                  alt="banner"
+                  className="w-full h-full object-cover object-center rounded-3xl border border-dashed border-rose-400"
+                />
+              ) : (
+                <div className="w-full h-full relative bg-white text-rose-300/80 hover:text-rose-400 border-rose-300/80 hover:border-rose-400 overflow-hidden border border-dashed rounded-3xl flex justify-center items-center py-4">
+                  <p>📎</p>
+                  <p>Attach your files</p>
+                  <input
+                    type="file"
+                    onChange={(e) => uploadFile(e)}
+                    className="absolute w-full h-full opacity-1 py-4 flex justify-center items-center opacity-0"
+                  />
                 </div>
-                <div className="w-1/2 flex flex-col gap-2">
-                  <label>
-                    Promo Code
-                    <input
-                      type="text"
-                      name="promo_code"
-                      className="w-full rounded-full p-2 focus:outline-none text-rose-600 text-center"
-                    />
-                  </label>
-                  <label>
-                    Promo Discount Price
-                    <input
-                      type="number"
-                      name="promo_discount_price"
-                      className="w-full rounded-full p-2 focus:outline-none text-rose-600 text-center"
-                    />
-                  </label>
-                </div>
+              )}
+              <div className="w-full flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => removeImage()}
+                  className="bg-transparent underlined text-md p-2 underlined text-rose-600">
+                  clear
+                </button>
+              </div>
+              <div className="w-full flex flex-col gap-4 mt-4 ">
+                <label
+                  htmlFor="promo-name"
+                  className="text-xl text-rose-300 font-bold">
+                  Promo Title
+                </label>
+                <InputForm
+                  onChange={(e) => setPromoName(e.target.value)}
+                  type="text"
+                  name="promo-name"
+                />
               </div>
             </div>
-            <button
-              type="submit"
-              className="flex items-center justify-center w-3/4 mt-2 py-2 text-center px-6 font-bold rounded-full bg-rose-700/70 text-white hover:bg-rose-800/70 hover:translate-y-1 transition-all">
-              Add
-            </button>
-          </form>
+          </div>
+          <div
+            className={`w-1/2 bg-zinc-100 rounded-3xl ${
+              !hoverActive ? 'hidden' : ''
+            }`}>
+            <Form onSubmit={addPromo} className="w-full p-4">
+              <label htmlFor="description-promo" className="">
+                Description
+              </label>
+              <textarea
+                name="description"
+                className="w-full h-48 resize-none p-4 rounded-3xl border border-rose-300/80 focus:border-rose-400 focus:outline-none"
+              />
+              <div className="w-full flex gap-4 mt-2">
+                <div>
+                  <label htmlFor="terms-condition-promo">
+                    Terms and Condition
+                  </label>
+                  <textarea
+                    name="terms_conditions"
+                    className="w-full h-52 resize-none p-4 rounded-3xl border border-rose-300/80 focus:border-rose-400 focus:outline-none"
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <div className="relative">
+                    <label htmlFor="code-promo">Promo Code</label>
+                    <InputForm type="text" name="promo_code" />
+                    <button className="absolute bottom-0 right-4 top-4 flex items-center">
+                      <Icons.Copy w={20} />
+                    </button>
+                  </div>
+                  <div>
+                    <label htmlFor="code-promo">Discount Price</label>
+                    <InputForm type="text" name="promo_discount_price" />
+                  </div>
+                  <div>
+                    <label htmlFor="code-promo">Minimum Purchase</label>
+                    <InputForm type="text" name="minimum_claim_price" />
+                  </div>
+                </div>
+              </div>
+              <button className="w-full p-3 font-bold text-white bg-rose-400 rounded-3xl">
+                {' '}
+                Add Promo
+              </button>
+            </Form>
+          </div>
         </div>
       </motion.div>
     </div>

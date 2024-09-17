@@ -120,6 +120,7 @@ export const AddCategory = () => {
   const [token, setToken] = useState('');
   const [category, setCategory] = useState([]);
   const [categoryName, setCategoryName] = useState('');
+  const [hoverActive, setHoverActive] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -212,6 +213,10 @@ export const AddCategory = () => {
     });
   };
 
+  const handleHover = () => {
+    setHoverActive(!hoverActive);
+  };
+
   return (
     <div className="bg-emerald-300/80 w-full h-screen flex flex-col justify-center">
       <Toast {...toast} duration={3000} setToast={setToast} />
@@ -229,37 +234,62 @@ export const AddCategory = () => {
             restDelta: 0.001,
           },
         }}>
-        <div className="w-1/2 m-auto bg-emerald-500/50 shadow-md shadow-emerald-600 p-4 rounded-lg flex flex-col justify-center relative">
-          <button
-            type="button"
-            onClick={() => (window.location.href = '/dashboard/category')}
-            className="flex items-center py-2 px-6 font-bold rounded-full text-white bg-emerald-700/70 absolute left-4 top-4">
-            Back
-          </button>
-          <div className="w-full text-center text-2xl font-bold text-emerald-800">
-            <h1>Add New Category Form</h1>
-          </div>
-          <div className="flex flex-col justify-center gap-2 items-center">
-            <div className="w-full flex justify-center">
-              <InputImagePoster
-                src={imageUrl?.length > 0 ? imageUrl : SUB_EMPTY_IMAGE_PROMO}
-                onChange={uploadFile}
-                clear={removeImage}
-              />
+        <div className="relative">
+          <div className="md:w-1/3 w-[90%] m-auto bg-white rounded-3xl flex flex-col justify-start h-48 items-center pb-6 absolute inset-0 -translate-y-48 pt-8">
+            <div className="w-full justify-between px-4 text-center text-2xl flex font-bold text-emerald-800">
+              <h1>Add New category Form</h1>
+              <button
+                type="button"
+                onClick={() => window.history.back()}
+                className={`bg-transparent text-emerald-800 text-sm font-light hover:underline underline-offset-4`}>
+                ← Back
+              </button>
             </div>
-            <div className="flex flex-col text-center text-white font-medium">
-              <label htmlFor="">Category name</label>
+          </div>
+          <div
+            onMouseHover={handleHover}
+            className={`md:w-1/3 w-[90%] m-auto bg-slate-100 rounded-3xl flex flex-col h-[435px] items-center p-4 absolute inset-0 ${
+              hoverActive || 'hover:' ? 'translate-y-2' : ''
+            } -translate-y-10 transition-all`}>
+            {imageUrl.length > 0 ? (
+              <img
+                src={imageUrl}
+                alt="category"
+                className="w-full h-[35%] object-cover object-center rounded-3xl border border-dashed border-emerald-400"
+              />
+            ) : (
+              <div className="w-full relative bg-white text-emerald-400 border-emerald-400 h-[35%] overflow-hidden border border-dashed rounded-3xl flex justify-center items-center py-4">
+                <p>📎</p>
+                <p>Attach your files</p>
+                <input
+                  type="file"
+                  onChange={(e) => uploadFile(e)}
+                  className="absolute w-full h-full opacity-1 py-4 flex justify-center items-center opacity-0"
+                />
+              </div>
+            )}
+            <div className="w-full flex justify-end">
+              <button
+                type="button"
+                onClick={() => removeImage()}
+                className="bg-transparent underlined text-md p-2 underlined text-rose-600">
+                clear
+              </button>
+            </div>
+            <div className="flex w-full mt-4 flex-col gap-2">
+              <label htmlFor="category-name">category Name</label>
               <input
-                className="w-full rounded-full p-2 focus:outline-none text-emerald-600 text-center"
+                onChange={(e) => setCategoryName(e.target.value)}
                 type="text"
-                onChange={(e) => setCategoryName(e?.target?.value)}
+                placeholder="category Name"
+                className="w-full p-4 rounded-3xl border border-emerald-300/80 focus:border-emerald-400 focus:outline-none"
               />
             </div>
             <button
               type="button"
-              onClick={addCategory}
-              className="flex items-center py-2 px-6 font-bold rounded-full bg-white">
-              Add
+              onClick={() => addCategory()}
+              className="w-full p-4 font-bold text-white bg-emerald-400 rounded-3xl mt-8">
+              Add category
             </button>
           </div>
         </div>
@@ -286,13 +316,13 @@ export const UpdateCategory = () => {
     }
   }, []);
 
-  const getBanner = async () => {
+  const getcategory = async () => {
     const res = await getData(`category/${query?.slug}`, token);
     setData(res?.data?.data);
   };
 
   useEffect(() => {
-    getBanner();
+    getcategory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, query?.slug]);
 
@@ -384,12 +414,6 @@ export const UpdateCategory = () => {
   return (
     <div className="bg-emerald-300/80 w-full h-screen flex flex-col justify-center">
       <Toast {...toast} duration={3000} setToast={setToast} />
-      <ModalDelete
-        show={show}
-        setShow={setShow}
-        id={query?.slug}
-        title="category"
-      />
       <motion.div
         className="box"
         initial={{ opacity: 0, scale: 0.5 }}
@@ -404,48 +428,64 @@ export const UpdateCategory = () => {
             restDelta: 0.001,
           },
         }}>
-        <div className="w-1/2 m-auto bg-emerald-500/50 shadow-md shadow-emerald-600 p-4 rounded-lg flex flex-col justify-center relative">
-          <button
-            type="button"
-            onClick={() => (window.location.href = '/dashboard/category')}
-            className="flex items-center py-2 px-6 font-bold rounded-full text-white bg-emerald-700/70 absolute left-4 top-4">
-            Back
-          </button>
-          <div className="w-full text-center text-2xl font-bold text-emerald-800">
-            <h1>Update Category Form</h1>
+        <div className="relative">
+          <div
+            onClick={handleHover}
+            className="md:w-1/3 w-[90%] m-auto bg-white rounded-3xl flex flex-col justify-start h-48 items-center pb-6 absolute inset-0 -translate-y-48 pt-8">
+            <div className="w-full justify-between px-4 text-center text-2xl flex font-bold text-emerald-800">
+              <h1>Add New category Form</h1>
+              <button
+                type="button"
+                onClick={() => window.history.back()}
+                className={`bg-transparent text-emerald-800 text-sm font-light hover:underline underline-offset-4`}>
+                ← Back
+              </button>
+            </div>
           </div>
-          <div className="flex flex-col justify-center gap-2 items-center">
-            <div className="w-full flex justify-center">
-              <InputImagePoster
-                src={imageUrl?.length > 0 ? imageUrl : data?.imageUrl}
-                onChange={uploadFile}
-                clear={removeImage}
+          <div
+            className={`md:w-1/3 w-[90%] m-auto bg-slate-100 rounded-3xl flex flex-col h-[435px] items-center p-4 absolute inset-0 ${
+              hoverActive || 'hover:' ? 'translate-y-2' : ''
+            } -translate-y-10 transition-all`}>
+            {imageUrl.length > 0 ? (
+              <img
+                src={imageUrl}
+                alt="category"
+                className="w-full h-[35%] object-cover object-center rounded-3xl border border-dashed border-emerald-400"
               />
+            ) : (
+              <div className="w-full relative bg-white text-emerald-400 border-emerald-400 h-[35%] overflow-hidden border border-dashed rounded-3xl flex justify-center items-center py-4">
+                <p>📎</p>
+                <p>Attach your files</p>
+                <input
+                  type="file"
+                  onChange={(e) => uploadFile(e)}
+                  className="absolute w-full h-full opacity-1 py-4 flex justify-center items-center opacity-0"
+                />
+              </div>
+            )}
+            <div className="w-full flex justify-end">
+              <button
+                type="button"
+                onClick={() => removeImage()}
+                className="bg-transparent underlined text-md p-2 underlined text-rose-600">
+                clear
+              </button>
             </div>
-            <div className="flex flex-col text-center text-white font-medium">
-              <label htmlFor="">Category name</label>
+            <div className="flex w-full mt-4 flex-col gap-2">
+              <label htmlFor="category-name">category Name</label>
               <input
-                className="w-full rounded-full p-2 focus:outline-none text-emerald-600 text-center"
+                onChange={(e) => setcategoryName(e.target.value)}
                 type="text"
-                defaultValue={data?.name}
-                onChange={(e) => setCategoryName(e?.target?.value)}
+                placeholder="category Name"
+                className="w-full p-4 rounded-3xl border border-emerald-300/80 focus:border-emerald-400 focus:outline-none"
               />
             </div>
-            <div className="flex gap-2 items-center mt-4">
-              <button
-                type="button"
-                onClick={updateCategory}
-                className="flex items-center py-2 px-6 font-bold rounded-full bg-emerald-600 text-emerald-800 hover:bg-emerald-700 hover:translate-y-1">
-                Save Change
-              </button>
-              <p className="text-emerald-800">| or |</p>
-              <button
-                type="button"
-                onClick={() => setShow(true)}
-                className="flex items-center py-2 px-6 font-bold rounded-full  bg-rose-600 text-rose-800 hover:bg-rose-700 hover:translate-y-1">
-                Delete Category
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={() => addcategorys()}
+              className="w-full p-4 font-bold text-white bg-emerald-400 rounded-3xl mt-8">
+              Add category
+            </button>
           </div>
         </div>
       </motion.div>
