@@ -110,7 +110,7 @@ export default function Activity() {
 
 export const AddActivity = () => {
   const { post } = usePost();
-  const [imageUrl, setImageUrl] = useState({});
+  const [imageUrl, setImageUrl] = useState([]);
   const [toast, setToast] = useState({});
   const { upload } = useUpload();
   const [token, setToken] = useState('');
@@ -161,7 +161,7 @@ export const AddActivity = () => {
               message: 'Your Banner image success to be applied',
               show: true,
             });
-            setImageUrl(res.data.url);
+            setImageUrl([...imageUrl, res.data.url]);
           })
           .catch((err) => {
             setToast({
@@ -175,13 +175,15 @@ export const AddActivity = () => {
     }
   };
 
+  console.log(imageUrl);
+
   const addActivities = async (e) => {
     e?.preventDefault();
 
     const body = {
       categoryId: categoryId,
       title: activityTitle,
-      description: setDescription,
+      description: description,
       imageUrls: imageUrl,
 
       price: e?.target?.price?.value,
@@ -260,6 +262,7 @@ export const AddActivity = () => {
         }}>
         <div
           onMouseEnter={handleHover}
+          onMouseLeave={() => setHoverActive(false)}
           className={` m-auto bg-white h-[90vh] rounded-3xl overflow-hidden transition-all duration-300 ${
             hoverActive ? 'w-[85%] flex' : 'w-1/2'
           }`}>
@@ -305,14 +308,14 @@ export const AddActivity = () => {
                 </button>
               </div>
               <div className="w-full flex flex-col gap-2 ">
-                <div className="w-full flex gap-2">
+                <div className="w-full flex items-center gap-2">
                   <label
                     htmlFor="promo-name"
                     className="text-slate-300 font-bold">
                     Choose Category
                   </label>
                   <select
-                    className="border border-slate-300/80 focus:border-slate-400 focus:outline-none"
+                    className="border border-slate-300/80 p-2 rounded-3xl focus:border-slate-400 focus:outline-none"
                     onChange={(e) => setCategoryId(e.target.value)}
                     id="">
                     <option value="">Choose Category</option>
@@ -346,7 +349,7 @@ export const AddActivity = () => {
                   </label>
                   <textarea
                     onChange={(e) => setDescription(e.target.value)}
-                    className="w-full h-32 resize-none rounded-3xl border border-slate-300/80 focus:border-slate-400 focus:outline-none"
+                    className="w-full h-32 p-4 resize-none rounded-3xl border border-slate-300/80 focus:border-slate-400 focus:outline-none"
                     id=""
                   />
                 </div>
@@ -384,7 +387,7 @@ export const AddActivity = () => {
                   <textarea
                     name=""
                     id=""
-                    className="w-full h-36 resize-none rounded-3xl border border-slate-300/80 focus:border-slate-400 focus:outline-none"
+                    className="w-full p-4 h-36 resize-none rounded-3xl border border-slate-300/80 focus:border-slate-400 focus:outline-none"
                   />
                 </div>
 
@@ -405,7 +408,7 @@ export const AddActivity = () => {
                 <textarea
                   name="maps"
                   id=""
-                  className="w-full h-24 resize-none rounded-3xl border border-slate-300/80 focus:border-slate-400 focus:outline-none"
+                  className="w-full p-4 h-24 resize-none rounded-3xl border border-slate-300/80 focus:border-slate-400 focus:outline-none"
                 />
               </label>
               <button
