@@ -186,8 +186,8 @@ export const AddActivity = () => {
       description: description,
       imageUrls: imageUrl,
 
-      price: e?.target?.price?.value,
-      price_discount: e?.target?.price_discount?.value,
+      price: Number(e?.target?.price?.value),
+      price_discount: Number(e?.target?.price_discount?.value),
       total_reviews: e?.target?.total_reviews?.value,
       facilties: <p>{e?.target?.facilities?.value}</p>,
 
@@ -267,9 +267,9 @@ export const AddActivity = () => {
             hoverActive ? 'w-[85%] flex' : 'w-1/2'
           }`}>
           <div
-            className={`${
+            className={`h-full ${
               hoverActive ? 'w-1/2' : 'w-full'
-            } p-4 bg-white flex flex-col h-full items-center `}>
+            } p-4 bg-white flex flex-col items-center `}>
             <div className="w-full justify-between px-4 text-center text-2xl flex font-bold text-amber-800">
               <h1 className="text-3xl font-bold text-slate-500 ">
                 New Activity Form
@@ -281,15 +281,28 @@ export const AddActivity = () => {
                 ← Back
               </button>
             </div>
-            <div className="w-full h-[35%] mt-5">
+            <div className="w-full h-[35%] mt-5 overflow-hidden">
               {imageUrl.length > 0 ? (
-                <img
-                  src={imageUrl}
-                  alt="banner"
-                  className="w-full h-full object-cover object-center rounded-3xl border border-dashed border-slate-400"
-                />
+                imageUrl?.map((image, i) => {
+                  return (
+                    <div
+                      key={i}
+                      className="w-full flex flex-col justify-center overflow-auto">
+                      <img
+                        src={image}
+                        alt="banner"
+                        className="w-24 h-24 object-cover object-center rounded-3xl border border-dashed border-slate-400"
+                      />
+                      <input
+                        type="file"
+                        onChange={(e) => uploadFile(e)}
+                        className="w-full p-2 rounded-3xl "
+                      />
+                    </div>
+                  );
+                })
               ) : (
-                <div className="w-full h-full relative bg-white text-slate-300/80 hover:text-slate-400 border-slate-300/80 hover:border-slate-400 overflow-hidden border border-dashed rounded-3xl flex justify-center items-center py-4">
+                <div className="w-full relative h-[35%] text-slate-300/80 hover:text-slate-400 border-slate-300/80 hover:border-slate-400 overflow-hidden border border-dashed rounded-3xl flex justify-center items-center py-4">
                   <p>📎</p>
                   <p>Attach your files</p>
                   <input
